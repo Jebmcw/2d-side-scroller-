@@ -17,17 +17,22 @@
 
 
 ## General Information
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
-- What is the purpose of your project?
-- Why did you undertake it?
-<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
+- Who you’re working with (you and your team members)?
+- Blake Woods
+- Mustafa Chambers
+- Seth Leifheit
+- Fernando Martinez
+- Abel Guzman
+- What you’re creating? - We are creating a 2d side scroller.
+- Who you’re doing it for - We are doing this for people who enjoy old style video games like 2d side scroller.
+- Why you’re doing this, the impact or change you hope to make? - Our team chose a side-scroller for its classic appeal, embracing the challenge of innovating within a beloved genre, fueled by our passion for gaming.
+
 
 
 ## Technologies Used
-- Tech 1 - version 1.0
-- Tech 2 - version 2.0
-- Tech 3 - version 3.0
+- Tech 1 - Pygame
+- Tech 2 - ChatGpt
+- Tech 3 - Github
 
 
 ## Features
