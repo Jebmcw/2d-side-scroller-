@@ -71,11 +71,13 @@ Room for improvement:
 
 
 To do:
-- Title Screen - The initial interface offering options to start a new game or load a saved one, catering to all player types. Aj User Story 1
-- Choice a Player - This is where the user will choice a player that is male or female. Blake User Story 4
-- Platform - Create a platform for the character sprite to stand on. Seth User Story 3
-- Movement - Create a simple movement in the character (left and right). Freddy User Story 1
-- Background - Create a background in Godot that moves relative to player movement. Seth User Story 3
+
+- Title Screen - The initial interface offering options to start a new game or load a saved one, catering to all player types. Aj User Story 1 
+
+- Choice a Player - This is where the user will choice a player that is male or female. Blake User Story 4 
+- Platform - Create a platform for the character sprite to stand on. Seth User Story 3 
+- Movement - Create a simple movement in the character (left and right). Freddy User Story 1 
+- Background - Create a background in Godot that moves relative to player movement. Seth User Story 3 
 
 
 
