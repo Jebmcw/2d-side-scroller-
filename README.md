@@ -30,7 +30,7 @@
 
 
 ## Technologies Used
-- Tech 1 - Pygame
+- Tech 1 - Godot
 - Tech 2 - ChatGpt
 - Tech 3 - Github
 
@@ -68,12 +68,15 @@ Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are
 Include areas you believe need improvement / could be improved. Also add TODOs for future development.
 
 Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
+
 
 To do:
-- Feature to be added 1
-- Feature to be added 2
+- Title Screen - The initial interface offering options to start a new game or load a saved one, catering to all player types. Aj User Story 1
+- Choice a Player - This is where the user will choice a player that is male or female. Blake User Story 4
+- Platform - Create a platform for the character sprite to stand on. Seth User Story 3
+- Movement - Create a simple movement in the character (left and right). Freddy User Story 1
+- Background - Create a background in Godot that moves relative to player movement. Seth User Story 3
+
 
 
 ## Acknowledgements
