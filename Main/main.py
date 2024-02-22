@@ -1,6 +1,6 @@
 import pygame
 import sys
-from levels import Level1
+from levels.level1 import Level1
 FPS = 60
 
 class Game:
