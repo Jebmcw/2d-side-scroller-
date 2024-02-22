@@ -6,7 +6,7 @@ FPS = 60
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((1280,720))
+        self.screen = pygame.display.set_mode((1500,600))
         self.clock = pygame.time.Clock()
         
         self.gameStateManager = GameStateManager('start')
