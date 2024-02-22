@@ -18,8 +18,10 @@ class Level1:
         
         
     def run(self):
-        for i in range(0, self.tiles):
-            self.display.blit(self.background, (i  * self.background_width + self.scroll, 0))
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_d]:
+            for i in range(0, self.tiles):
+                self.display.blit(self.background, (i  * self.background_width + self.scroll, 0))
         self.scroll -= 5
         
         if abs(self.scroll) > self.background_width:
