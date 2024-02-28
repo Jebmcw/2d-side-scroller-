@@ -8,7 +8,7 @@ class Mob(pygame.sprite.Sprite):
         image_path = os.path.join(current_path, "level1_mob.png")
         self.image = pygame.image.load(image_path).convert_alpha()
         self.rect = self.image.get_rect(x=initial_x, y=initial_y)
-        self.speed_x = .9  # Horizontal speed
+        self.speed_x = .8  # Horizontal speed
         self.direction = 1  # -1 for left
         self.screen_width = screen_width
         self.is_dead = False

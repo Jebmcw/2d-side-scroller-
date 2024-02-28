@@ -18,16 +18,17 @@ class Level1:
         self.scroll = 0
         self.tiles = math.ceil(self.display.get_width() / self.background_width) + 1
         self.scroll_speed = 5
-        self.scroll_duration = 100 * 25
-        self.scroll_frames_remaining = self.scroll_duration
-
-        # Initialize mob storage using pygame.sprite.Group for better management
+        self.scroll_duration_foward = 100 * 25
+        self.scroll_duration_backwards = 100 * 25
+        self.scroll_frames_remaining_foward = self.scroll_duration_foward
+        self.scroll_frames_remaining_backwards = self.scroll_duration_backwards
+        
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
 
         # Frame rate and timing for spawns
         self.FPS = 25
         self.current_frame = 0
-        self.spawn_frames = [self.FPS * 1, self.FPS * 5, self.FPS * 3]
+        self.spawn_frames = [self.FPS * 1, self.FPS * 5, self.FPS * 3, self.FPS * 10, self.FPS * 15]
         self.spawn_index = 0
 
 
@@ -51,18 +52,18 @@ class Level1:
         # Clear the display at the start of each frame
         self.display.fill((0, 0, 0))  # Fill the screen with black before redrawing the background
 
-        if keys[pygame.K_d] and self.scroll_frames_remaining > 0:
+        if keys[pygame.K_d] and self.scroll_frames_remaining_foward > 0:
             self.scroll -= self.scroll_speed
             if self.scroll <= -self.background_width:
                 self.scroll += self.background_width  # This ensures continuous scrolling
-            self.scroll_frames_remaining -= 2
+            self.scroll_frames_remaining_foward -= 2
 
         # Corrected logic for scrolling left
-        elif keys[pygame.K_a] and self.scroll_frames_remaining > 0:
+        elif keys[pygame.K_a] and self.scroll_frames_remaining_backwards > 0:
             self.scroll += self.scroll_speed
             if self.scroll >= 0:  # Adjust for leftward scrolling
                 self.scroll -= self.background_width
-            self.scroll_frames_remaining -= 2
+            self.scroll_frames_remaining_backwards -= 2
 
         # Render the background tiles
         for i in range(self.tiles):
