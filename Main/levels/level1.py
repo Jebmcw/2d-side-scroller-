@@ -18,14 +18,14 @@ class Level1:
         self.scroll = 0
         self.tiles = math.ceil(self.display.get_width() / self.background_width) + 1
         self.scroll_speed = 5
-        self.scroll_duration = 150 * 40
+        self.scroll_duration = 100 * 25
         self.scroll_frames_remaining = self.scroll_duration
 
         # Initialize mob storage using pygame.sprite.Group for better management
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
 
         # Frame rate and timing for spawns
-        self.FPS = 50
+        self.FPS = 25
         self.current_frame = 0
         self.spawn_frames = [self.FPS * 1, self.FPS * 2, self.FPS * 3]
         self.spawn_index = 0
