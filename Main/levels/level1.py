@@ -27,13 +27,13 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 25
         self.current_frame = 0
-        self.spawn_frames = [self.FPS * 1, self.FPS * 2, self.FPS * 3]
+        self.spawn_frames = [self.FPS * 1, self.FPS * 5, self.FPS * 3]
         self.spawn_index = 0
 
 
     def spawn_mobs(self):
         
-        self.spawn_mobs_horizontally(1, 350, 10)
+        self.spawn_mobs_horizontally(1, 350, 50)
 
     def spawn_mobs_horizontally(self, num_mobs, initial_y, spacing=0):
         screen_width = self.display.get_width()
@@ -42,20 +42,29 @@ class Level1:
         for _ in range(num_mobs):
             mob = Mob(screen_width=screen_width, initial_y=initial_y, initial_x=start_x)
             self.mobs.add(mob)
-            start_x += mob.rect.width + spacing  # This would space additional mobs off the screen; adjust logic as needed for your design
+            start_x += mob.rect.width + spacing # This would space additional mobs off the screen; adjust logic as needed for your design
         
     def run(self):
         self.current_frame += 1
         keys = pygame.key.get_pressed()
 
-        # Handle scrolling
+        # Clear the display at the start of each frame
+        self.display.fill((0, 0, 0))  # Fill the screen with black before redrawing the background
+
         if keys[pygame.K_d] and self.scroll_frames_remaining > 0:
             self.scroll -= self.scroll_speed
             if self.scroll <= -self.background_width:
-                self.scroll += self.background_width
+                self.scroll += self.background_width  # This ensures continuous scrolling
             self.scroll_frames_remaining -= 2
 
-        # Background rendering
+        # Corrected logic for scrolling left
+        elif keys[pygame.K_a] and self.scroll_frames_remaining > 0:
+            self.scroll += self.scroll_speed
+            if self.scroll >= 0:  # Adjust for leftward scrolling
+                self.scroll -= self.background_width
+            self.scroll_frames_remaining -= 2
+
+        # Render the background tiles
         for i in range(self.tiles):
             self.display.blit(self.background, (i * self.background_width + self.scroll, 0))
 

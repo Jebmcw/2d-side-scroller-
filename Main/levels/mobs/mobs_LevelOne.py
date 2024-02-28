@@ -9,7 +9,7 @@ class Mob(pygame.sprite.Sprite):
         self.image = pygame.image.load(image_path).convert_alpha()
         self.rect = self.image.get_rect(x=initial_x, y=initial_y)
         self.speed_x = .9  # Horizontal speed
-        self.direction = -1  # -1 for left
+        self.direction = 1  # -1 for left
         self.screen_width = screen_width
         self.is_dead = False
 
@@ -24,8 +24,8 @@ class Mob(pygame.sprite.Sprite):
         self.rect.x += self.speed_x * self.direction
 
     # Check boundaries and reverse direction if hitting screen edges
-        if self.rect.left < 0:  # If mob goes past the left edge
-            self.rect.left = 0  # Position it at the left edge
+        if self.rect.left < -1:  # If mob goes past the left edge
+            self.rect.left = -1  # Position it at the left edge
             self.direction *= -1  # And reverse direction to move right
         elif self.rect.right > self.screen_width:  # If mob goes past the right edge while moving back
             self.rect.right = self.screen_width  # Position it at the right edge
