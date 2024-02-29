@@ -2,13 +2,13 @@ import pygame
 import os
 
 class Mob(pygame.sprite.Sprite):
-    def __init__(self, screen_width=700, initial_y=0, initial_x=None):  # Assume screen_width is passed or preset
+    def __init__(self, screen_width=600, initial_y=0, initial_x=None):  # Assume screen_width is passed or preset
         super().__init__()
         current_path = os.path.dirname(__file__)  # Current file directory
         image_path = os.path.join(current_path, "level1_mob.png")
         self.image = pygame.image.load(image_path).convert_alpha()
         self.rect = self.image.get_rect(x=initial_x, y=initial_y)
-        self.speed_x = .8  # Horizontal speed
+        self.speed_x = .55  # Horizontal speed
         self.direction = 1  # -1 for left
         self.screen_width = screen_width
         self.is_dead = False
