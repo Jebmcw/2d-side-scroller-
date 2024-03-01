@@ -2,6 +2,11 @@ import pygame
 import os
 import random  # Import the random module
 
+# Colors
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+
 class Mob(pygame.sprite.Sprite):
     def __init__(self, screen_width=700, screen_height=1500, initial_y=0, initial_x=None):
         super().__init__()
@@ -31,7 +36,22 @@ class Mob(pygame.sprite.Sprite):
         
         self.jump_max = screen_height-100  # this set a max limt for the mob to jump to
         
+        self.health = 100  # Max health
         
+    @staticmethod
+    def draw_health_bar(display, mob,scroll):
+        # Health bar drawing
+        health_percentage = mob.health / 100
+        bar_width = 50
+        bar_height = 10
+        fill = bar_width * health_percentage
+        outline_rect = pygame.Rect(mob.rect.x+scroll+60, mob.rect.y - 10, bar_width, bar_height)
+        fill_rect = pygame.Rect(mob.rect.x+scroll+60, mob.rect.y - 10, fill, bar_height)
+        
+        pygame.draw.rect(display, (255, 0, 0), outline_rect)  # Red background
+        pygame.draw.rect(display, (0, 255, 0), fill_rect)  # Green foreground
+        pygame.draw.rect(display, (255, 255, 255), outline_rect, 2)  # White border    
+          
     @staticmethod
     def spawn_mobs_horizontally(display, num_mobs, initial_y, spacing=0):
         screen_width = display.get_width()

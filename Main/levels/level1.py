@@ -24,7 +24,8 @@ class Level1:
         self.scroll_frames_remaining_backwards = self.scroll_duration_backwards
         
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
-
+        self.health_bar = pygame.sprite.Group()
+        
         # Frame rate and timing for spawns
         self.FPS = 25
         self.current_frame = 0
@@ -32,10 +33,12 @@ class Level1:
         self.spawn_index = 0
 
     def spawn_mobs(self):
-        # Updated to use the static method from Mob class
+        # use the static method from Mob class
         mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 350, 50)
         self.mobs.add(*mobs_to_add)
+        
     
+            
     def run(self):
         self.current_frame += 1
         keys = pygame.key.get_pressed()
@@ -66,12 +69,11 @@ class Level1:
             self.spawn_index += 1
 
         # Update and draw mobs
-        self.mobs.update()  # This calls the update method on all sprite objects in the group
-        # Draw mobs
+        self.mobs.update()
         
         for mob in self.mobs:
             self.display.blit(mob.image, (mob.rect.x + self.scroll, mob.rect.y))
-
+            Mob.draw_health_bar(self.display, mob,self.scroll)
 
 
 
