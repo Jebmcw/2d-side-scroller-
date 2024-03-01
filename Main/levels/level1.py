@@ -17,7 +17,7 @@ class Level1:
         # Initialize scrolling variables
         self.scroll = 0
         self.tiles = math.ceil(self.display.get_width() / self.background_width) + 1
-        self.scroll_speed = 5
+        self.scroll_speed = 3
         self.scroll_duration_foward = 100 * 25
         self.scroll_duration_backwards = 100 * 25
         self.scroll_frames_remaining_foward = self.scroll_duration_foward
@@ -28,28 +28,19 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 25
         self.current_frame = 0
-        self.spawn_frames = [self.FPS * 1, self.FPS * 5, self.FPS * 3, self.FPS * 10, self.FPS * 15]
+        self.spawn_frames = [self.FPS * 1, self.FPS * 20, self.FPS * 40, self.FPS * 50, self.FPS * 60]
         self.spawn_index = 0
 
-
     def spawn_mobs(self):
-        
-        self.spawn_mobs_horizontally(1, 350, 50)
-
-    def spawn_mobs_horizontally(self, num_mobs, initial_y, spacing=0):
-        screen_width = self.display.get_width()
-        start_x = screen_width  # Start just off the right side of the screen
-
-        for _ in range(num_mobs):
-            mob = Mob(screen_width=screen_width, initial_y=initial_y, initial_x=start_x)
-            self.mobs.add(mob)
-            start_x += mob.rect.width + spacing # This would space additional mobs off the screen; adjust logic as needed for your design
-        
+        # Updated to use the static method from Mob class
+        mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 350, 50)
+        self.mobs.add(*mobs_to_add)
+    
     def run(self):
         self.current_frame += 1
         keys = pygame.key.get_pressed()
 
-        # Clear the display at the start of each frame
+        
         self.display.fill((0, 0, 0))  # Fill the screen with black before redrawing the background
 
         if keys[pygame.K_d] and self.scroll_frames_remaining_foward > 0:
@@ -80,11 +71,6 @@ class Level1:
         
         for mob in self.mobs:
             self.display.blit(mob.image, (mob.rect.x + self.scroll, mob.rect.y))
-
-        # Remove dead mobs
-        for mob in self.mobs:
-            if mob.is_dead:
-                mob.kill()
 
 
 

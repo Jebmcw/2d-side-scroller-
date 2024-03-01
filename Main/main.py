@@ -1,7 +1,9 @@
 import pygame
 import sys
 from levels.level1 import Level1
-FPS = 25
+
+from levels.mobs.mobs_LevelOne import Mob
+FPS = 30
 
 class Game:
     def __init__(self):
@@ -14,6 +16,7 @@ class Game:
         self.level1 = Level1(self.screen, self.gameStateManager)
         
         self.states = {'start':self.start, 'level1': self.level1}
+        
     def run(self):
         while True:
             for event in pygame.event.get():
