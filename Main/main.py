@@ -1,6 +1,7 @@
 import pygame
 import sys
 from levels.level1 import Level1
+from soundtrack import soundtrack
 FPS = 40
 
 class Game:
@@ -47,6 +48,7 @@ class GameStateManager:
 
     
 if __name__ == '__main__': 
+    soundtrack()
     game = Game()
     game.run()
 
