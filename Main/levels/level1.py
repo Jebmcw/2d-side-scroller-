@@ -1,6 +1,8 @@
 import pygame
 import os
 import math
+import time
+
 from levels.mobs.mobs_LevelOne import Mob  # Ensure this import path is correct for your project
 
 class Level1:
@@ -24,23 +26,25 @@ class Level1:
         self.scroll_frames_remaining_backwards = self.scroll_duration_backwards
         
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
-        self.health_bar = pygame.sprite.Group()
         
         # Frame rate and timing for spawns
         self.FPS = 25
-        self.current_frame = 0
-        self.spawn_frames = [self.FPS * 1, self.FPS * 20, self.FPS * 40, self.FPS * 50, self.FPS * 60]
+        self.start_time = time.time()
+        self.spawn_intervals = [1, 19, 20, 10, 10] # seconds between spawns
+        self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
 
     def spawn_mobs(self):
         # use the static method from Mob class
-        mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 350, 50)
+        mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 3, 350, 50)
         self.mobs.add(*mobs_to_add)
         
     
             
     def run(self):
-        self.current_frame += 1
+        current_time = time.time()
+        elapsed_time = current_time - self.start_time
+        
         keys = pygame.key.get_pressed()
 
         
@@ -55,19 +59,26 @@ class Level1:
         # Corrected logic for scrolling left
         elif keys[pygame.K_a] and self.scroll_frames_remaining_backwards > 0:
             self.scroll += self.scroll_speed
-            if self.scroll >= 0:  # Adjust for leftward scrolling
+            if self.scroll >= 0:  # Leftward scrolling
                 self.scroll -= self.background_width
             self.scroll_frames_remaining_backwards -= 2
-
+            
+        if self.scroll < self.max_scroll:
+            self.max_scroll = self.scroll
+            
         # Render the background tiles
         for i in range(self.tiles):
             self.display.blit(self.background, (i * self.background_width + self.scroll, 0))
 
-        # Mob spawning, updating, and drawing
-        if self.spawn_index < len(self.spawn_frames) and self.current_frame >= self.spawn_frames[self.spawn_index]:
+            
+        if elapsed_time >= self.next_spawn_time:
             self.spawn_mobs()
-            self.spawn_index += 1
-
+            self.spawn_index +=1
+            if self.spawn_index < len(self.spawn_intervals):
+                self.next_spawn_time += self.spawn_intervals[self.spawn_index]
+            else:
+                self.next_spawn_time = float('inf') # Stop spawning after last interval
+                
         # Update and draw mobs
         self.mobs.update()
         
