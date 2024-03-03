@@ -63,8 +63,8 @@ class Level1:
                 self.scroll -= self.background_width
             self.scroll_frames_remaining_backwards -= 2
             
-        if self.scroll < self.max_scroll:
-            self.max_scroll = self.scroll
+        #if self.scroll < self.max_scroll:
+            #self.max_scroll = self.scroll
             
         # Render the background tiles
         for i in range(self.tiles):

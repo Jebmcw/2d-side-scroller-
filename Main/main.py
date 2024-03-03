@@ -2,7 +2,7 @@ import pygame
 import sys
 from levels.level1 import Level1
 
-from levels.mobs.mobs_LevelOne import Mob
+
 FPS = 30
 
 class Game:
