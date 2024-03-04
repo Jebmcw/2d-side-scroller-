@@ -3,17 +3,19 @@ import sys
 from button import Button  # Ensure this is correctly implemented elsewhere
 
 class Menu:
-    def __init__(self, screen):
+    def __init__(self, screen,gameStateManager):
         self.screen = screen
         self.bg = pygame.image.load("assets/Background.png")
         self.font_path = "assets/font.ttf"  # Update this path as needed
-
+        self.gameStateManager = gameStateManager
     def get_font(self, size):  # Helper method to load fonts
         return pygame.font.Font(self.font_path, size)
 
     def play(self):
         # Implement play screen functionality here
-        pass
+            print("Play button clicked, changing state to 'start'")
+            self.gameStateManager.set_state('start')
+            return
 
     def options(self):
         # Implement options screen functionality here
@@ -51,5 +53,6 @@ class Menu:
                     if quit_button.checkForInput(menu_mouse_pos):
                         pygame.quit()
                         sys.exit()
-
+            if self.gameStateManager.get_state() != 'menu':
+                return              
             pygame.display.update()

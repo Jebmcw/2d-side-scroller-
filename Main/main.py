@@ -13,8 +13,8 @@ class Game:
         self.clock = pygame.time.Clock()
         
         self.gameStateManager = GameStateManager('menu')
+        self.menu = Menu(self.screen, self.gameStateManager)
         self.start = Start(self.screen, self.gameStateManager)
-        self.menu = Menu(self.screen)
         self.level1 = Level1(self.screen, self.gameStateManager)
         
         self.states = {'start':self.start, 'menu': self.menu, 'level1': self.level1}
@@ -43,17 +43,26 @@ class Start:
     def __init__(self, display, gameStateManager):
         self.display = display
         self.gameStateManager = gameStateManager
-         # Initialize Menu
-        self.menu = Menu(self.display)
+        self.font = pygame.font.Font(None, 36)
+        # Pass gameStateManager to the Menu
+        self.menu = Menu(self.display, self.gameStateManager)
+
     def run(self):
+        self.display.fill('red')
+        text_surface = self.font.render('Press E to start', True, (255, 255, 255))  # Render white text
+        text_rect = text_surface.get_rect(center=(750, 300))  # Position the text in the center
+        self.display.blit(text_surface, text_rect)
+        
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_e]:
+            self.gameStateManager.set_state('level1')
         if self.gameStateManager.get_state() == 'menu':
-            # The Menu class handles displaying the title screen
             self.menu.main_menu()
         elif self.gameStateManager.get_state() == 'level1':
-            # Here, you might clear the screen and start the level1 game logic
-            # If level1 has its own background, you might not need to fill the screen with a solid color here
+            # Logic for starting level 1
             pass
-            
+ 
+                      
 class GameStateManager:
     def __init__(self, currentState):
         self.currentState=currentState
