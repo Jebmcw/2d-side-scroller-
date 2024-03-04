@@ -4,7 +4,7 @@ import math
 import time
 
 from levels.mobs.mobs_LevelOne import Mob  # Ensure this import path is correct for your project
-
+from main_character.player import Player
 class Level1:
     def __init__(self, display, gameStateManager):
         self.display = display
@@ -34,6 +34,15 @@ class Level1:
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
 
+        #initialize main character pos and jumps
+        self.jumpCount = 0
+        self.jump = 0
+        self.player_x = 150
+        self.player_y = 450
+        self.alive = False
+        self.mainCharacter = pygame.sprite.Group()
+
+
     def spawn_mobs(self):
         # use the static method from Mob class
         mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 3, 350, 50)
@@ -49,6 +58,12 @@ class Level1:
 
         
         self.display.fill((0, 0, 0))  # Fill the screen with black before redrawing the background
+        
+        if self.alive == False:
+            #Create Player Sprite
+            live = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
+            self.mainCharacter.add(*live)
+            self.alive = True
 
         if keys[pygame.K_d] and self.scroll_frames_remaining_foward > 0:
             self.scroll -= self.scroll_speed
@@ -65,6 +80,11 @@ class Level1:
             
         #if self.scroll < self.max_scroll:
             #self.max_scroll = self.scroll
+
+        #Jump button is 'w':
+        if keys[pygame.K_w] and self.player_y == self.player_y == 450:########
+            print('jump')
+            self.jump = 1###########
             
         # Render the background tiles
         for i in range(self.tiles):
@@ -85,6 +105,18 @@ class Level1:
         for mob in self.mobs:
             self.display.blit(mob.image, (mob.rect.x + self.scroll, mob.rect.y))
             Mob.draw_health_bar(self.display, mob,self.scroll)
+
+        #Update and draw player
+        if self.jump == 1:
+            self.mainCharacter.update()
+            self.jumpCount += 1
+        if self.jumpCount >= 60:
+            self.jump = 0
+            self.jumpCount = 0
+            for player in self.mainCharacter:
+                player.rect.y = player.initial_y
+        for player in self.mainCharacter:
+            self.display.blit(player.image, (player.rect.x, player.rect.y))
 
 
 
