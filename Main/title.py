@@ -13,7 +13,6 @@ class Menu:
 
     def play(self):
         # Implement play screen functionality here
-            print("Play button clicked, changing state to 'start'")
             self.gameStateManager.set_state('start')
             return
 

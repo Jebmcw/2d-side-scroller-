@@ -4,7 +4,7 @@ from title import Menu
 from levels.level1 import Level1
 
 
-FPS = 30
+FPS = 45
 
 class Game:
     def __init__(self):
