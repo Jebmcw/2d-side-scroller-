@@ -24,13 +24,13 @@ class Player(pygame.sprite.Sprite):
         self.screen_height = screen_height
         self.jump_max = screen_height - 80
         self.parabolaX = 0
-        self.gravity = 1
+        self.gravity = .5
 
     @staticmethod
     def spawnPlayer(display, imageNum, initial_x, initial_y):
         screen_width = display.get_width()
         screen_height = display.get_height()
-        player = Player(imageNum, screen_width, screen_height, initial_x, initial_y)
+        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)
         players = pygame.sprite.Group()
         players.add(player)    
         return players
