@@ -30,7 +30,7 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 25
         self.start_time = time.time()
-        self.spawn_intervals = [1, 19, 20, 10, 10] # seconds between spawns
+        self.spawn_intervals = [1, 19, 20, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
 
@@ -45,7 +45,7 @@ class Level1:
 
     def spawn_mobs(self):
         # use the static method from Mob class
-        mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 3, 350, 50)
+        mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 350, 50)
         self.mobs.add(*mobs_to_add)
         
     
