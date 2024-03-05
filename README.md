@@ -163,6 +163,8 @@ Mustafa: " Provided user with tex box, character backstory, sound of the level o
 [bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/4d8c8b2def9bc3c7386b1182091de20f6a69cb0a)
 
 
+## Jira Report
+![Example screenshot](./img/jira.png)
 ## Screenshots
 ![Example screenshot](./img/2d side scroller.webp)
 <!-- If you have screenshots you'd like to share, include them here. -->
