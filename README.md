@@ -98,7 +98,7 @@ Seth: " Provided users with sound of the characeter and simple movement characte
 
 [bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/ef4b9872bc8776490d45d0330902cc1d20b5751f)
 
-- Task 2: Create simple movement in teh character
+- Task 2: Create simple movement in the character
 
 [SCRUM32](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-32)
 
