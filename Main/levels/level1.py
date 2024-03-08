@@ -105,7 +105,8 @@ class Level1:
         for mob in self.mobs:
             self.display.blit(mob.image, (mob.rect.x + self.scroll, mob.rect.y))
             Mob.draw_health_bar(self.display, mob,self.scroll)
-
+            
+       
         #Update and draw player
         if self.jump == 1:
             self.mainCharacter.update()
@@ -115,11 +116,12 @@ class Level1:
             self.jumpCount = 0
             for player in self.mainCharacter:
                 player.rect.y = player.initial_y
+                
         for player in self.mainCharacter:
             self.display.blit(player.image, (player.rect.x, player.rect.y))
-
-
-
+            Player.draw_health_bar_player(self.display, player,100)
+            
+            
 
 
 

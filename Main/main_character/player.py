@@ -25,7 +25,8 @@ class Player(pygame.sprite.Sprite):
         self.jump_max = screen_height - 80
         self.parabolaX = 0
         self.gravity = .5
-
+        self.health = 100
+        
     @staticmethod
     def spawnPlayer(display, imageNum, initial_x, initial_y):
         screen_width = display.get_width()
@@ -35,6 +36,19 @@ class Player(pygame.sprite.Sprite):
         players.add(player)    
         return players
     
+    @staticmethod
+    def draw_health_bar_player(display, player,scroll):
+        # Health bar drawing
+        health_percentage = player.health / 100
+        bar_width = 50
+        bar_height = 10
+        fill = bar_width * health_percentage
+        outline_rect = pygame.Rect(player.rect.x-scroll+ 150, player.rect.y -20, bar_width, bar_height)
+        fill_rect = pygame.Rect(player.rect.x-scroll+ 150, player.rect.y - 20, fill, bar_height)
+        
+        pygame.draw.rect(display, (255, 0, 0), outline_rect)  # Red background
+        pygame.draw.rect(display, (0, 255, 0), fill_rect)  # Green foreground
+        pygame.draw.rect(display, (255, 255, 255), outline_rect, 2)  # White border   
     def update(self):
         #Jump curve
         factor = self.parabolaX - 30
