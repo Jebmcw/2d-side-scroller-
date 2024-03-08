@@ -17,7 +17,7 @@ class Mob(pygame.sprite.Sprite):
         
         # Set initial positions
         if initial_x is None:
-            initial_x = screen_width // 2  # Start at the middle of the screen
+            initial_x = screen_width // 10  # Start at the middle of the screen
         self.rect.x = initial_x
         self.rect.y = initial_y
         
