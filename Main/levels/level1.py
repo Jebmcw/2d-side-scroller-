@@ -13,6 +13,9 @@ class Level1:
         
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
         
+        # Initialize Background with the display
+        self.bg = Background(self.display)
+        
         # Frame rate and timing for spawns
         self.FPS = 25
         self.start_time = time.time()
@@ -42,6 +45,9 @@ class Level1:
 
         keys=pygame.key.get_pressed()
         
+        # Draw the background first
+        self.bg.draw_bg()
+        
         if self.alive == False:
             #Create Player Sprite
             live = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
@@ -65,10 +71,10 @@ class Level1:
                 
         # Update and draw mobs
         self.mobs.update()
-        self.scroll= 0
         for mob in self.mobs:
-            self.display.blit(mob.image, (mob.rect.x + self.scroll, mob.rect.y))
-            Mob.draw_health_bar(self.display, mob,self.scroll)
+            mob_world_x = mob.rect.x - self.bg.scroll
+            self.display.blit(mob.image, (mob_world_x, mob.rect.y))
+            Mob.draw_health_bar(self.display, mob, self.bg.scroll)
             
        
         #Update and draw player
@@ -84,8 +90,6 @@ class Level1:
         for player in self.mainCharacter:
             self.display.blit(player.image, (player.rect.x, player.rect.y))
             Player.draw_health_bar_player(self.display, player,100)
-            
-        Background.draw_bg(self)   
 
 
 
