@@ -1,6 +1,6 @@
 import pygame
 import os
-
+#testing branches on gitkraken.
 class Player(pygame.sprite.Sprite):
     def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 150, initial_y = 450):
         super().__init__()
@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.screen_height = screen_height
         self.jump_max = screen_height - 80
         self.parabolaX = 0
-        self.gravity = .5
+        
         self.health = 100
         
     @staticmethod
@@ -48,7 +48,8 @@ class Player(pygame.sprite.Sprite):
         
         pygame.draw.rect(display, (255, 0, 0), outline_rect)  # Red background
         pygame.draw.rect(display, (0, 255, 0), fill_rect)  # Green foreground
-        pygame.draw.rect(display, (255, 255, 255), outline_rect, 2)  # White border   
+        pygame.draw.rect(display, (255, 255, 255), outline_rect, 2)  # White border 
+          
     def update(self):
         #Jump curve
         factor = self.parabolaX - 30

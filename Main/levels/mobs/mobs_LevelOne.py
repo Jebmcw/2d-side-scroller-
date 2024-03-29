@@ -1,6 +1,5 @@
 import pygame
-import os
-import random  # Import the random module
+
 
 # Colors
 WHITE = (255, 255, 255)
@@ -8,11 +7,9 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
 class Mob(pygame.sprite.Sprite):
-    def __init__(self, screen_width=700, screen_height=1500, initial_y=0, initial_x=None):
+    def __init__(self, screen_width=600, screen_height=1500, initial_y=0, initial_x=None):
         super().__init__()
-        current_path = os.path.dirname(__file__)  # Current file directory
-        image_path = os.path.join(current_path, "level1_mob.png")
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load("Main/Level1_img/mob/level1_mob.png").convert_alpha()
         self.rect = self.image.get_rect()
         
         # Set initial positions
@@ -39,32 +36,38 @@ class Mob(pygame.sprite.Sprite):
         self.health = 100  # Max health
         
     @staticmethod
-    def draw_health_bar(display, mob,scroll):
-        # Health bar drawing
-        health_percentage = mob.health / 100
-        bar_width = 50
-        bar_height = 10
-        fill = bar_width * health_percentage
-        outline_rect = pygame.Rect(mob.rect.x+scroll+60, mob.rect.y - 10, bar_width, bar_height)
-        fill_rect = pygame.Rect(mob.rect.x+scroll+60, mob.rect.y - 10, fill, bar_height)
-        
-        pygame.draw.rect(display, (255, 0, 0), outline_rect)  # Red background
-        pygame.draw.rect(display, (0, 255, 0), fill_rect)  # Green foreground
-        pygame.draw.rect(display, (255, 255, 255), outline_rect, 2)  # White border    
+    def draw_health_bar(display, mob, scroll):
+        # Example health bar properties
+        BAR_WIDTH = 50
+        BAR_HEIGHT = 10
+        border_color = (0, 0, 0)  # Black
+        fill_color = (255, 0, 0)  # Red
+    
+        # Calculate health bar position
+        # Let's assume the health bar is drawn directly above the mob sprite
+        bar_x = mob.rect.x+65 - scroll  # Adjust mob's X position with scroll value
+        bar_y = mob.rect.y - 10  # Positioned 10 pixels above the mob
+    
+        # Draw the health bar
+        pygame.draw.rect(display, border_color, (bar_x, bar_y, BAR_WIDTH, BAR_HEIGHT), 1)  # Border
+        pygame.draw.rect(display, fill_color, (bar_x + 1, bar_y + 1, BAR_WIDTH - 2, BAR_HEIGHT - 2))  # Fill 
           
     @staticmethod
-    def spawn_mobs_horizontally(display, num_mobs, initial_y, spacing=0):
+    def spawn_mobs_horizontally(display, num_mobs, initial_y, spacing, x_offset=0):
         screen_width = display.get_width()
         screen_height = display.get_height()
         mobs = pygame.sprite.Group()
-        
-        for _ in range(num_mobs):
-            # initial_x calculation
-            initial_x = random.randint(0, screen_width)
+    
+        for i in range(num_mobs):
+            initial_x = (i * spacing) + x_offset  # Use the dynamic offset here
+        # Ensure mobs spawn within the intended area, adjusting as necessary
             mob = Mob(screen_width=screen_width, screen_height=screen_height, initial_y=initial_y, initial_x=initial_x)
             mobs.add(mob)
-            
+    
         return mobs
+
+
+
 
     def update(self):
         
@@ -74,14 +77,6 @@ class Mob(pygame.sprite.Sprite):
         # Apply gravity
         self.vertical_speed += self.gravity
         self.rect.y += self.vertical_speed
-        
-        if self.rect.right > self.screen_width-500:  # If mob hits the right edge of the screen
-            self.rect.right = self.screen_width-500
-            self.direction_x *= -1  # Reverse direction
-            
-        elif self.rect.left < 0:  # If mob hits the left edge of the screen
-            self.rect.left = 0
-            self.direction_x *= -1  # Reverse direction
             
         # Boundary checks and jumping logic
         if self.rect.bottom > self.jump_max:
