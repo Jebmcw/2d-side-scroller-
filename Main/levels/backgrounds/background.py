@@ -10,7 +10,7 @@ class Background:
         
         self.bg_images = []
         for i in range(1, 6):                
-            bg_image = pygame.image.load(f"img/backgrounds/plx-{i}.png").convert_alpha()
+            bg_image = pygame.image.load(f"Main/Level1_img/backgrounds/plx-{i}.png").convert_alpha()
             bg_image = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
             self.bg_images.append(bg_image)
                 

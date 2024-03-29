@@ -1,6 +1,5 @@
 import pygame
-import os
-import random  # Import the random module
+
 
 # Colors
 WHITE = (255, 255, 255)
@@ -10,9 +9,7 @@ GREEN = (0, 255, 0)
 class Mob(pygame.sprite.Sprite):
     def __init__(self, screen_width=600, screen_height=1500, initial_y=0, initial_x=None):
         super().__init__()
-        current_path = os.path.dirname(__file__)  # Current file directory
-        image_path = os.path.join(current_path, "level1_mob.png")
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load("Main/Level1_img/mob/level1_mob.png").convert_alpha()
         self.rect = self.image.get_rect()
         
         # Set initial positions
