@@ -4,7 +4,7 @@ import time
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
 from levels.backgrounds.background import Background
-
+#from levels.boss.boss import Boss
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -12,12 +12,13 @@ class Level1:
         self.gameStateManager = gameStateManager
         
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
+        self.boss = pygame.sprite.Group()
         
         # Initialize Background with the display
         self.bg = Background(self.display)
         
         # Frame rate and timing for spawns
-        self.FPS = 25
+        self.FPS = 45
         self.start_time = time.time()
         self.spawn_intervals = [1, 5, 9, 12, 14] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
@@ -37,10 +38,9 @@ class Level1:
         if self.spawn_intervals[self.spawn_index] ==1:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 400, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 1")
-    
         if self.spawn_intervals[self.spawn_index] == 5:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
@@ -68,7 +68,10 @@ class Level1:
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 14")
-                
+            
+    #def spawn_boss(self):
+        
+        #pass            
     def run(self):
         current_time = time.time()
         elapsed_time = current_time - self.start_time
@@ -105,7 +108,7 @@ class Level1:
             mob_world_x = mob.rect.x - self.bg.scroll
             self.display.blit(mob.image, (mob_world_x, mob.rect.y))
             Mob.draw_health_bar(self.display, mob, self.bg.scroll)
-            
+        
        
         #Update and draw player
         if self.jump == 1:
