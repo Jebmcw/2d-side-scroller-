@@ -4,7 +4,7 @@ import time
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
 from levels.backgrounds.background import Background
-#from levels.boss.boss import Boss
+from levels.Level1_boss.level1_boss import Boss
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -69,9 +69,13 @@ class Level1:
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 14")
             
-    #def spawn_boss(self):
-        
-        #pass            
+    def spawn_boss(self):
+        if self.bg.scroll == 8000:
+            dynamic_offset = 10000
+            boss_to_add = Boss.spawn_boss_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            self.boss.add(boss_to_add)
+            print("boss spawned")
+               
     def run(self):
         current_time = time.time()
         elapsed_time = current_time - self.start_time
@@ -108,8 +112,12 @@ class Level1:
             mob_world_x = mob.rect.x - self.bg.scroll
             self.display.blit(mob.image, (mob_world_x, mob.rect.y))
             Mob.draw_health_bar(self.display, mob, self.bg.scroll)
-        
-       
+         
+        self.spawn_boss()   
+        self.boss.update()
+        for boss in self.boss:
+            self.display.blit(boss.image, (boss.rect.x-self.bg.scroll, boss.rect.y))
+            
         #Update and draw player
         if self.jump == 1:
             self.mainCharacter.update()
