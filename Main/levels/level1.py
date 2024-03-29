@@ -19,7 +19,7 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 25
         self.start_time = time.time()
-        self.spawn_intervals = [1, 19, 20, 10] # seconds between spawns
+        self.spawn_intervals = [1, 5, 9, 12, 14] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
 
@@ -30,15 +30,45 @@ class Level1:
         self.player_y = 450
         self.alive = False
         self.mainCharacter = pygame.sprite.Group()
-
+        self.some_additional_offset = 100
 
     def spawn_mobs(self):
-        # use the static method from Mob class
-        mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 350, 50)
-        self.mobs.add(*mobs_to_add)
-        
+        dynamic_offset = 0
+        if self.spawn_intervals[self.spawn_index] ==1:
+            self.some_additional_offset = 500
+            dynamic_offset = self.bg.scroll + self.some_additional_offset
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            self.mobs.add(*mobs_to_add)
+            print("Mob spawned : 1")
     
+        if self.spawn_intervals[self.spawn_index] == 5:
+            self.some_additional_offset = 500
+            dynamic_offset = self.bg.scroll + self.some_additional_offset
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            self.mobs.add(*mobs_to_add)
+            print("Mob spawned : 5")
             
+        if self.spawn_intervals[self.spawn_index] == 9:
+            self.some_additional_offset = 500
+            dynamic_offset = self.bg.scroll + self.some_additional_offset
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            self.mobs.add(*mobs_to_add)
+            print("Mob spawned : 10")
+            
+        if self.spawn_intervals[self.spawn_index] == 12:
+            self.some_additional_offset = 500
+            dynamic_offset = self.bg.scroll + self.some_additional_offset
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            self.mobs.add(*mobs_to_add)
+            print("Mob spawned : 12")
+            
+        if self.spawn_intervals[self.spawn_index] == 14:
+            self.some_additional_offset = 500
+            dynamic_offset = self.bg.scroll + self.some_additional_offset
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            self.mobs.add(*mobs_to_add)
+            print("Mob spawned : 14")
+                
     def run(self):
         current_time = time.time()
         elapsed_time = current_time - self.start_time
@@ -57,7 +87,7 @@ class Level1:
 
         #Jump button is 'w':
         if keys[pygame.K_w] and self.player_y == self.player_y == 450:
-            print('jump')
+            #print('jump')
             self.jump = 1
 
             
