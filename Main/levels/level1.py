@@ -20,7 +20,7 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 45
         self.start_time = time.time()
-        self.spawn_intervals = [1, 5, 9, 12, 14] # seconds between spawns
+        self.spawn_intervals = [1, 5, 8, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
 
@@ -33,6 +33,7 @@ class Level1:
         self.mainCharacter = pygame.sprite.Group()
         self.some_additional_offset = 100
 
+    
     def spawn_mobs(self):
         dynamic_offset = 0
         if self.spawn_intervals[self.spawn_index] ==1:
@@ -48,34 +49,40 @@ class Level1:
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 5")
             
+        if self.spawn_intervals[self.spawn_index] == 8:
+            self.some_additional_offset = 500
+            dynamic_offset = self.bg.scroll + self.some_additional_offset
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 500, 50, dynamic_offset)
+            self.mobs.add(*mobs_to_add)
+            print("Mob spawned : 8")
+            
         if self.spawn_intervals[self.spawn_index] == 9:
+            self.some_additional_offset = 500
+            dynamic_offset = self.bg.scroll + self.some_additional_offset
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            self.mobs.add(*mobs_to_add)
+            print("Mob spawned : 9")
+            
+        if self.spawn_intervals[self.spawn_index] == 10:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 10")
             
-        if self.spawn_intervals[self.spawn_index] == 12:
-            self.some_additional_offset = 500
-            dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
-            self.mobs.add(*mobs_to_add)
-            print("Mob spawned : 12")
-            
-        if self.spawn_intervals[self.spawn_index] == 14:
-            self.some_additional_offset = 500
-            dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
-            self.mobs.add(*mobs_to_add)
-            print("Mob spawned : 14")
-            
     def spawn_boss(self):
+        font = pygame.font.SysFont('arial', 100)  # Specify the font name and size.
+        text_color = (255, 0, 0)  # Red color
+        self.bossFightTextShown = False
         if self.bg.scroll == 8000:
             dynamic_offset = 10000
             boss_to_add = Boss.spawn_boss_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.boss.add(boss_to_add)
-            print("boss spawned")
-               
+        if self.bg.scroll >9000 and self.bg.scroll <= 10000 and not self.bossFightTextShown:
+            text_surface = font.render('Boss Fight!!!', True, text_color)
+            self.display.blit(text_surface, (450, 150))  # Position of the text
+            self.bossFightTextShown = True  # Prevent the message from showing again
+                      
     def run(self):
         current_time = time.time()
         elapsed_time = current_time - self.start_time

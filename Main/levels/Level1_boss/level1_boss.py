@@ -4,8 +4,8 @@ import pygame
 class Boss(pygame.sprite.Sprite):
     def __init__(self, screen_width=600, screen_height=1500, initial_y=0, initial_x=None):
         super().__init__()
-        self.image = pygame.image.load("Main/Level1_img/boss/first_boss.png").convert()
-        self.image.set_colorkey((0, 0, 0))
+        self.image = pygame.image.load("Main/Level1_img/boss/first_boss.png").convert_alpha()
+        
         self.rect = self.image.get_rect()
         
         # Set initial positions
@@ -17,6 +17,18 @@ class Boss(pygame.sprite.Sprite):
         self.screen_width = screen_width
         self.screen_height = screen_height
         
+        self.gravity = 0.5  # Gravity effect
+        self.jump_force = -15  # Initial force for jumps
+        self.vertical_speed = 0  # Current vertical speed
+        
+        self.speed_x = 1  # Horizontal speed
+        
+        self.direction_x = -1  # 1 for right, -1 for left
+        
+        self.screen_width = screen_width
+        self.screen_height = screen_height
+        
+        self.jump_max = screen_height  # this set a max limt for the mob to jump to
         
           
     @staticmethod
@@ -35,4 +47,17 @@ class Boss(pygame.sprite.Sprite):
 
     def update(self):
         
-        pass
+        # speed based on direction
+        self.rect.x += self.speed_x * self.direction_x
+        
+        # Apply gravity
+        self.vertical_speed += self.gravity
+        self.rect.y += self.vertical_speed
+            
+        # Boundary checks and jumping logic
+        if self.rect.bottom > self.jump_max:
+            self.rect.bottom = self.jump_max
+            self.vertical_speed = self.jump_force  # Apply jump force to simulate a bounce
+        elif self.rect.top < 0:
+            self.rect.top = 0
+            self.vertical_speed = 0  # Stop upward movement
