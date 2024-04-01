@@ -31,7 +31,7 @@ class Mob(pygame.sprite.Sprite):
         
         self.speed_x = 0.55  # Horizontal speed
         
-        self.direction_x = 1  # 1 for right, -1 for left
+        self.direction_x = -1  # 1 for right, -1 for left
         
         self.screen_width = screen_width
         self.screen_height = screen_height
