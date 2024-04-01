@@ -33,7 +33,8 @@ class Level1:
         self.mainCharacter = pygame.sprite.Group()
         self.some_additional_offset = 100
 
-    
+        self.bossFightTextShown = False
+        
     def spawn_mobs(self):
         dynamic_offset = 0
         if self.spawn_intervals[self.spawn_index] ==1:
@@ -73,15 +74,16 @@ class Level1:
     def spawn_boss(self):
         font = pygame.font.SysFont('arial', 100)  # Specify the font name and size.
         text_color = (255, 0, 0)  # Red color
-        self.bossFightTextShown = False
+
         if self.bg.scroll == 8000:
             dynamic_offset = 10000
             boss_to_add = Boss.spawn_boss_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.boss.add(boss_to_add)
-        if self.bg.scroll >9000 and self.bg.scroll <= 10000 and not self.bossFightTextShown:
+            
+        if self.bg.scroll >8000 and self.bg.scroll <= 9000 and not self.bossFightTextShown:
             text_surface = font.render('Boss Fight!!!', True, text_color)
             self.display.blit(text_surface, (450, 150))  # Position of the text
-            self.bossFightTextShown = True  # Prevent the message from showing again
+            
                       
     def run(self):
         current_time = time.time()
@@ -124,7 +126,8 @@ class Level1:
         self.boss.update()
         for boss in self.boss:
             self.display.blit(boss.image, (boss.rect.x-self.bg.scroll, boss.rect.y))
-            
+            Boss.draw_health_bar(self.display, boss, self.bg.scroll)
+             
         #Update and draw player
         if self.jump == 1:
             self.mainCharacter.update()
