@@ -141,7 +141,10 @@ class Level1:
         for player in self.mainCharacter:
             self.display.blit(player.image, (player.rect.x, player.rect.y))
             Player.draw_health_bar_player(self.display, player,100)
-
+            Player.draw_text_box(self.display, player,'')
+    
+   
+    
 
 
 
