@@ -57,6 +57,7 @@ class Start:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_e]:
             self.gameStateManager.set_state('level1')
+            soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
         if self.gameStateManager.get_state() == 'menu':
             self.menu.main_menu()
         elif self.gameStateManager.get_state() == 'level1':
@@ -74,7 +75,7 @@ class GameStateManager:
 
     
 if __name__ == '__main__': 
-    soundtrack()
+    soundtrack('Main/music/Title Theme.wav')
     game = Game()
     game.run()
 
