@@ -5,13 +5,12 @@ class Player(pygame.sprite.Sprite):
     def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 150, initial_y = 450):
         super().__init__()
         #Current file directory
-        current_path = os.path.dirname(__file__)
+        current_path = os.path.dirname('assets')
         #Load image file path
         if imageChoice == 1:
-            image_path = os.path.join(current_path, "main_character.png")
+            self.image = pygame.image.load('assets/main_character.png').convert_alpha()
         elif imageChoice == 2:
-            image_path = os.path.join(current_path, "main character 2nd option.png")
-        self.image = pygame.image.load(image_path).convert_alpha()
+            self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
         self.rect = self.image.get_rect()
         #Creates the rectangle for the sprite
         #This will be the area of collision
@@ -82,7 +81,5 @@ class Player(pygame.sprite.Sprite):
         self.parabolaX += 1
         if self.parabolaX >= 60:
             self.parabolaX = 0
-        self.verticalSpeed += self.gravity
-        self.rect.y += self.verticalSpeed
 
     
