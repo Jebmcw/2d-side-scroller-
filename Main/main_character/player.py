@@ -15,6 +15,8 @@ class Player(pygame.sprite.Sprite):
         #Creates the rectangle for the sprite
         #This will be the area of collision
         #coordinates of top left corner.
+        self.width = self.image.get_width
+        self.height = self.image.get_height
         self.rect.x = initial_x
         self.rect.y = initial_y
         self.initial_y = initial_y
