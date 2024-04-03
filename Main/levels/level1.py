@@ -17,6 +17,7 @@ class Level1:
         # Initialize Background with the display
         self.bg = Background(self.display)
         
+        self.lines = "In a mystical realm, a hero embarks on a quest\n to recover ancient artifacts, battling foes and unraveling mysteries\n to restore harmony to the land."
         # Frame rate and timing for spawns
         self.FPS = 45
         self.start_time = time.time()
@@ -141,7 +142,9 @@ class Level1:
         for player in self.mainCharacter:
             self.display.blit(player.image, (player.rect.x, player.rect.y))
             Player.draw_health_bar_player(self.display, player,100)
-            Player.draw_text_box(self.display, player,'')
+            print(self.bg.scroll)
+            if self.bg.scroll >= 30 and self.bg.scroll <= 1000:
+                Player.draw_text_box(self.display, player,self.lines)
     
    
     
