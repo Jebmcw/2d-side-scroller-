@@ -49,25 +49,43 @@ class Player(pygame.sprite.Sprite):
         pygame.draw.rect(display, (0, 255, 0), fill_rect)  # Green foreground
         pygame.draw.rect(display, (255, 255, 255), outline_rect, 2)  # White border 
    
-    @staticmethod       
+    @staticmethod
     def draw_text_box(display, player, text, font_size=24, text_color=(255, 255, 255), box_color=(0, 0, 0, 128), padding=10, offset_y=50):
         font = pygame.font.Font(None, font_size)
-        text_surf = font.render(text, True, text_color)
-        text_rect = text_surf.get_rect(center=(player.rect.centerx, player.rect.y - offset_y))
 
-        # Calculate box dimensions based on text dimensions + padding
-        box_rect = text_surf.get_rect()
-        box_rect.inflate_ip(padding * 2, padding * 2)  # Inflate the rect to add padding around the text
-        box_rect.center = (player.rect.centerx, player.rect.y - offset_y - text_rect.height // 2 - padding)
 
-        # Create a semi-transparent surface for the text box background
+        lines = text.split('\n')
+        max_width = 0
+        text_surfs = []
+
+
+        for line in lines:
+            text_surf = font.render(line, True, text_color)
+            text_surfs.append(text_surf)
+            if text_surf.get_width() > max_width:
+                max_width = text_surf.get_width()
+
+
+        total_height = sum(text_surf.get_height() for text_surf in text_surfs) + padding * (len(text_surfs) - 1)
+
+
+        box_rect = pygame.Rect(0, 0, max_width + padding * 2, total_height + padding * 2)
+        box_rect.center = (player.rect.centerx, player.rect.y - offset_y - total_height // 2 - padding)
+
+
         box_surface = pygame.Surface(box_rect.size, pygame.SRCALPHA)
         box_surface.fill(box_color)
 
-        # Blit the semi-transparent surface onto the display first
+
         display.blit(box_surface, box_rect.topleft)
-        # Then blit the text onto the display, centered within the text box
-        display.blit(text_surf, text_rect)
+
+
+        current_y = box_rect.y + padding
+        for text_surf in text_surfs:
+            text_rect = text_surf.get_rect(center=(box_rect.centerx, current_y + text_surf.get_height() // 2))
+            display.blit(text_surf, text_rect)
+            current_y += text_surf.get_height() + padding
+    
    
    
    

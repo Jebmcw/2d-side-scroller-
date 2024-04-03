@@ -17,6 +17,7 @@ class Level1:
         # Initialize Background with the display
         self.bg = Background(self.display)
         
+        self.lines = "In a mystical realm, a hero embarks \non a quest to recover ancient artifacts,\n battling foes and unraveling mysteries\n to restore harmony to the land."
         # Frame rate and timing for spawns
         self.FPS = 45
         self.start_time = time.time()
@@ -139,13 +140,13 @@ class Level1:
                 
         self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
         Player.draw_health_bar_player(self.display, self.freddy,100)
-        Player.draw_text_box(self.display, self.freddy,'')
+        if self.bg.scroll >= 30 and self.bg.scroll <= 1000:
+            Player.draw_text_box(self.display, self.freddy,self.lines)
 
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
             print("Collison!")
-    
-   
+           
     
 
 
