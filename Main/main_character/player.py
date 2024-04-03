@@ -32,10 +32,8 @@ class Player(pygame.sprite.Sprite):
     def spawnPlayer(display, imageNum, initial_x, initial_y):
         screen_width = display.get_width()
         screen_height = display.get_height()
-        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)
-        players = pygame.sprite.Group()
-        players.add(player)    
-        return players
+        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)  
+        return player
     
     @staticmethod
     def draw_health_bar_player(display, player,scroll):
@@ -73,12 +71,12 @@ class Player(pygame.sprite.Sprite):
    
    
    
-    def update(self):
+    def jump(self):
         #Jump curve
         factor = self.parabolaX - 30
         square = factor*factor
-        coefficient = float(square)*0.144
-        jump_height = int(coefficient)-130
+        coefficient = float(square)*0.2
+        jump_height = int(coefficient)-180
         self.rect.y = self.initial_y + jump_height
         self.parabolaX += 1
         if self.parabolaX >= 60:

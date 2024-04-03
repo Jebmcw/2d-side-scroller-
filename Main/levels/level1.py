@@ -30,7 +30,7 @@ class Level1:
         self.player_x = 150
         self.player_y = 450
         self.alive = False
-        self.mainCharacter = pygame.sprite.Group()
+        self.freddy = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
         self.some_additional_offset = 100
 
         self.bossFightTextShown = False
@@ -94,11 +94,11 @@ class Level1:
         # Draw the background first
         self.bg.draw_bg()
         
-        if self.alive == False:
+        #if self.alive == False:
             #Create Player Sprite
-            live = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
-            self.mainCharacter.add(*live)
-            self.alive = True
+            #live = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
+            #self.mainCharacter.add(*live)
+            #self.alive = True
             
 
         #Jump button is 'w':
@@ -130,18 +130,20 @@ class Level1:
              
         #Update and draw player
         if self.jump == 1:
-            self.mainCharacter.update()
+            self.freddy.jump()
             self.jumpCount += 1
         if self.jumpCount >= 60:
             self.jump = 0
             self.jumpCount = 0
-            for player in self.mainCharacter:
-                player.rect.y = player.initial_y
+            self.freddy.rect.y = self.freddy.initial_y
                 
-        for player in self.mainCharacter:
-            self.display.blit(player.image, (player.rect.x, player.rect.y))
-            Player.draw_health_bar_player(self.display, player,100)
-            Player.draw_text_box(self.display, player,'')
+        self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
+        Player.draw_health_bar_player(self.display, self.freddy,100)
+        Player.draw_text_box(self.display, self.freddy,'')
+
+        collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
+        for collided_sprite in collisions:
+            print("Collison!")
     
    
     
