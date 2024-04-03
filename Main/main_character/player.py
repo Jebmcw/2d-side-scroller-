@@ -32,10 +32,8 @@ class Player(pygame.sprite.Sprite):
     def spawnPlayer(display, imageNum, initial_x, initial_y):
         screen_width = display.get_width()
         screen_height = display.get_height()
-        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)
-        players = pygame.sprite.Group()
-        players.add(player)    
-        return players
+        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)  
+        return player
     
     @staticmethod
     def draw_health_bar_player(display, player,scroll):
