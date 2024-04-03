@@ -130,7 +130,7 @@ class Level1:
              
         #Update and draw player
         if self.jump == 1:
-            self.freddy.update()
+            self.freddy.jump()
             self.jumpCount += 1
         if self.jumpCount >= 60:
             self.jump = 0
@@ -140,6 +140,10 @@ class Level1:
         self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
         Player.draw_health_bar_player(self.display, self.freddy,100)
         Player.draw_text_box(self.display, self.freddy,'')
+
+        collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
+        for collided_sprite in collisions:
+            print("Collison!")
     
    
     

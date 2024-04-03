@@ -71,12 +71,12 @@ class Player(pygame.sprite.Sprite):
    
    
    
-    def update(self):
+    def jump(self):
         #Jump curve
         factor = self.parabolaX - 30
         square = factor*factor
-        coefficient = float(square)*0.144
-        jump_height = int(coefficient)-130
+        coefficient = float(square)*0.2
+        jump_height = int(coefficient)-180
         self.rect.y = self.initial_y + jump_height
         self.parabolaX += 1
         if self.parabolaX >= 60:
