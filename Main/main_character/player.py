@@ -99,7 +99,5 @@ class Player(pygame.sprite.Sprite):
         self.parabolaX += 1
         if self.parabolaX >= 60:
             self.parabolaX = 0
-        self.verticalSpeed += self.gravity
-        self.rect.y += self.verticalSpeed
 
     
