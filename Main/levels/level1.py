@@ -21,7 +21,7 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 45
         self.start_time = time.time()
-        self.spawn_intervals = [1, 5, 8, 9, 10] # seconds between spawns
+        self.spawn_intervals = [1,4,3, 5, 8, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
 
@@ -38,7 +38,7 @@ class Level1:
         
     def spawn_mobs(self):
         dynamic_offset = 0
-        if self.spawn_intervals[self.spawn_index] ==1:
+        if self.spawn_intervals[self.spawn_index] ==3:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 400, 50, dynamic_offset)
@@ -94,6 +94,10 @@ class Level1:
         
         # Draw the background first
         self.bg.draw_bg()
+        font = pygame.font.SysFont('Times New Roman',30)
+        text_color = (255,255,255)
+        text_surface = font.render('Freddy World', True, text_color)
+        self.display.blit(text_surface, (0,10))
         
         #if self.alive == False:
             #Create Player Sprite
@@ -140,37 +144,9 @@ class Level1:
                 
         self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
         Player.draw_health_bar_player(self.display, self.freddy,100)
-        if self.bg.scroll >= 30 and self.bg.scroll <= 1000:
+        if self.spawn_intervals[self.spawn_index] >=1 and self.spawn_intervals[self.spawn_index] <=4:
             Player.draw_text_box(self.display, self.freddy,self.lines)
 
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
             print("Collison!")
-           
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
