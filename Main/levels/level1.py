@@ -54,7 +54,7 @@ class Level1:
         if self.spawn_intervals[self.spawn_index] == 8:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 500, 50, dynamic_offset)
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 8")
             
@@ -121,6 +121,9 @@ class Level1:
         for mob in self.mobs:
             mob_world_x = mob.rect.x - self.bg.scroll
             self.display.blit(mob.image, (mob_world_x, mob.rect.y))
+            mob.seeRect(self.bg.scroll)
+            pygame.draw.rect(self.display, (255, 0, 0), mob.rect, 2)  # Draw a rectangle around the sprite's rect
+            mob.revertX(self.bg.scroll)
             Mob.draw_health_bar(self.display, mob, self.bg.scroll)
          
         self.spawn_boss()   
@@ -139,6 +142,7 @@ class Level1:
             self.freddy.rect.y = self.freddy.initial_y
                 
         self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
+        pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
         if self.bg.scroll >= 30 and self.bg.scroll <= 1000:
             Player.draw_text_box(self.display, self.freddy,self.lines)

@@ -90,7 +90,11 @@ class Mob(pygame.sprite.Sprite):
         elif self.rect.top < 0:
             self.rect.top = 0
             self.vertical_speed = 0  # Stop upward movement
-        
+
+    def seeRect(self, bg_scroll):
+        self.rect.x -= bg_scroll    
+    def revertX(self, bg_scroll):
+        self.rect.x += bg_scroll
 
 
        
