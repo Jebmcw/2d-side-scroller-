@@ -22,9 +22,14 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 45
         self.start_time = time.time()
-        self.spawn_intervals = [1,4,3, 5, 8, 9, 10] # seconds between spawns
+        self.spawn_intervals = [3, 5, 8, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
+        
+         # Timing for text box display
+        self.text_box_start_time = 1  # Displaying the text box 1 second into the game
+        self.text_box_end_time = 6  # Stop displaying the text box 6 seconds into the game
+        self.text_displayed = False  # Flag
 
         current_path = os.path.dirname(__file__)
         # Initialize the TileMap
@@ -98,6 +103,8 @@ class Level1:
         self.tile_map.draw(self.display)
         current_time = time.time()
         elapsed_time = current_time - self.start_time
+        game_elapsed_time = current_time - self.start_time
+
 
         keys=pygame.key.get_pressed()
         
@@ -154,8 +161,10 @@ class Level1:
                 
         self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
         Player.draw_health_bar_player(self.display, self.freddy,100)
-        if self.spawn_intervals[self.spawn_index] >=1 and self.spawn_intervals[self.spawn_index] <=4:
+        
+        if self.text_box_start_time <= game_elapsed_time <= self.text_box_end_time:
             Player.draw_text_box(self.display, self.freddy,self.lines)
+            self.text_displayed = True
 
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
