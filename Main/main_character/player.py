@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
     def spawnPlayer(display, imageNum, initial_x, initial_y):
         screen_width = display.get_width()
         screen_height = display.get_height()
-        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)  
+        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y=350)  
         return player
     
     @staticmethod
