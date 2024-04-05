@@ -28,9 +28,8 @@ class Level1:
 
         current_path = os.path.dirname(__file__)
         # Initialize the TileMap
-        csv_file_path = "C:\\Users\\Fernando\\OneDrive\\Desktop\\Bitbucket Stuff\\2d-side-scroller\\Main\\levels\\platforms\\level 1 tile map.csv"
-        tileset_path = "C:\\Users\\Fernando\\OneDrive\\Desktop\\Bitbucket Stuff\\2d-side-scroller\\Main\\levels\\platforms\\level 1 tile map.png"
-        self.tile_map = TileMap(csv_file_path, tileset_path, tile_size=32)  # Adjust as needed
+        csv_file_path = "Main/levels/platforms/level 1 tile map.csv"
+        self.tile_map = TileMap(csv_file_path, tile_size=32)  # Adjust as needed
 
         #initialize main character pos and jumps
         self.jumpCount = 0
@@ -104,7 +103,7 @@ class Level1:
         
         # Draw the background first
         self.bg.draw_bg()
-        self.tile_map.draw(self.display)
+        self.bg.draw_ground()
         #if self.alive == False:
             #Create Player Sprite
             #live = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)

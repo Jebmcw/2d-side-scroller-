@@ -2,13 +2,13 @@ import pygame
 import csv
 
 class TileMap:
-    def __init__(self, csv_file, tileset_path, tile_size):
+    def __init__(self, csv_file, tile_size):
         """
         Initialize the TileMap with a CSV file path, tileset image path, and tile size.
         """
         self.tile_size = tile_size
         self.tilemap = self.load_csv(csv_file)
-        self.tileset = pygame.image.load(tileset_path).convert_alpha()
+       # self.tileset = pygame.image.load(tileset_path).convert_alpha()
 
         print("Loaded tilemap with dimensions:", len(self.tilemap), "x", len(self.tilemap[0]))
    
@@ -25,19 +25,19 @@ class TileMap:
         Draw the visible portion of the tilemap onto the specified display surface,
         offset by the camera position.
         """
-        print("Drawing tilemap...")
+       # print("Drawing tilemap...")
         for y, row in enumerate(self.tilemap):
             for x, tile in enumerate(row):
                 if tile.isdigit():
                     tile = int(tile)
                     # Calculate the position of the tile in the tileset
-                    tile_x = (tile % (self.tileset.get_width() // self.tile_size)) * self.tile_size
-                    tile_y = (tile // (self.tileset.get_width() // self.tile_size)) * self.tile_size
+                   # tile_x = (tile % (self.tileset.get_width() // self.tile_size)) * self.tile_size
+                    #tile_y = (tile // (self.tileset.get_width() // self.tile_size)) * self.tile_size
                     # Calculate the position on the screen
                     screen_x = x * self.tile_size - camera_offset_x
                     screen_y = y * self.tile_size - camera_offset_y
                     # Blit the tile to the display
-                    display.blit(self.tileset, (screen_x, screen_y), (tile_x, tile_y, self.tile_size, self.tile_size))
+                   # display.blit(self.tileset, (screen_x, screen_y), (tile_x, tile_y, self.tile_size, self.tile_size))
 
         # Draw a red border around the entire tilemap for debugging
         border_color = (255, 0, 0)  # Red color
