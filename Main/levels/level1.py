@@ -11,14 +11,6 @@ class Level1:
     def __init__(self, display, gameStateManager):
         self.display = display
         self.gameStateManager = gameStateManager
-        end_time = time.time()
-        elapsed_time = end_time - self.gameStateManager.start_time  # Assuming the start time is accessible here
-        
-        self.minutes = int(elapsed_time // 60)
-        self.seconds = int(elapsed_time % 60)
-
-        self.time_text = f"Time: {self.minutes}m {self.seconds}s"
-        # Use your existing text rendering method to display `time_text` on the screen
 
         
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
@@ -105,7 +97,25 @@ class Level1:
             text_surface = font.render('Boss Fight!!!', True, text_color)
             self.display.blit(text_surface, (450, 150))  # Position of the text
             
-                      
+    def update_timer(self):
+        self.font = pygame.font.Font(None, 36)
+    # Calculate elapsed time
+        if self.gameStateManager.start_time is not None:
+            current_time = time.time()
+            elapsed_time = current_time - self.gameStateManager.start_time
+        
+            # Format as minutes:seconds
+            minutes = int(elapsed_time // 60)
+            seconds = int(elapsed_time % 60)
+            timer_text = f"{minutes:02d}:{seconds:02d}"
+        
+            # Render the text
+            text_surface = self.font.render(timer_text, True, (255, 255, 255))  # White text
+            text_rect = text_surface.get_rect(topright=(1420, 20))  # Position it at the top right
+        
+            # Blit the text surface onto the screen
+            self.display.blit(text_surface, text_rect)
+                  
     def run(self):
         self.display.fill((0, 0, 0))
         pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
@@ -120,10 +130,12 @@ class Level1:
         # Draw the background first
         self.bg.draw_bg()
         self.bg.draw_ground()
+        self.update_timer()
         font = pygame.font.SysFont('Times New Roman',30)
         text_color = (255,255,255)
         text_surface = font.render('Freddy World', True, text_color)
         self.display.blit(text_surface, (0,10))
+        
         
         #if self.alive == False:
             #Create Player Sprite
@@ -178,31 +190,3 @@ class Level1:
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
             print("Collison!")
-           
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-

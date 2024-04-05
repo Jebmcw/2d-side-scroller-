@@ -70,6 +70,7 @@ class Start:
 class GameStateManager:
     def __init__(self, currentState):
         self.currentState=currentState
+        self.start_time = None  # Add this line
     def get_state(self):
         return self.currentState
     def set_state(self, state):
@@ -80,4 +81,3 @@ if __name__ == '__main__':
     soundtrack('Main/music/Title Theme.wav')
     game = Game()
     game.run()
-
