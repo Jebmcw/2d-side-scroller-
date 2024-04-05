@@ -1,5 +1,6 @@
 import pygame
 import sys
+import time
 from title import Menu
 from levels.level1 import Level1
 from soundtrack import soundtrack
@@ -57,6 +58,7 @@ class Start:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_e]:
             self.gameStateManager.set_state('level1')
+            self.gameStateManager.start_time = time.time()  # Record start time
             soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
         if self.gameStateManager.get_state() == 'menu':
             self.menu.main_menu()

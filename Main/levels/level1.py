@@ -11,6 +11,15 @@ class Level1:
     def __init__(self, display, gameStateManager):
         self.display = display
         self.gameStateManager = gameStateManager
+        end_time = time.time()
+        elapsed_time = end_time - self.gameStateManager.start_time  # Assuming the start time is accessible here
+        
+        self.minutes = int(elapsed_time // 60)
+        self.seconds = int(elapsed_time % 60)
+
+        self.time_text = f"Time: {self.minutes}m {self.seconds}s"
+        # Use your existing text rendering method to display `time_text` on the screen
+
         
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
         self.boss = pygame.sprite.Group()
