@@ -22,7 +22,7 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 45
         self.start_time = time.time()
-        self.spawn_intervals = [1,4,3, 5, 8, 9, 10] # seconds between spawns
+        self.spawn_intervals = [1, 4, 3, 5, 8, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
 
@@ -44,7 +44,7 @@ class Level1:
         
     def spawn_mobs(self):
         dynamic_offset = 0
-        if self.spawn_intervals[self.spawn_index] ==3:
+        if self.spawn_intervals[self.spawn_index] == 3:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 400, 50, dynamic_offset)
@@ -97,6 +97,7 @@ class Level1:
         pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
         self.tile_map.draw(self.display)
         current_time = time.time()
+        #total time since instance of lvl1 was initialized
         elapsed_time = current_time - self.start_time
 
         keys=pygame.key.get_pressed()
@@ -121,8 +122,11 @@ class Level1:
             #print('jump')
             self.jump = 1
 
-            
+        #Timed spawning only works with infinite scroll and infinite scroll doesn't work bc?
+            #coordinate spawning would be easier to plan and level would have a set duration till boss fight.
+            #less group list creation would be necessary --> cleaner code.    
         if elapsed_time >= self.next_spawn_time:
+            #self
             self.spawn_mobs()
             self.spawn_index +=1
             if self.spawn_index < len(self.spawn_intervals):
@@ -158,8 +162,10 @@ class Level1:
         self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
         pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
-        if self.spawn_intervals[self.spawn_index] >=1 and self.spawn_intervals[self.spawn_index] <=4:
-            Player.draw_text_box(self.display, self.freddy,self.lines)
+        #if the time between spawns is between 1 and 4, draw the player text box
+        if self.spawn_index < len(self.spawn_intervals):
+            if self.spawn_intervals[self.spawn_index] >=1 and self.spawn_intervals[self.spawn_index] <=4:
+                Player.draw_text_box(self.display, self.freddy, self.lines)
 
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
