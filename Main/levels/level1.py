@@ -1,6 +1,7 @@
 import pygame
 import time
-
+import os
+from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
 from levels.backgrounds.background import Background
@@ -24,6 +25,11 @@ class Level1:
         self.spawn_intervals = [1,4,3, 5, 8, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
+
+        current_path = os.path.dirname(__file__)
+        # Initialize the TileMap
+        csv_file_path = "Main/levels/platforms/level 1 tile map.csv"
+        self.tile_map = TileMap(csv_file_path, tile_size=32)  # Adjust as needed
 
         #initialize main character pos and jumps
         self.jumpCount = 0
@@ -87,6 +93,9 @@ class Level1:
             
                       
     def run(self):
+        self.display.fill((0, 0, 0))
+        pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
+        self.tile_map.draw(self.display)
         current_time = time.time()
         elapsed_time = current_time - self.start_time
 
@@ -94,6 +103,7 @@ class Level1:
         
         # Draw the background first
         self.bg.draw_bg()
+        self.bg.draw_ground()
         font = pygame.font.SysFont('Times New Roman',30)
         text_color = (255,255,255)
         text_surface = font.render('Freddy World', True, text_color)
@@ -150,3 +160,31 @@ class Level1:
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
             print("Collison!")
+           
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+

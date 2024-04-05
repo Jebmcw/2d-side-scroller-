@@ -17,6 +17,10 @@ class Background:
         if self.bg_images:
             self.bg_width = self.bg_images[0].get_width()
             
+        self.ground_image = pygame.image.load("Main/Level1_img/backgrounds/ground.png").convert_alpha()
+        self.ground_width = self.ground_image.get_width()
+        self.ground_height = self.ground_image.get_height() 
+
     def draw_bg(self):
         for x in range(15):
             speed = 1
@@ -29,3 +33,6 @@ class Background:
             self.scroll -= 5
         if key[pygame.K_d] and self.scroll < 10000:
             self.scroll += 5
+    def draw_ground(self):
+        for x in range(19):
+            self.screen.blit(self.ground_image, ((x * self.ground_width) - self.scroll * 1, SCREEN_HEIGHT - self.ground_height))
