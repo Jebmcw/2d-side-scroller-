@@ -3,15 +3,28 @@ import pygame as pg
 class Fireball(object):
     def __init__(self, x_pos, y_pos, move_direction: bool):
         super().__init__()
-
+        #What we need to do:
+        # :)
+        #determine when the fire will spawn, collision as circle
+        #not ready for the implementation stage, do not implement, conceptualize
+        #...>>
+        #fireball leaves the mouth of the freddy dred sprite.
+        #--troubleshoot printing the fireball directly over sprite's mouth consistently.
+        #need x and y coordinates attached to sprite circle (research)
+        #
+        #Rect created, try to create a circle too
         self.rect = pg.Rect(x_pos, y_pos, 16, 16)
-        self.state = 0
-        self.direction = move_direction
+        
+        self.direction = move_direction#-->
+        #tertiary statement: (research review)
         self.x_vel = 5 if move_direction else -5
+
         self.y_vel = 0
 
+        self.state = 0
         self.current_image = 0
         self.image_tick = 0
+        #7 images loaded into class
         self.fires = [pg.image.load('assets/fireball.png').convert_alpha()]
         self.fires.append(pg.transform.flip(self.fires[0], 0, 90))
         self.fires.append(pg.transform.flip(self.fires[0], 90, 90))
@@ -22,18 +35,19 @@ class Fireball(object):
     #update parameters for use in level1.py
     def update_image(self, core):
         self.image_tick += 1
-
+            #rolling fireball
         if self.state == 0:
             if self.image_tick % 15 == 0:
                 self.current_image += 1
                 if self.current_image > 3:
                     self.current_image = 0
                     self.image_tick = 0
-
+                            #kaboom
         elif self.state == -1:
             if self.image_tick % 10 == 0:
                 self.current_image += 1
             if self.current_image == 7:
+                #end of explosion, so remove the object
                 core.get_map().remove_whizbang(self)
 
     def start_boom(self):
@@ -60,7 +74,7 @@ class Fireball(object):
                 if pg.Rect.colliderect(self.rect, block.rect):
                     self.rect.bottom = block.rect.top
                     self.y_vel = -3
-
+#update borders in this function//
     def check_map_borders(self, core):
         if self.rect.x <= 0:
             core.get_map().remove_whizbang(self)
@@ -92,18 +106,35 @@ class Fireball(object):
             self.check_collision_with_mobs(core)
         elif self.state == -1:
             self.update_image(core)
-
-    def render(self, core):
+    #where to blit the image from. write the blit statement on this function?
+    def render(self, window):
+        #self.screen = pg.display.set_mode((WINDOW_W, WINDOW_H))
         core.screen.blit(self.images[self.current_image], core.get_map().get_camera().apply(self))
-
+###################################################################################################
     #maybe apply into level1.py
+        #the function will need to be defined in the level class becasue that is where
+        #the fire is spawned, updated, and printed/rendered.
     def spawn_fireball(self, x, y, move_direction):
+        #define list self.projectiles in levelone class
+            #//player inventory/state could define the projectiles list//
+        #spawn_fireball creates an instance of Fireball in level1,
+        #then adds it to projectiles list.
         self.projectiles.append(Fireball(x, y, move_direction))
     def remove_whizbang(self, whizbang):
+        #remove_whizbang deletes the fireball from object from self.projectiles
         self.projectiles.remove(whizbang)
     # Player's fireballs
+        #update then render
+
     #for whizbang in self.projectiles:
         #whizbang.update(core)
+            #update is the function in the Fireball class,
+            #and whizbang is the name of the Fireball instance.
 
     #for whizbang in self.projectiles:
             #whizbang.render(core)
+        
+    #summarize the instructions for screen scrolling and player traversal.
+        #send in discord chat and text.
+
+    #Logically speaking, I want the player to have the ability to spawn the fireballs
