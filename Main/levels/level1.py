@@ -6,6 +6,7 @@ from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
 from levels.backgrounds.background import Background
 from levels.Level1_boss.level1_boss import Boss
+from weapons.fireball import Fireball
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -34,10 +35,25 @@ class Level1:
         #initialize main character pos and jumps
         self.jumpCount = 0
         self.jump = 0
-        self.player_x = 150
-        self.player_y = 450
-        self.alive = False
-        self.freddy = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
+        self.player_x = 300
+        self.player_y = 390
+        self.alive = True
+        self.freddy = Player.spawnPlayer(self.display, 2, 300, 390)
+        print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
+
+        #initialize power up fireball to collect
+        self.powerUp_img = pygame.image.load('assets/powFire.png').convert_alpha()
+        # Original dimensions of the image
+        # original_width, original_height = self.powerUp_img.get_width(), self.powerUp_img.get_height()
+        # print(original_width, ", ", original_height, '\n')
+        # Scale the image
+        self.scaled_width = 50  # Desired width after scaling
+        self.scaled_height = 48  # Desired height after scaling
+        self.powerUp_scaled = pygame.transform.scale(self.powerUp_img, (self.scaled_width, self.scaled_height))
+        self.powerUp_rect = self.powerUp_scaled.get_rect()
+        print('Power Up dimensions: ', self.powerUp_rect.width, ',', self.powerUp_rect.height)
+
+
         self.some_additional_offset = 100
 
         self.bossFightTextShown = False
@@ -90,7 +106,10 @@ class Level1:
         if self.bg.scroll >8000 and self.bg.scroll <= 9000 and not self.bossFightTextShown:
             text_surface = font.render('Boss Fight!!!', True, text_color)
             self.display.blit(text_surface, (450, 150))  # Position of the text
-            
+
+    #def spawn_powerUp(self):
+        #make the png a sprite and scale and blit to screen
+                
                       
     def run(self):
         self.display.fill((0, 0, 0))
@@ -118,7 +137,7 @@ class Level1:
             
 
         #Jump button is 'w':
-        if keys[pygame.K_w] and self.player_y == self.player_y == 450:
+        if keys[pygame.K_w] and self.player_y == 390:
             #print('jump')
             self.jump = 1
 
@@ -159,13 +178,15 @@ class Level1:
             self.jumpCount = 0
             self.freddy.rect.y = self.freddy.initial_y
                 
-        self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
+        self.display.blit(self.freddy.image, (self.freddy.rect.x - 58, self.freddy.rect.y - 40))
         pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
         #if the time between spawns is between 1 and 4, draw the player text box
         if self.spawn_index < len(self.spawn_intervals):
             if self.spawn_intervals[self.spawn_index] >=1 and self.spawn_intervals[self.spawn_index] <=4:
                 Player.draw_text_box(self.display, self.freddy, self.lines)
+
+        self.display.blit(self.powerUp_scaled, (350, self.freddy.rect.y))
 
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
