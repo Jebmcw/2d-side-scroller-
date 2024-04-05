@@ -36,7 +36,7 @@ class Mob(pygame.sprite.Sprite):
         self.screen_width = screen_width
         self.screen_height = screen_height
         
-        self.jump_max = screen_height  # this set a max limt for the mob to jump to
+        self.jump_max = screen_height-100  # this set a max limt for the mob to jump to
         
         self.health = 100  # Max health
         
