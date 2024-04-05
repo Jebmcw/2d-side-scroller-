@@ -1,6 +1,7 @@
 import pygame
 import time
-
+import os
+from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
 from levels.backgrounds.background import Background
@@ -24,6 +25,12 @@ class Level1:
         self.spawn_intervals = [1, 5, 8, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
+
+        current_path = os.path.dirname(__file__)
+        # Initialize the TileMap
+        csv_file_path = "C:\\Users\\Fernando\\OneDrive\\Desktop\\Bitbucket Stuff\\2d-side-scroller\\Main\\levels\\platforms\\level 1 tile map.csv"
+        tileset_path = "C:\\Users\\Fernando\\OneDrive\\Desktop\\Bitbucket Stuff\\2d-side-scroller\\Main\\levels\\platforms\\level 1 tile map.png"
+        self.tile_map = TileMap(csv_file_path, tileset_path, tile_size=32)  # Adjust as needed
 
         #initialize main character pos and jumps
         self.jumpCount = 0
@@ -87,6 +94,9 @@ class Level1:
             
                       
     def run(self):
+        self.display.fill((0, 0, 0))
+        pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
+        self.tile_map.draw(self.display)
         current_time = time.time()
         elapsed_time = current_time - self.start_time
 
@@ -94,7 +104,7 @@ class Level1:
         
         # Draw the background first
         self.bg.draw_bg()
-        
+        self.tile_map.draw(self.display)
         #if self.alive == False:
             #Create Player Sprite
             #live = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
@@ -146,6 +156,9 @@ class Level1:
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
             print("Collison!")
+
+        pygame.display.flip()
+
            
     
 
