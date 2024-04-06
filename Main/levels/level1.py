@@ -24,7 +24,6 @@ class Level1:
         
         self.lines = "In a mystical realm, a hero embarks \non a quest to recover ancient artifacts,\n battling foes and unraveling mysteries\n to restore harmony to the land."
         # Frame rate and timing for spawns
-        self.FPS = 45
         self.start_time = time.time()
         self.spawn_intervals = [3, 5, 6, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
@@ -56,16 +55,21 @@ class Level1:
         print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
 
         #initialize power up fireball to collect
-        self.powerUp_img = pygame.image.load('assets/powFire.png').convert_alpha()
+        self.powerUp_img = pygame.image.load('assets/fireball.png').convert_alpha()
+        self.scaled_width = 50  # Desired width after scaling
+        self.scaled_height = 50  # Desired height after scaling
+        self.powerUp_img1 = pygame.transform.scale(self.powerUp_img, (self.scaled_width, self.scaled_height))
+        self.powerUp_rect = self.powerUp_img1.get_rect()
+        print('Power Up dimensions: ', self.powerUp_rect.width, ',', self.powerUp_rect.height)
+        self.powerUp_img2 = pygame.transform.flip(self.powerUp_img1, 0, 90)
+        self.powerUp_img3 = pygame.transform.flip(self.powerUp_img1, 90, 90)
+        self.powerUp_img4 = pygame.transform.flip(self.powerUp_img1, 90, 0)
+        self.fireFrame = 0
         # Original dimensions of the image
         # original_width, original_height = self.powerUp_img.get_width(), self.powerUp_img.get_height()
         # print(original_width, ", ", original_height, '\n')
         # Scale the image
-        self.scaled_width = 50  # Desired width after scaling
-        self.scaled_height = 48  # Desired height after scaling
-        self.powerUp_scaled = pygame.transform.scale(self.powerUp_img, (self.scaled_width, self.scaled_height))
-        self.powerUp_rect = self.powerUp_scaled.get_rect()
-        print('Power Up dimensions: ', self.powerUp_rect.width, ',', self.powerUp_rect.height)
+        
 
 
         self.some_additional_offset = 100
@@ -166,14 +170,7 @@ class Level1:
         text_color = (255,255,255)
         text_surface = font.render('Freddy World', True, text_color)
         self.display.blit(text_surface, (0,10))
-        
-        
-        #if self.alive == False:
-            #Create Player Sprite
-            #live = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
-            #self.mainCharacter.add(*live)
-            #self.alive = True
-            
+       
 
         #Jump button is 'w':
         if keys[pygame.K_w] and self.player_y == 390:
@@ -216,6 +213,17 @@ class Level1:
             self.jump = 0
             self.jumpCount = 0
             self.freddy.rect.y = self.freddy.initial_y
+
+        #Freddy is updated, so spawn the fireball at his pos
+            #shoot fireball    
+        if keys[pygame.K_f]:
+            #spawn fireball into player projectile list
+            #update fireball sprite every frame
+            #apply gravity until it hits the ground and then make it bounce twice
+            #explodes on third bounce or collision
+            #remove fireball from the projectiles list
+            self.freddy.projectiles.add(Fireball(350, self.freddy.rect.y, True))
+        
                 
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 58, self.freddy.rect.y - 40))
         pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
@@ -236,9 +244,26 @@ class Level1:
         else:
             self.audio_displayed = False
         #soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
-
-        self.display.blit(self.powerUp_scaled, (350, self.freddy.rect.y))
+        #while self.fireAnime == True:
+        if self.fireFrame <= 20:
+            print('fireball1')
+            self.display.blit(self.powerUp_img1, (350, self.freddy.rect.y))
+            self.fireFrame += 1
+        elif self.fireFrame <= 40:
+            print('fireball2')
+            self.display.blit(self.powerUp_img2, (350, self.freddy.rect.y))
+            self.fireFrame += 1
+        elif self.fireFrame <= 60:
+            print('fireball3')
+            self.display.blit(self.powerUp_img3, (350, self.freddy.rect.y))
+            self.fireFrame += 1
+        else:
+            print('fireball4')
+            self.fireFrame += 1
+            self.display.blit(self.powerUp_img4, (350, self.freddy.rect.y))
+            if self.fireFrame == 80:    
+                self.fireFrame = 0
 
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
-        for collided_sprite in collisions:
-            print("Collison!")
+        #for collided_sprite in collisions:
+            #print("Collison!")

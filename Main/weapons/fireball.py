@@ -33,7 +33,7 @@ class Fireball(object):
         self.fires.append(pg.image.load('assets/firework1.png').convert_alpha())
         self.fires.append(pg.image.load('assets/firework2.png').convert_alpha())
     #update parameters for use in level1.py
-    def update_image(self, core):
+    def update_image(self):
         self.image_tick += 1
             #rolling fireball
         if self.state == 0:
@@ -109,6 +109,10 @@ class Fireball(object):
     #where to blit the image from. write the blit statement on this function?
     def render(self, window):
         #self.screen = pg.display.set_mode((WINDOW_W, WINDOW_H))
+
+        #include the window data into this file so I can blit from here.
+
+
         core.screen.blit(self.images[self.current_image], core.get_map().get_camera().apply(self))
 ###################################################################################################
     #maybe apply into level1.py
@@ -120,7 +124,7 @@ class Fireball(object):
         #spawn_fireball creates an instance of Fireball in level1,
         #then adds it to projectiles list.
         self.projectiles.append(Fireball(x, y, move_direction))
-    def remove_whizbang(self, whizbang):
+    def remove_fireball(self, whizbang):
         #remove_whizbang deletes the fireball from object from self.projectiles
         self.projectiles.remove(whizbang)
     # Player's fireballs
