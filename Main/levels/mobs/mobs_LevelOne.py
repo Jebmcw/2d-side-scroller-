@@ -2,9 +2,6 @@
 import pygame,sys
 
 # Assuming you've initialized pygame and set up a display beforehand
-pygame.init()
-clock = pygame.time.Clock()
-moving_sprites = pygame.sprite.Group()
 
 # Colors
 WHITE = (255, 255, 255)
@@ -15,9 +12,12 @@ class Mob(pygame.sprite.Sprite):
     def __init__(self, screen_width=600, screen_height=1500, initial_y=None, initial_x=None):
         super().__init__()
         self.sprites = []
+        self.is_animating = True
         self.sprites.append(pygame.image.load('Main/Level1_Img/mob/mob_walk_death_1.png'))
         self.sprites.append(pygame.image.load('Main/Level1_Img/mob/mob_walk_death_2.png'))
         self.current_sprite = 0
+        self.image_change_delay = 10
+        self.current_delay = 0
         self.image = self.sprites[self.current_sprite]
 
         self.rect = self.image.get_rect()
@@ -46,9 +46,6 @@ class Mob(pygame.sprite.Sprite):
         self.jump_max = screen_height-100  # this set a max limt for the mob to jump to
         
         self.health = 100  # Max health
-
-        self.animation_speed = 0.2
-        self.last_update = pygame.time.get_ticks()
         
     @staticmethod
     def draw_health_bar(display, mob, scroll):
@@ -82,19 +79,18 @@ class Mob(pygame.sprite.Sprite):
         return mobs
 
 
-
-
     def update(self):
-        now = pygame.time.get_ticks()
-        if now - self.last_update > self.animation_speed * 1000:
-            self.last_update = now
-            self.current_sprite = (self.current_sprite + 1) % len(self.sprites)
-            self.image = self.sprites[self.current_sprite]
+        if self.is_animating == True:
+            self.current_delay += 1
 
-        self.current_sprite += 1
+            if self.current_delay >= self.image_change_delay:
+                self.current_sprite += 1
+                self.current_delay = 0
 
-        if self.current_sprite >= len(self.sprites):
-            self.current_sprite = 0
+                if self.current_sprite >= len(self.sprites):
+                    self.current_sprite = 0
+
+                self.image = self.sprites[self.current_sprite]
         # speed based on direction
         self.rect.x += self.speed_x * self.direction_x
         
@@ -109,6 +105,11 @@ class Mob(pygame.sprite.Sprite):
         elif self.rect.top < 0:
             self.rect.top = 0
             self.vertical_speed = 0  # Stop upward movement
+
+pygame.init()
+clock = pygame.time.Clock()
+moving_sprites = pygame.sprite.Group()
+
 # Create an instance of the Mob class
 mob_instance = Mob()
 # Add the instance to the group
@@ -118,11 +119,4 @@ moving_sprites.add(mob_instance)
 moving_sprites.update()
 
 # Control the frame rate
-clock.tick(60)
-
-
-        
-        
-
-
-
+clock.tick(10)
