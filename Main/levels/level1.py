@@ -51,7 +51,7 @@ class Level1:
         self.player_x = 300
         self.player_y = 395
         self.alive = True
-        self.freddy = Player.spawnPlayer(self.display, 2, 300, 395)
+        self.freddy = Player.spawnPlayer(self.display, 2, 300, 410)
         print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
 
         #initialize power up fireball to collect
@@ -249,19 +249,15 @@ class Level1:
         #soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
         #while self.fireAnime == True:
         if self.fireFrame <= 20:
-            print('fireball1')
             self.display.blit(self.powerUp_img1, (350, self.freddy.rect.y))
             self.fireFrame += 1
         elif self.fireFrame <= 40:
-            print('fireball2')
             self.display.blit(self.powerUp_img2, (350, self.freddy.rect.y))
             self.fireFrame += 1
         elif self.fireFrame <= 60:
-            print('fireball3')
             self.display.blit(self.powerUp_img3, (350, self.freddy.rect.y))
             self.fireFrame += 1
         else:
-            print('fireball4')
             self.fireFrame += 1
             self.display.blit(self.powerUp_img4, (350, self.freddy.rect.y))
             if self.fireFrame == 80:    
