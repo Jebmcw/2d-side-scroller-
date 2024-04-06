@@ -2,7 +2,7 @@ import pygame
 import os
 #testing branches on gitkraken.
 class Player(pygame.sprite.Sprite):
-    def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 150, initial_y = 450):
+    def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 300, initial_y = 390):
         super().__init__()
         #Current file directory
         current_path = os.path.dirname('assets')
@@ -11,16 +11,17 @@ class Player(pygame.sprite.Sprite):
             self.image = pygame.image.load('assets/main_character.png').convert_alpha()
         elif imageChoice == 2:
             self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
-        self.rect = self.image.get_rect()
-        #Creates the rectangle for the sprite
+        #self.rect = self.image.get_rect()
+        #Creates the rectangle for the sprite, now scale it down
+        # Scale down the sprite's rectangle
+        scaled_rect_width = 39
+        scaled_rect_height = 80
+        self.rect = pygame.Rect(initial_x, initial_y, scaled_rect_width, scaled_rect_height)
         #This will be the area of collision
         #coordinates of top left corner.
         self.width = self.image.get_width
         self.height = self.image.get_height
-        self.rect.x = initial_x
-        self.rect.y = initial_y
         self.initial_y = initial_y
-        self.verticalSpeed = 0
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.jump_max = screen_height - 80
@@ -28,12 +29,15 @@ class Player(pygame.sprite.Sprite):
         
         self.health = 100
         self.speed = 5
+        #Fireball Power-Up
+        self.flameOn = False
+        self.projectiles = []
         
     @staticmethod
     def spawnPlayer(display, imageNum, initial_x, initial_y):
         screen_width = display.get_width()
         screen_height = display.get_height()
-        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y=350)  
+        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)  
         return player
     
     @staticmethod
@@ -43,8 +47,8 @@ class Player(pygame.sprite.Sprite):
         bar_width = 50
         bar_height = 10
         fill = bar_width * health_percentage
-        outline_rect = pygame.Rect(player.rect.x-scroll+ 150, player.rect.y -20, bar_width, bar_height)
-        fill_rect = pygame.Rect(player.rect.x-scroll+ 150, player.rect.y - 20, fill, bar_height)
+        outline_rect = pygame.Rect(player.rect.x-scroll + 90, player.rect.y -20, bar_width, bar_height)
+        fill_rect = pygame.Rect(player.rect.x-scroll + 90, player.rect.y - 20, fill, bar_height)
         
         pygame.draw.rect(display, (255, 0, 0), outline_rect)  # Red background
         pygame.draw.rect(display, (0, 255, 0), fill_rect)  # Green foreground

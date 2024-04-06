@@ -106,6 +106,10 @@ class Mob(pygame.sprite.Sprite):
             self.rect.top = 0
             self.vertical_speed = 0  # Stop upward movement
 
+    def seeRect(self, bg_scroll):
+        self.rect.x -= bg_scroll    
+    def revertX(self, bg_scroll):
+        self.rect.x += bg_scroll
 pygame.init()
 clock = pygame.time.Clock()
 moving_sprites = pygame.sprite.Group()

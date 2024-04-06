@@ -8,6 +8,7 @@ from levels.backgrounds.background import Background
 from levels.Level1_boss.level1_boss import Boss
 from Voice import Voice 
 from soundtrack import soundtrack
+from weapons.fireball import Fireball
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -23,7 +24,6 @@ class Level1:
         
         self.lines = "In a mystical realm, a hero embarks \non a quest to recover ancient artifacts,\n battling foes and unraveling mysteries\n to restore harmony to the land."
         # Frame rate and timing for spawns
-        self.FPS = 45
         self.start_time = time.time()
         self.spawn_intervals = [3, 5, 6, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
@@ -48,17 +48,37 @@ class Level1:
         #initialize main character pos and jumps
         self.jumpCount = 0
         self.jump = 0
-        self.player_x = 150
-        self.player_y = 450
-        self.alive = False
-        self.freddy = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
+        self.player_x = 300
+        self.player_y = 390
+        self.alive = True
+        self.freddy = Player.spawnPlayer(self.display, 2, 300, 390)
+        print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
+
+        #initialize power up fireball to collect
+        self.powerUp_img = pygame.image.load('assets/fireball.png').convert_alpha()
+        self.scaled_width = 50  # Desired width after scaling
+        self.scaled_height = 50  # Desired height after scaling
+        self.powerUp_img1 = pygame.transform.scale(self.powerUp_img, (self.scaled_width, self.scaled_height))
+        self.powerUp_rect = self.powerUp_img1.get_rect()
+        print('Power Up dimensions: ', self.powerUp_rect.width, ',', self.powerUp_rect.height)
+        self.powerUp_img2 = pygame.transform.flip(self.powerUp_img1, 0, 90)
+        self.powerUp_img3 = pygame.transform.flip(self.powerUp_img1, 90, 90)
+        self.powerUp_img4 = pygame.transform.flip(self.powerUp_img1, 90, 0)
+        self.fireFrame = 0
+        # Original dimensions of the image
+        # original_width, original_height = self.powerUp_img.get_width(), self.powerUp_img.get_height()
+        # print(original_width, ", ", original_height, '\n')
+        # Scale the image
+        
+
+
         self.some_additional_offset = 100
 
         self.bossFightTextShown = False
         
     def spawn_mobs(self):
         dynamic_offset = 0
-        if self.spawn_intervals[self.spawn_index] ==3:
+        if self.spawn_intervals[self.spawn_index] == 3:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 400, 50, dynamic_offset)
@@ -75,7 +95,7 @@ class Level1:
             self.some_additional_offset = 500
             soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
             dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 500, 50, dynamic_offset)
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 8")
             
@@ -105,6 +125,11 @@ class Level1:
         if self.bg.scroll >8000 and self.bg.scroll <= 9000 and not self.bossFightTextShown:
             text_surface = font.render('Boss Fight!!!', True, text_color)
             self.display.blit(text_surface, (450, 150))  # Position of the text
+
+    #def spawn_powerUp(self):
+        #make the png a sprite and scale and blit to screen
+                
+                      
             
     def update_timer(self):
         self.font = pygame.font.Font(None, 36)
@@ -130,6 +155,7 @@ class Level1:
         pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
         self.tile_map.draw(self.display)
         current_time = time.time()
+        #total time since instance of lvl1 was initialized
         elapsed_time = current_time - self.start_time
         game_elapsed_time = current_time - self.start_time
 
@@ -144,22 +170,18 @@ class Level1:
         text_color = (255,255,255)
         text_surface = font.render('Freddy World', True, text_color)
         self.display.blit(text_surface, (0,10))
-        
-        
-        #if self.alive == False:
-            #Create Player Sprite
-            #live = Player.spawnPlayer(self.display, 1, self.player_x, self.player_y)
-            #self.mainCharacter.add(*live)
-            #self.alive = True
-            
+       
 
         #Jump button is 'w':
-        if keys[pygame.K_w] and self.player_y == self.player_y == 450:
+        if keys[pygame.K_w] and self.player_y == 390:
             #print('jump')
             self.jump = 1
 
-            
+        #Timed spawning only works with infinite scroll and infinite scroll doesn't work bc?
+            #coordinate spawning would be easier to plan and level would have a set duration till boss fight.
+            #less group list creation would be necessary --> cleaner code.    
         if elapsed_time >= self.next_spawn_time:
+            #self
             self.spawn_mobs()
             self.spawn_index +=1
             if self.spawn_index < len(self.spawn_intervals):
@@ -172,6 +194,9 @@ class Level1:
         for mob in self.mobs:
             mob_world_x = mob.rect.x - self.bg.scroll
             self.display.blit(mob.image, (mob_world_x, mob.rect.y))
+            mob.seeRect(self.bg.scroll)
+            pygame.draw.rect(self.display, (255, 0, 0), mob.rect, 2)  # Draw a rectangle around the sprite's rect
+            mob.revertX(self.bg.scroll)
             Mob.draw_health_bar(self.display, mob, self.bg.scroll)
          
         self.spawn_boss()   
@@ -188,8 +213,20 @@ class Level1:
             self.jump = 0
             self.jumpCount = 0
             self.freddy.rect.y = self.freddy.initial_y
+
+        #Freddy is updated, so spawn the fireball at his pos
+            #shoot fireball    
+        if keys[pygame.K_f]:
+            #spawn fireball into player projectile list
+            #update fireball sprite every frame
+            #apply gravity until it hits the ground and then make it bounce twice
+            #explodes on third bounce or collision
+            #remove fireball from the projectiles list
+            self.freddy.projectiles.append(Fireball(350, self.freddy.rect.y, True))
+        
                 
-        self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
+        self.display.blit(self.freddy.image, (self.freddy.rect.x - 58, self.freddy.rect.y - 40))
+        pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
         if self.bg.scroll == 10000:
             keys = pygame.key.get_pressed()
@@ -207,6 +244,26 @@ class Level1:
         else:
             self.audio_displayed = False
         #soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
+        #while self.fireAnime == True:
+        if self.fireFrame <= 20:
+            print('fireball1')
+            self.display.blit(self.powerUp_img1, (350, self.freddy.rect.y))
+            self.fireFrame += 1
+        elif self.fireFrame <= 40:
+            print('fireball2')
+            self.display.blit(self.powerUp_img2, (350, self.freddy.rect.y))
+            self.fireFrame += 1
+        elif self.fireFrame <= 60:
+            print('fireball3')
+            self.display.blit(self.powerUp_img3, (350, self.freddy.rect.y))
+            self.fireFrame += 1
+        else:
+            print('fireball4')
+            self.fireFrame += 1
+            self.display.blit(self.powerUp_img4, (350, self.freddy.rect.y))
+            if self.fireFrame == 80:    
+                self.fireFrame = 0
+
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
-        for collided_sprite in collisions:
-            print("Collison!")
+        #for collided_sprite in collisions:
+            #print("Collison!")
