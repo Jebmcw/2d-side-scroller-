@@ -6,6 +6,8 @@ from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
 from levels.backgrounds.background import Background
 from levels.Level1_boss.level1_boss import Boss
+from Voice import Voice 
+from soundtrack import soundtrack
 from weapons.fireball import Fireball
 
 class Level1:
@@ -24,14 +26,20 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 45
         self.start_time = time.time()
-        self.spawn_intervals = [3, 5, 8, 9, 10] # seconds between spawns
+        self.spawn_intervals = [3, 5, 6, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
         
          # Timing for text box display
         self.text_box_start_time = 1  # Displaying the text box 1 second into the game
-        self.text_box_end_time = 6  # Stop displaying the text box 6 seconds into the game
+        self.text_box_end_time = 10  # Stop displaying the text box 6 seconds into the game
         self.text_displayed = False  # Flag
+
+        #audio for the text
+        self.audio_start_time = self.text_box_start_time
+        self.audio_end_time = self.text_box_end_time
+        
+        self.audio_displayed = False  
 
         current_path = os.path.dirname(__file__)
         # Initialize the TileMap
@@ -79,8 +87,9 @@ class Level1:
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 5")
             
-        if self.spawn_intervals[self.spawn_index] == 8:
+        if self.spawn_intervals[self.spawn_index] == 6:
             self.some_additional_offset = 500
+            soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
             dynamic_offset = self.bg.scroll + self.some_additional_offset
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
@@ -211,10 +220,22 @@ class Level1:
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 58, self.freddy.rect.y - 40))
         pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
+        if self.bg.scroll == 10000:
+            keys = pygame.key.get_pressed()
+            self.freddy.player_movements(keys)
         
+
+
         if self.text_box_start_time <= game_elapsed_time <= self.text_box_end_time:
             Player.draw_text_box(self.display, self.freddy,self.lines)
-            self.text_displayed = True
+            if not self.audio_displayed:
+                Voice('Main/music/AI.mp3')  # Play the audio
+                #soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
+                self.audio_displayed = True  # Prevent audio from being played again in this session
+            self.text_displayed = True  # Keep showing the text box
+        else:
+            self.audio_displayed = False
+        #soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
 
         self.display.blit(self.powerUp_scaled, (350, self.freddy.rect.y))
 
