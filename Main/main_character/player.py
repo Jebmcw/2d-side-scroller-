@@ -9,12 +9,23 @@ class Player(pygame.sprite.Sprite):
         #Current file directory
         self.fire = Fireball(350,450,True)
         print()
+        imageChoice = 1
         current_path = os.path.dirname('assets')
+        self.sprites = []
         #Load image file path
         if imageChoice == 1:
             self.image = pygame.image.load('assets/main_character.png').convert_alpha()
+            self.sprites.append(pygame.image.load('assets/main_char_walk_1.png').convert_alpha())
+            self.sprites.append(pygame.image.load('assets/main_char_walk_2.png').convert_alpha())
+            self.sprites.append(pygame.image.load('assets/main_char_walk_3.png').convert_alpha())
+            self.sprites.append(pygame.image.load('assets/main_char_walk_4.png').convert_alpha())
+            self.sprites.append(pygame.image.load('assets/main_char_walk_5.png').convert_alpha())
+            
         elif imageChoice == 2:
             self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
+            
+        self.current_frame = 0
+        self.image = self.sprites[self.current_frame]    
         #self.rect = self.image.get_rect()
         #Creates the rectangle for the sprite, now scale it down
         # Scale down the sprite's rectangle
@@ -32,6 +43,10 @@ class Player(pygame.sprite.Sprite):
         self.parabolaX = 0
         
         self.health = 100
+        
+        self.ticks = pygame.time.get_ticks()
+        self.animation_delay = 200
+        self.animation_timer = self.ticks
         self.speed = 5
         #Fireball Power-Up
         self.flameOn = False
@@ -118,4 +133,27 @@ class Player(pygame.sprite.Sprite):
         
         self.rect.x = max(0, min(self.rect.x, self.screen_width - self.rect.width))
 
-    
+    def update(self, keys_pressed):
+    # Check for movement
+        if pygame.time.get_ticks() - self.animation_timer > self.animation_delay:
+            self.animation_timer = pygame.time.get_ticks()
+            if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_d]:
+                # If moving, update animation
+                self.current_frame = (self.current_frame + 1) % len(self.sprites)
+                if self.current_frame == 0:
+                    self.current_frame = 1  # Skip frame 0
+
+            else:
+                self.current_frame = 0  # Set current frame to 0 when not moving
+
+            # Update the image according to the current frame
+            if keys_pressed[pygame.K_a]:
+                self.image = pygame.transform.flip(self.sprites[self.current_frame], True, False)
+            else:
+                self.image = self.sprites[self.current_frame]
+
+        # Check for movement
+        if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_d]:
+            # If moving, update position
+            # Your movement logic here
+            pass

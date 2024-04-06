@@ -163,6 +163,7 @@ class Level1:
         keys=pygame.key.get_pressed()
         self.freddy.update(keys)
         
+        
         # Draw the background first
         self.bg.draw_bg()
         self.bg.draw_ground()
