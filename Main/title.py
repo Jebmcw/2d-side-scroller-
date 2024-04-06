@@ -26,14 +26,14 @@ class Menu:
             menu_mouse_pos = pygame.mouse.get_pos()
 
             menu_text = self.get_font(100).render("MAIN MENU", True, "#b68f40")
-            menu_rect = menu_text.get_rect(center=(640, 100))
+            menu_rect = menu_text.get_rect(center=(750, 100))
             self.screen.blit(menu_text, menu_rect)
 
-            play_button = Button(image=None, pos=(640, 250), 
+            play_button = Button(image=None, pos=(750, 250), 
                                  text_input="PLAY", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")
-            options_button = Button(image=None, pos=(640, 400), 
+            options_button = Button(image=None, pos=(750, 400), 
                                     text_input="OPTIONS", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")
-            quit_button = Button(image=None, pos=(640, 550), 
+            quit_button = Button(image=None, pos=(750, 550), 
                                  text_input="QUIT", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")
 
             for button in [play_button, options_button, quit_button]:
