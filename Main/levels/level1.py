@@ -7,6 +7,7 @@ from main_character.player import Player
 from levels.backgrounds.background import Background
 from levels.Level1_boss.level1_boss import Boss
 from Voice import Voice 
+from soundtrack import soundtrack
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -24,7 +25,7 @@ class Level1:
         # Frame rate and timing for spawns
         self.FPS = 45
         self.start_time = time.time()
-        self.spawn_intervals = [3, 5, 8, 9, 10] # seconds between spawns
+        self.spawn_intervals = [3, 5, 6, 9, 10] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
         
@@ -70,8 +71,9 @@ class Level1:
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 5")
             
-        if self.spawn_intervals[self.spawn_index] == 8:
+        if self.spawn_intervals[self.spawn_index] == 6:
             self.some_additional_offset = 500
+            soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
             dynamic_offset = self.bg.scroll + self.some_additional_offset
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
@@ -196,11 +198,12 @@ class Level1:
             Player.draw_text_box(self.display, self.freddy,self.lines)
             if not self.audio_displayed:
                 Voice('Main/music/AI.mp3')  # Play the audio
+                #soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
                 self.audio_displayed = True  # Prevent audio from being played again in this session
             self.text_displayed = True  # Keep showing the text box
         else:
             self.audio_displayed = False
-
+        #soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
             print("Collison!")

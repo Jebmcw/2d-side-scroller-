@@ -72,7 +72,6 @@ class Start:
         if keys[pygame.K_e]:
             self.gameStateManager.set_state('level1')
             self.gameStateManager.start_time = time.time()  # Record start time
-            soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
         if self.gameStateManager.get_state() == 'menu':
             self.menu.main_menu()
         elif self.gameStateManager.get_state() == 'level1':
