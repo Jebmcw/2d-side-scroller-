@@ -6,6 +6,7 @@ from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
 from levels.backgrounds.background import Background
 from levels.Level1_boss.level1_boss import Boss
+from Voice import Voice 
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -29,8 +30,14 @@ class Level1:
         
          # Timing for text box display
         self.text_box_start_time = 1  # Displaying the text box 1 second into the game
-        self.text_box_end_time = 6  # Stop displaying the text box 6 seconds into the game
+        self.text_box_end_time = 10  # Stop displaying the text box 6 seconds into the game
         self.text_displayed = False  # Flag
+
+        #audio for the text
+        self.audio_start_time = self.text_box_start_time
+        self.audio_end_time = self.text_box_end_time
+        
+        self.audio_displayed = False  
 
         current_path = os.path.dirname(__file__)
         # Initialize the TileMap
@@ -183,9 +190,16 @@ class Level1:
         self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
         Player.draw_health_bar_player(self.display, self.freddy,100)
         
+
+
         if self.text_box_start_time <= game_elapsed_time <= self.text_box_end_time:
             Player.draw_text_box(self.display, self.freddy,self.lines)
-            self.text_displayed = True
+            if not self.audio_displayed:
+                Voice('Main/music/AI.mp3')  # Play the audio
+                self.audio_displayed = True  # Prevent audio from being played again in this session
+            self.text_displayed = True  # Keep showing the text box
+        else:
+            self.audio_displayed = False
 
         collisions = pygame.sprite.spritecollide(self.freddy, self.mobs, False)
         for collided_sprite in collisions:
