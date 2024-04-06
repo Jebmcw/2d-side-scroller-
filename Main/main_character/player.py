@@ -27,6 +27,7 @@ class Player(pygame.sprite.Sprite):
         self.parabolaX = 0
         
         self.health = 100
+        self.speed = 5
         
     @staticmethod
     def spawnPlayer(display, imageNum, initial_x, initial_y):
@@ -99,5 +100,14 @@ class Player(pygame.sprite.Sprite):
         self.parabolaX += 1
         if self.parabolaX >= 60:
             self.parabolaX = 0
+            
+    def player_movements(self, keys):
+        
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            self.rect.x -= self.speed
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            self.rect.x += self.speed
+        
+        self.rect.x = max(0, min(self.rect.x, self.screen_width - self.rect.width))
 
     

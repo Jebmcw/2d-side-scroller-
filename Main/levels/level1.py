@@ -191,6 +191,9 @@ class Level1:
                 
         self.display.blit(self.freddy.image, (self.freddy.rect.x, self.freddy.rect.y))
         Player.draw_health_bar_player(self.display, self.freddy,100)
+        if self.bg.scroll == 10000:
+            keys = pygame.key.get_pressed()
+            self.freddy.player_movements(keys)
         
 
 
