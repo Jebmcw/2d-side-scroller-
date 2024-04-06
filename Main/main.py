@@ -21,6 +21,9 @@ class Game:
         
         self.states = {'start':self.start, 'menu': self.menu, 'level1': self.level1}
     
+        # Initialize pause state
+        self.paused = False  # Add this line to track pause state
+
     def run(self):
         while True:
             for event in pygame.event.get():
@@ -28,17 +31,27 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 
-                
-            current_state = self.gameStateManager.get_state()
-            if current_state == 'menu':
+                elif event.type == pygame.KEYDOWN:
+                    # Toggle pause state when spacebar is pressed
+                    if event.key == pygame.K_SPACE:
+                        self.paused = not self.paused
+                        if self.paused:
+                            print("Game paused. Press Space to resume.")
+                        else:
+                            print("Game resumed.")
+         # Check if game is paused
+            if not self.paused:
+            # Proceed with game logic only if not paused
+                current_state = self.gameStateManager.get_state()
+                if current_state == 'menu':
                 # Call the main_menu method of Menu
-                self.menu.main_menu()  
-            else:
+                    self.menu.main_menu()  
+                else:
                 # Call the run method for other states
-                self.states[current_state].run()  
+                    self.states[current_state].run()  
 
-            pygame.display.update()
-            self.clock.tick(FPS)
+                pygame.display.update()
+                self.clock.tick(FPS)
             
 
 class Start:
