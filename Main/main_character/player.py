@@ -5,17 +5,18 @@ class Player(pygame.sprite.Sprite):
     def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 150, initial_y = 450):
         super().__init__()
         #Current file directory
-        current_path = os.path.dirname(__file__)
+        current_path = os.path.dirname('assets')
         #Load image file path
         if imageChoice == 1:
-            image_path = os.path.join(current_path, "main_character.png")
+            self.image = pygame.image.load('assets/main_character.png').convert_alpha()
         elif imageChoice == 2:
-            image_path = os.path.join(current_path, "main character 2nd option.png")
-        self.image = pygame.image.load(image_path).convert_alpha()
+            self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
         self.rect = self.image.get_rect()
         #Creates the rectangle for the sprite
         #This will be the area of collision
         #coordinates of top left corner.
+        self.width = self.image.get_width
+        self.height = self.image.get_height
         self.rect.x = initial_x
         self.rect.y = initial_y
         self.initial_y = initial_y
@@ -31,10 +32,8 @@ class Player(pygame.sprite.Sprite):
     def spawnPlayer(display, imageNum, initial_x, initial_y):
         screen_width = display.get_width()
         screen_height = display.get_height()
-        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)
-        players = pygame.sprite.Group()
-        players.add(player)    
-        return players
+        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y=350)  
+        return player
     
     @staticmethod
     def draw_health_bar_player(display, player,scroll):
@@ -49,17 +48,56 @@ class Player(pygame.sprite.Sprite):
         pygame.draw.rect(display, (255, 0, 0), outline_rect)  # Red background
         pygame.draw.rect(display, (0, 255, 0), fill_rect)  # Green foreground
         pygame.draw.rect(display, (255, 255, 255), outline_rect, 2)  # White border 
-          
-    def update(self):
+   
+    @staticmethod
+    def draw_text_box(display, player, text, font_size=24, text_color=(255, 255, 255), box_color=(0, 0, 0, 128), padding=10, offset_y=50):
+        font = pygame.font.Font(None, font_size)
+
+
+        lines = text.split('\n')
+        max_width = 0
+        text_surfs = []
+
+
+        for line in lines:
+            text_surf = font.render(line, True, text_color)
+            text_surfs.append(text_surf)
+            if text_surf.get_width() > max_width:
+                max_width = text_surf.get_width()
+
+
+        total_height = sum(text_surf.get_height() for text_surf in text_surfs) + padding * (len(text_surfs) - 1)
+
+
+        box_rect = pygame.Rect(0, 0, max_width + padding * 2, total_height + padding * 2)
+        box_rect.center = (player.rect.centerx, player.rect.y - offset_y - total_height // 2 - padding)
+
+
+        box_surface = pygame.Surface(box_rect.size, pygame.SRCALPHA)
+        box_surface.fill(box_color)
+
+
+        display.blit(box_surface, box_rect.topleft)
+
+
+        current_y = box_rect.y + padding
+        for text_surf in text_surfs:
+            text_rect = text_surf.get_rect(center=(box_rect.centerx, current_y + text_surf.get_height() // 2))
+            display.blit(text_surf, text_rect)
+            current_y += text_surf.get_height() + padding
+    
+   
+   
+   
+    def jump(self):
         #Jump curve
         factor = self.parabolaX - 30
         square = factor*factor
-        coefficient = float(square)*0.144
-        jump_height = int(coefficient)-130
+        coefficient = float(square)*0.2
+        jump_height = int(coefficient)-180
         self.rect.y = self.initial_y + jump_height
         self.parabolaX += 1
         if self.parabolaX >= 60:
             self.parabolaX = 0
-        #self.verticalSpeed += self.gravity
-        #self.rect.y += self.verticalSpeed
 
+    
