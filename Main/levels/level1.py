@@ -133,6 +133,7 @@ class Level1:
 
 
         keys=pygame.key.get_pressed()
+        self.freddy.update(keys)
         
         # Draw the background first
         self.bg.draw_bg()
@@ -177,8 +178,9 @@ class Level1:
         for boss in self.boss:
             self.display.blit(boss.image, (boss.rect.x-self.bg.scroll, boss.rect.y))
             Boss.draw_health_bar(self.display, boss, self.bg.scroll)
-             
+        
         #Update and draw player
+        self.freddy.update(keys)
         if self.jump == 1:
             self.freddy.jump()
             self.jumpCount += 1
