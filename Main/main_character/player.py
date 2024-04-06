@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 5
         #Fireball Power-Up
         self.flameOn = False
-        self.projectiles = pygame.sprite.Group()
+        self.projectiles = []
         
     @staticmethod
     def spawnPlayer(display, imageNum, initial_x, initial_y):

@@ -222,7 +222,7 @@ class Level1:
             #apply gravity until it hits the ground and then make it bounce twice
             #explodes on third bounce or collision
             #remove fireball from the projectiles list
-            self.freddy.projectiles.add(Fireball(350, self.freddy.rect.y, True))
+            self.freddy.projectiles.append(Fireball(350, self.freddy.rect.y, True))
         
                 
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 58, self.freddy.rect.y - 40))
