@@ -7,8 +7,14 @@ class Player(pygame.sprite.Sprite):
         #Current file directory
         current_path = os.path.dirname('assets')
         #Load image file path
+        self.sprites = []
         if imageChoice == 1:
-            self.image = pygame.image.load('assets/main_character.png').convert_alpha()
+            self.sprites.append(pygame.image.load('assets/main_char_walk_1.png').convert_alpha())
+            self.sprites.append(pygame.image.load('assets/main_char_walk_2.png').convert_alpha())
+            self.sprites.append(pygame.image.load('assets/main_char_walk_3.png').convert_alpha())
+            self.sprites.append(pygame.image.load('assets/main_char_walk_4.png').convert_alpha())
+            self.sprites.append(pygame.image.load('assets/main_char_walk_5.png').convert_alpha())
+            
         elif imageChoice == 2:
             self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
         #self.rect = self.image.get_rect()
@@ -17,6 +23,10 @@ class Player(pygame.sprite.Sprite):
         scaled_rect_width = 39
         scaled_rect_height = 80
         self.rect = pygame.Rect(initial_x, initial_y, scaled_rect_width, scaled_rect_height)
+        self.current_frame = 0
+        self.image = self.sprites[self.current_frame]
+        self.rect = self.image.get_rect()
+        #Creates the rectangle for the sprite
         #This will be the area of collision
         #coordinates of top left corner.
         self.width = self.image.get_width
@@ -26,18 +36,20 @@ class Player(pygame.sprite.Sprite):
         self.screen_height = screen_height
         self.jump_max = screen_height - 80
         self.parabolaX = 0
-        
         self.health = 100
         self.speed = 5
         #Fireball Power-Up
         self.flameOn = False
         self.projectiles = []
+        self.ticks = pygame.time.get_ticks()
+        self.animation_delay = 200
+        self.animation_timer = self.ticks
         
     @staticmethod
     def spawnPlayer(display, imageNum, initial_x, initial_y):
         screen_width = display.get_width()
         screen_height = display.get_height()
-        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y)  
+        player = Player(imageNum, screen_width, screen_height+500, initial_x, initial_y=375)  
         return player
     
     @staticmethod
@@ -90,8 +102,34 @@ class Player(pygame.sprite.Sprite):
             text_rect = text_surf.get_rect(center=(box_rect.centerx, current_y + text_surf.get_height() // 2))
             display.blit(text_surf, text_rect)
             current_y += text_surf.get_height() + padding
-    
-   
+
+    def update(self, keys_pressed):
+    # Check for movement
+        if pygame.time.get_ticks() - self.animation_timer > self.animation_delay:
+            self.animation_timer = pygame.time.get_ticks()
+            if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_d]:
+                # If moving, update animation
+                self.current_frame = (self.current_frame + 1) % len(self.sprites)
+                if self.current_frame == 0:
+                    self.current_frame = 1  # Skip frame 0
+
+            else:
+                self.current_frame = 0  # Set current frame to 0 when not moving
+
+            # Update the image according to the current frame
+            if keys_pressed[pygame.K_a]:
+                self.image = pygame.transform.flip(self.sprites[self.current_frame], True, False)
+            else:
+                self.image = self.sprites[self.current_frame]
+
+        # Check for movement
+        if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_d]:
+            # If moving, update position
+            # Your movement logic here
+            pass
+
+            
+
    
    
     def jump(self):
