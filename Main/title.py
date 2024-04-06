@@ -5,7 +5,7 @@ from button import Button  # Ensure this is correctly implemented elsewhere
 class Menu:
     def __init__(self, screen,gameStateManager):
         self.screen = screen
-        self.bg = pygame.image.load("assets/Background.png")
+        self.bg = pygame.image.load("assets/background2.png")
         self.font_path = "assets/font.ttf"  # Update this path as needed
         self.gameStateManager = gameStateManager
     def get_font(self, size):  # Helper method to load fonts
