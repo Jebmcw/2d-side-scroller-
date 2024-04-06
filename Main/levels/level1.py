@@ -49,9 +49,9 @@ class Level1:
         self.jumpCount = 0
         self.jump = 0
         self.player_x = 300
-        self.player_y = 390
+        self.player_y = 395
         self.alive = True
-        self.freddy = Player.spawnPlayer(self.display, 2, 300, 390)
+        self.freddy = Player.spawnPlayer(self.display, 2, 300, 395)
         print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
 
         #initialize power up fireball to collect
@@ -173,7 +173,7 @@ class Level1:
        
 
         #Jump button is 'w':
-        if keys[pygame.K_w] and self.player_y == 390:
+        if keys[pygame.K_w] and self.player_y == 395:
             #print('jump')
             self.jump = 1
 
