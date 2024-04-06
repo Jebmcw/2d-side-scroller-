@@ -4,10 +4,7 @@ class Fireball(object):
     def __init__(self, x_pos, y_pos, move_direction: bool):
         super().__init__()
         #What we need to do:
-        # :)
         #determine when the fire will spawn, collision as circle
-        #not ready for the implementation stage, do not implement, conceptualize
-        #...>>
         #fireball leaves the mouth of the freddy dred sprite.
         #--troubleshoot printing the fireball directly over sprite's mouth consistently.
         #need x and y coordinates attached to sprite circle (research)
