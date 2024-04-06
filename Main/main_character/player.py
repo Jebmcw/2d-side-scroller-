@@ -2,7 +2,7 @@ import pygame
 import os
 #testing branches on gitkraken.
 class Player(pygame.sprite.Sprite):
-    def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 300, initial_y = 390):
+    def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 300, initial_y = 395):
         super().__init__()
         #Current file directory
         current_path = os.path.dirname('assets')
