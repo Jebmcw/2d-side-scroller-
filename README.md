@@ -229,3 +229,151 @@ Blake Woods:
 
 [Scrum70](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-70)
 
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/e44baa0609553f21fa2dbcddd5b2491b2f843936)
+
+- Task 2: Fix the mob spawning bug
+
+[SCRUM66](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-66)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/417698cf84189ca3742ef1d6c97aa1f117d468dd)
+
+- Task 3: Clean of the repo so it looks nice
+
+[SCRUM88](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-88)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/fa5c16d5d76de27322f62534814c470137004a11)
+
+- Task 4: Add the boss into the game
+
+[SCRUM67](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-67)
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/5c3182e2f7eed10c022072e966289b6322d58687)
+
+- Task 5: Add movement to the boss
+
+[SCRUM68](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-68)
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/9f560045411b0c820a46ddad0744c152f4d68efb)
+	
+- Task 6: Add a health bar to the boss
+
+[SCRUM69](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-69)
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/b10710c291e4125a731940ede65f92b6c8a9f65b)
+
+
+Abel Guzman:
+
+- Task 1: Create the moving animations for the character
+
+[SCRUM73](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-73)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/ec70ff53c55b07f70523c77a2130db0f64aed21d)
+
+- Task 2:  implement the animations of the main character
+
+[SCRUM77](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-77)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/b4101af482328c0b5b9c2786427e96c976581823)
+
+- Task 3: add alternating music to different parts of the game
+
+[SCRUM81](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-81)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/5d7e4a9ae3d2b052fa4e1ff602ce8fcf3226737e)
+
+
+- Task 4: create the moving animations for the mob
+
+[SCRUM76](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-76)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/62dd6ab0b4e9a4e1aef2e5d6a9be9fcf45490b82)
+
+- Task 5: implement the animation for the mobs
+
+[SCRUM78](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-78)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/f060384eff56cf97a58aa8693243e63c9b79fd61)
+
+Freddy Martinez:
+
+- Task 1: Create the platform for level one ,so the character sprite can stand on something
+
+[SCRUM31](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-31)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/2a3745a39e6dd0961492d357807a46e70e36dc65)
+
+- Task 2: Choices the narrator voice for the text boxes.
+
+[SCRUM57](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-57)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/e042bc4c72fe2c748e82ac53a1ff14adaf3c910b)
+
+- Task 3: Create a design for the first weapon.
+
+[SCRUM47](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-47)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/2539e7b708088d9b8d67ecbd5418e69ce2d4d32e)
+
+- Task 4: Implement a pause game feature.
+
+[SCRUM92](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-92)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/9366ccfd897ee2b21b83a1bdbf1cfcc826b3414c)
+
+
+Mustafa Chambers
+
+- Task 1: add a stopwatch into the game so the user knows how long it took for them to beat the game.
+
+[SCRUM82](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-82)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/09400999d6b6557ede35dc9b3bf62fb364744af1)
+
+- Task 2: Add a time limit to the text box so it wont be up forever.
+
+[SCRUM87](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-87)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/c4c05d647024e3b38eb3d79fdfd6a954da603aef)
+
+- Task 3: Add the text box into the game window so the player's backstory can be on the screen.
+
+[SCRUM83](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-83)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/f1905efdfd4d04bc5a00e659c0a26f0e914d45da)
+
+- Task 4: Add the backstory onto the textbox
+
+[SCRUM86](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-86)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/f1905efdfd4d04bc5a00e659c0a26f0e914d45da)
+
+- Task 5: Enable Forward/backward movement
+
+[SCRUM93](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-93)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/6302f6f48d9ce6bb59113107c6867375a397504e)
+
+Seth Leifheit
+
+- Task 1: add collision between player and platforms
+
+[SCRUM62](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-62)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/2d7b6f63bc91b6b82dc8fb67d698f3ef453732da)
+
+- Task 2: add collision between player and mobs
+
+[SCRUM63](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-63)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/98bcdf314fdffe2cf900db794d21715c8d7a8976)
+
+- Task 3: create instance of the weapon class in the level one file, and add to player inventory upon collision with player sprite.
+
+[SCRUM80](create instance of the weapon class in the level one file, and add to player inventory upon collision with player sprite.)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/2d-side-scroller/commits/ada5acb06e72a2190bbc5ff727a1dfa87c9fb0c1)
+
+- Task 4: Create simple movement for the first weapon.
+
+
+[SCRUM50](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-50)
+
+[bitbucket]()
