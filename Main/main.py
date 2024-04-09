@@ -47,7 +47,7 @@ class Game:
                 # Call the main_menu method of Menu
                     self.menu.main_menu()  
                 else:
-                # Call the run method for other states
+                # Call the run method for other statesa
                     self.states[current_state].run()  
 
                 pygame.display.update()

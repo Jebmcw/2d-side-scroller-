@@ -1,5 +1,5 @@
 import pygame as pg
-
+import pygame
 class Fireball(object):
     def __init__(self, x_pos, y_pos, move_direction: bool):
         super().__init__()
@@ -29,6 +29,20 @@ class Fireball(object):
         self.fires.append(pg.image.load('assets/firework0.png').convert_alpha())
         self.fires.append(pg.image.load('assets/firework1.png').convert_alpha())
         self.fires.append(pg.image.load('assets/firework2.png').convert_alpha())
+        
+        self.fireball = pygame.image.load("assets/fireball.png").convert_alpha()
+        
+        self.rect=self.fireball.get_rect()
+        
+        screen_height = 1500
+        self.jump_max = screen_height-100
+        self.gravity = 0.5  # Gravity effect
+        self.jump_force = -15  # Initial force for jumps
+        self.vertical_speed = 0  # Current vertical speed
+        
+        self.speed_x = 1  # Horizontal speed
+        
+        self.direction_x = 1  # 1 for right, -1 for left
     #update parameters for use in level1.py
     def update_image(self):
         self.image_tick += 1
@@ -139,3 +153,20 @@ class Fireball(object):
         #send in discord chat and text.
 
     #Logically speaking, I want the player to have the ability to spawn the fireballs
+    def Throw(self,keys):
+        if keys[pygame.K_f]:
+            # speed based on direction
+            self.rect.x += self.speed_x * self.direction_x
+            
+            # Apply gravity
+            self.vertical_speed += self.gravity
+            self.rect.y += self.vertical_speed
+                
+            # Boundary checks and jumping logic
+            if self.rect.bottom > self.jump_max:
+                self.rect.bottom = self.jump_max
+                self.vertical_speed = self.jump_force  # Apply jump force to simulate a bounce
+            elif self.rect.top < 0:
+                self.rect.top = 0
+                self.vertical_speed = 0  # Stop upward movement
+            

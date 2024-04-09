@@ -30,6 +30,7 @@ class Boss(pygame.sprite.Sprite):
         
         self.jump_max = screen_height-100  # this set a max limt for the mob to jump to
         
+        self.health = 1000
           
     @staticmethod
     def spawn_boss_horizontally(display, num_mobs, initial_y, spacing, x_offset=0):
@@ -44,20 +45,17 @@ class Boss(pygame.sprite.Sprite):
     
     @staticmethod
     def draw_health_bar(display, bosses, scroll):
-        # Example health bar properties
-        BAR_WIDTH = 50
-        BAR_HEIGHT = 10
-        border_color = (0, 0, 0)  # Black
-        fill_color = (255, 0, 0)  # Red
-    
-        # Calculate health bar position
-        # Let's assume the health bar is drawn directly above the mob sprite
-        bar_x = bosses.rect.x+50 - scroll  # Adjust mob's X position with scroll value
-        bar_y = bosses.rect.y - 7  # Positioned 10 pixels above the mob
-    
-        # Draw the health bar
-        pygame.draw.rect(display, border_color, (bar_x, bar_y, BAR_WIDTH, BAR_HEIGHT), 1)  # Border
-        pygame.draw.rect(display, fill_color, (bar_x + 1, bar_y + 1, BAR_WIDTH - 2, BAR_HEIGHT - 2))  # Fill 
+        # Health bar drawing
+        health_percentage = bosses.health / 1000
+        bar_width = 50
+        bar_height = 10
+        fill = bar_width * health_percentage
+        outline_rect = pygame.Rect(bosses.rect.x-scroll + 50, bosses.rect.y -10, bar_width, bar_height)
+        fill_rect = pygame.Rect(bosses.rect.x-scroll + 50, bosses.rect.y - 10, fill, bar_height)
+        
+        pygame.draw.rect(display, (255, 0, 0), outline_rect)  # Red background
+        pygame.draw.rect(display, (0, 255, 0), fill_rect)  # Green foreground
+        pygame.draw.rect(display, (255, 255, 255), outline_rect, 2)  # White border 
 
 
 
