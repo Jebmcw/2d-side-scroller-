@@ -471,3 +471,5 @@ Seth Leifheit
 
 - Mustafa: Add a death animation to the boss and the mobs
 
+## Jira Report
+![Example screenshot](./img/jira2.png)
