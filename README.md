@@ -377,3 +377,42 @@ Seth Leifheit
 [SCRUM50](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-50)
 
 [bitbucket]()
+
+## Next Step for Sprint 3
+
+- Freddy: Fix the tile map in our code
+
+- Freddy: Finish creating the map
+
+- AJ: Have the option page available
+
+- Freddy: Add the arkwork to the title screen
+
+- Blake: Add scoreboard for the mobs will kill
+
+- Freddy: Add a game over screen
+
+- AJ: Add the boss animation to the game
+
+- AJ: Add damage to the game
+
+- Blake: Add a game end screen
+
+- Blake: Add the sowrd into the game
+
+- Blake: Fix how the boss spawned at the end of the game
+
+- Seth: Add animation to the firball powerup
+
+- Seth: Fix the hitboxand make them usable
+
+- Seth: Add a time limit for the game
+
+- Mustafa: Put the timer in the middle and make every text in the game look better
+
+- Mustafa: Put our game somewhere so other people can veiw it
+
+- Mustafa: Connect the the animation of the fireball to damage to the mobs
+
+- Mustafa: Add a death animation to the boss and the mobs
+
