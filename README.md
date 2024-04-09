@@ -170,6 +170,7 @@ Mustafa: " Provided user with tex box, character backstory, sound of the level o
 
 ## Jira Report
 ![Example screenshot](./img/jira.png)
+
 ## Screenshots
 ![Example screenshot](./img/2d side scroller.webp)
 <!-- If you have screenshots you'd like to share, include them here. -->
@@ -471,3 +472,5 @@ Seth Leifheit
 
 - Mustafa: Add a death animation to the boss and the mobs
 
+## Jira Report
+![Example screenshot](./img/jira2.png)
