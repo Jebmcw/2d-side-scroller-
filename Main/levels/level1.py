@@ -85,6 +85,7 @@ class Level1:
 
         self.bossFightTextShown = False
         
+        self.score = 0
     def spawn_mobs(self):
         
         dynamic_offset = 0
@@ -103,6 +104,7 @@ class Level1:
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 5")
             
+            
         if self.spawn_intervals[self.spawn_index] == 6:
             self.some_additional_offset = 500
             soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
@@ -111,12 +113,14 @@ class Level1:
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 8")
             
+            
         if self.spawn_intervals[self.spawn_index] == 9:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 9")
+           
             
         if self.spawn_intervals[self.spawn_index] == 10:
             self.some_additional_offset = 500
@@ -124,6 +128,7 @@ class Level1:
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 10")
+            
             
     def spawn_boss(self):
         font = pygame.font.SysFont('arial', 100)  # Specify the font name and size.
@@ -232,7 +237,8 @@ class Level1:
             # Create a temporary rect for collision detection, adjusted for scrolling
             temp_rect = pygame.Rect(boss_world_x, boss.rect.y, boss.rect.width, boss.rect.height)
             temp_collision_rects.append((boss, temp_rect))
-            
+        
+                
         # Collision detection using temporary rects
         if self.bg.scroll <= 7000:
             if keys[pygame.K_f]:
@@ -240,30 +246,34 @@ class Level1:
                     if self.freddy.rect.colliderect(temp_rect):
                         # Deduct health from the specific mob that was hit 
                         mob.health -= 5
-                        print('hit mob')
                         
-                        # Check if the mob's health is 0 or less
-                        if mob.health <= 0:
-                            # If so, kill the mob
+                        # Check if the mob's health is 5 then kill the mob
+                        if mob.health == 5:
                             mob.kill()
-                            
-        else:                   
+                            self.score+=50
+        else:                     
             if keys[pygame.K_f]:
                 for boss, temp_rect in temp_collision_rects:
                     if self.freddy.rect.colliderect(temp_rect):
-                        # Deduct health from the specific mob that was hit 
                         boss.health -= 5
-                        print('hit boss')
-                        
-                        # Check if the mob's health is 0 or less
                         if boss.health <= 0:
-                            # If so, kill the mob
                             boss.kill()        
-                            
-                            
+        if self.bg.scroll == 2000:
+            self.score +=10
+        if self.bg.scroll == 4000:
+            self.score +=10
+        if self.bg.scroll == 6000:
+            self.score +=10
+        if self.bg.scroll == 8000:
+            self.score +=10
+                                
+        score_text = f"Scoreboard: {self.score:02d}"
+        text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
+        text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
+        self.display.blit(text_surface, text_rect) 
+                           
         for boss, temp_rect in temp_collision_rects:
                 if self.freddy.rect.colliderect(temp_rect):
-                    print(self.freddy.health)
                     self.freddy.health -= 1
                     if self.freddy.health <=0:
                         self.freddy.kill()
@@ -275,17 +285,15 @@ class Level1:
                 if self.freddy.rect.colliderect(temp_rect):
                     # Deduct health from the specific mob that was hit 
                     boss.health -= 5
-                    print('hit')
+                    
                     
                     # Check if the mob's health is 0 or less
                     if boss.health <= 0:
                         # If so, kill the mob
                         boss.kill()
-                    
-                        
+                                   
         for boss, temp_rect in temp_collision_rects:
                 if self.freddy.rect.colliderect(temp_rect):
-                    print(self.freddy.health)
                     self.freddy.health -= 1
                     if self.freddy.health <=0:
                         self.freddy.kill()
