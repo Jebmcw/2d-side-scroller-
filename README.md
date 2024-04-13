@@ -17,22 +17,24 @@
 
 
 ## General Information
-- Who you’re working with (you and your team members)?
+- Team Members:
 - Blake Woods
 - Mustafa Chambers
 - Seth Leifheit
 - Fernando Martinez
 - Abel Guzman
-- What you’re creating? - We are creating a 2d side scroller.
-- Who you’re doing it for - We are doing this for people who enjoy old style video games like 2d side scroller.
-- Why you’re doing this, the impact or change you hope to make? - Our team chose a side-scroller for its classic appeal, embracing the challenge of innovating within a beloved genre, fueled by our passion for gaming.
+
+- For this project we are creating a 2D side-scrolling video game using the Python library, Pygame.
+- We are creating this game for people who enjoy retro style video games like Mario.
+- Our team chose to make a side-scroller for its classic appeal, embracing the challenge of innovating within a beloved genre, fueled by our imagination and our passion for gaming.
 
 
 
 ## Technologies Used
-- Tech 1 - Godot
-- Tech 2 - ChatGpt
-- Tech 3 - Github
+- Programming Language - Python
+- Python Library - Pygame
+- IDE - VSCode
+- Repository - Bitbucket
 
 
 ## Features
@@ -404,6 +406,7 @@ Mustafa Chambers
 Seth Leifheit
 
 - Task 1: add collision between player and platforms
+-	Collision between the player and the ground is stable when jumping and landing.
 
 [SCRUM62](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-62)
 
@@ -412,6 +415,7 @@ Seth Leifheit
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/25)
 
 - Task 2: add collision between player and mobs
+-	Collision is being detected between player and mob sprites, although I may have to change this to rectangle collision for resizing purposes.
 
 [SCRUM63](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-63)
 
@@ -428,7 +432,8 @@ Seth Leifheit
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/24)
 
 - Task 4: Create simple movement for the first weapon.
-
+-	The movement of rotation was completed for the fireball subsequently by my third task. So, the Task 4 branch was not moved to 'complete' during this sprint.
+-	The task was still completed, but I will use the branch to update the movement even further to project forward form the main character sprite.
 
 [SCRUM50](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-50)
 
@@ -458,11 +463,15 @@ Seth Leifheit
 
 - Blake: Fix how the boss spawned at the end of the game
 
-- Seth: Add animation to the firball powerup
+- Seth: Turn fireball into projectile to shoot forward.
 
-- Seth: Fix the hitboxand make them usable
+- Seth: Animate the player to cast the fireball when F is pressed.
 
-- Seth: Add a time limit for the game
+- Seth: Create power up animation for player and walk cycle for alternate player color.
+
+- Seth: Polish up the hitbox of the player.
+
+- Seth: Implement the winner music.
 
 - Mustafa: Put the timer in the middle and make every text in the game look better
 
