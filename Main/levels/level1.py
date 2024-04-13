@@ -9,6 +9,7 @@ from levels.Level1_boss.level1_boss import Boss
 from Voice import Voice 
 from soundtrack import soundtrack
 from weapons.fireball import Fireball
+from weapons.sword import Sword
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -18,7 +19,6 @@ class Level1:
         
         self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
         self.boss = pygame.sprite.Group()
-        
         # Initialize Background with the display
         self.bg = Background(self.display)
         
@@ -51,41 +51,36 @@ class Level1:
         self.player_x = 300
         self.player_y = 395
         self.alive = True
+        
         self.freddy = Player.spawnPlayer(self.display, 2, 300, 410)
         print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
-
+       
+        
         #initialize power up fireball to collect
         self.powerUp_img = pygame.image.load('assets/fireball.png').convert_alpha()
         self.scaled_width = 50  # Desired width after scaling
         self.scaled_height = 50  # Desired height after scaling
+        
         self.powerUp_img1 = pygame.transform.scale(self.powerUp_img, (self.scaled_width, self.scaled_height))
         self.powerUp_rect = self.powerUp_img1.get_rect()
         print('Power Up dimensions: ', self.powerUp_rect.width, ',', self.powerUp_rect.height)
-        self.powerUp_img2 = pygame.transform.flip(self.powerUp_img1, 0, 90)
-        self.powerUp_img3 = pygame.transform.flip(self.powerUp_img1, 90, 90)
-        self.powerUp_img4 = pygame.transform.flip(self.powerUp_img1, 90, 0)
+        self.powerUp_img2 = pygame.transform.flip(self.powerUp_img1,0, 90)
+        self.powerUp_img3 = pygame.transform.flip(self.powerUp_img1,90,90)
+        self.powerUp_img4 = pygame.transform.flip(self.powerUp_img1,90,0)
         self.fireFrame = 0
+        
+        
         # Original dimensions of the image
         # original_width, original_height = self.powerUp_img.get_width(), self.powerUp_img.get_height()
         # print(original_width, ", ", original_height, '\n')
         # Scale the image
-        
-        
-        screen_height = 1500
-        self.jump_max = screen_height-100
-        self.gravity = 0.5  # Gravity effect
-        self.jump_force = -15  # Initial force for jumps
-        self.vertical_speed = 0  # Current vertical speed
-        
-        self.speed_x = 1  # Horizontal speed
-        
-        self.direction_x = 1  # 1 for right, -1 for left
 
         self.some_additional_offset = 100
 
         self.bossFightTextShown = False
         
         self.score = 0
+        
     def spawn_mobs(self):
         
         dynamic_offset = 0
@@ -166,7 +161,8 @@ class Level1:
         
             # Blit the text surface onto the screen
             self.display.blit(text_surface, text_rect)
-                  
+                 
+                    
     def run(self):
         self.display.fill((0, 0, 0))
         pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
@@ -179,7 +175,6 @@ class Level1:
 
         keys=pygame.key.get_pressed()
         self.freddy.update(keys)
-        
         
         # Draw the background first
         self.bg.draw_bg()
@@ -237,8 +232,8 @@ class Level1:
             # Create a temporary rect for collision detection, adjusted for scrolling
             temp_rect = pygame.Rect(boss_world_x, boss.rect.y, boss.rect.width, boss.rect.height)
             temp_collision_rects.append((boss, temp_rect))
-        
-                
+         
+            
         # Collision detection using temporary rects
         if self.bg.scroll <= 7000:
             if keys[pygame.K_f]:
@@ -258,6 +253,7 @@ class Level1:
                         boss.health -= 5
                         if boss.health <= 0:
                             boss.kill()        
+                            
         if self.bg.scroll == 2000:
             self.score +=10
         if self.bg.scroll == 4000:
@@ -334,11 +330,9 @@ class Level1:
                     self.fireFrame = 0
 
         
-
-
-               
+             
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 58, self.freddy.rect.y - 40))
-        pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
+      #  pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
         
         
@@ -348,8 +342,7 @@ class Level1:
             self.freddy.player_movements(keys)
         
         
-
-
+        
         if self.text_box_start_time <= game_elapsed_time <= self.text_box_end_time:
             Player.draw_text_box(self.display, self.freddy,self.lines)
             if not self.audio_displayed:
