@@ -55,6 +55,8 @@ class Level1:
         self.freddy = Player.spawnPlayer(self.display, 2, 300, 410)
         print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
        
+        self.sword = Sword(display, self.freddy)
+        
         
         #initialize power up fireball to collect
         self.powerUp_img = pygame.image.load('assets/fireball.png').convert_alpha()
@@ -341,7 +343,8 @@ class Level1:
             keys = pygame.key.get_pressed()
             self.freddy.player_movements(keys)
         
-        
+        keys = pygame.key.get_pressed()
+        self.sword.update(keys)
         
         if self.text_box_start_time <= game_elapsed_time <= self.text_box_end_time:
             Player.draw_text_box(self.display, self.freddy,self.lines)
