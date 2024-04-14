@@ -16,14 +16,14 @@ class Sword():
         self.sword_rect = self.sword_img.get_rect()
         print('Sword dimensions: ', self.sword_rect.width, ',', self.sword_rect.height)
         
-        '''
-        self.sword_img2 = pygame.transform.rotate(self.sword_img1, 270)
-        self.sword_img3 = pygame.transform.rotate(self.sword_img1, 240)
-        self.sword_img4 = pygame.transform.rotate(self.sword_img1,225)
-        self.sword_img5 = pygame.transform.rotate(self.sword_img1,210)
-        self.sword_img6 = pygame.transform.rotate(self.sword_img1,180)
+        
+        self.sword_img2 = pygame.transform.rotate(self.sword_img1, 330)
+        self.sword_img3 = pygame.transform.rotate(self.sword_img1, 315)
+        self.sword_img4 = pygame.transform.rotate(self.sword_img1, 300)
+        self.sword_img5 = pygame.transform.rotate(self.sword_img1,315)
+        self.sword_img6 = pygame.transform.rotate(self.sword_img1,330)
         self.SwordFrame = 0
-        '''
+        
         
    
     
@@ -35,10 +35,34 @@ class Sword():
     
         sword_position = (self.freddy.rect.x + sword_x_offset, self.freddy.rect.y + sword_y_offset)
         
-        # Update the rect for the sword image after transformations
-        self.sword_img1_rect = self.sword_img1.get_rect(topleft=sword_position)
+       
+       
         
-        if keys[pygame.K_LSHIFT]: 
-            self.display.blit(self.sword_img1,self.sword_img1_rect.topleft)
+        if keys[pygame.K_LSHIFT]:
+            if self.SwordFrame <= 20:
+                self.display.blit(self.sword_img1, sword_position)
+                self.SwordFrame += 4
+            elif self.SwordFrame <= 40:
+                self.display.blit(self.sword_img2, sword_position)
+                self.SwordFrame += 4
+            elif self.SwordFrame <= 60:
+                self.display.blit(self.sword_img3, sword_position)
+                self.SwordFrame += 4
+            elif self.SwordFrame <=80:
+                #self.SwordFrame +=2
+                self.display.blit(self.sword_img4, sword_position)
+                self.SwordFrame += 4
+                #if self.SwordFrame == 80:
+                   # self.SwordFrame = 0
+            elif self.SwordFrame <=100:
+                self.display.blit(self.sword_img5, sword_position)
+                self.SwordFrame +=4
+            else:
+                self.SwordFrame +=4
+                self.display.blit(self.sword_img6, sword_position)
+                if self.SwordFrame == 120:
+                    self.SwordFrame =0
+            
+            
                 
         
