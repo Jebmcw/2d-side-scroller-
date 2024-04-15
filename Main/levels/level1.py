@@ -55,7 +55,7 @@ class Level1:
         self.freddy = Player.spawnPlayer(self.display, 2, 300, 410)
         print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
        
-        self.sword = Sword(display, self.freddy)
+        self.sword = Sword(display,self.freddy)
         
         
         #initialize power up fireball to collect
@@ -106,7 +106,7 @@ class Level1:
             self.some_additional_offset = 500
             soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
             dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 8")
             
@@ -207,9 +207,8 @@ class Level1:
                 
         self.mobs.update()
 
-        # Use a list to store temporary rects adjusted for scrolling, for collision detection
+       
         temp_collision_rects = []
-
         for mob in self.mobs:
             # Calculate the drawing position considering scrolling
             mob_world_x = mob.rect.x - self.bg.scroll
@@ -232,71 +231,35 @@ class Level1:
             self.display.blit(boss.image, (boss_world_x, boss.rect.y))
             Boss.draw_health_bar(self.display, boss, self.bg.scroll)
             # Create a temporary rect for collision detection, adjusted for scrolling
-            temp_rect = pygame.Rect(boss_world_x, boss.rect.y, boss.rect.width, boss.rect.height)
-            temp_collision_rects.append((boss, temp_rect))
+            temp_rects = pygame.Rect(boss_world_x, boss.rect.y, boss.rect.width, boss.rect.height)
+            temp_collision_rects.append((boss, temp_rects))
          
-            
-        # Collision detection using temporary rects
-        if self.bg.scroll <= 7000:
-            if keys[pygame.K_f]:
-                for mob, temp_rect in temp_collision_rects:
-                    if self.freddy.rect.colliderect(temp_rect):
-                        # Deduct health from the specific mob that was hit 
-                        mob.health -= 5
+        keys = pygame.key.get_pressed()
+        self.sword.update(keys)   
+        
+        
+        if keys[pygame.K_LSHIFT]:
+            for mob, temp_rect in temp_collision_rects:
+                if self.sword.rect.colliderect(temp_rect):
+                    mob.health -= 2
+                    
+                    if mob.health == 2:
+                        mob.kill()
+                        self.score+=50        
                         
-                        # Check if the mob's health is 5 then kill the mob
-                        if mob.health == 5:
-                            mob.kill()
-                            self.score+=50
-        else:                     
-            if keys[pygame.K_f]:
-                for boss, temp_rect in temp_collision_rects:
-                    if self.freddy.rect.colliderect(temp_rect):
-                        boss.health -= 5
-                        if boss.health <= 0:
-                            boss.kill()        
-                            
-        if self.bg.scroll == 2000:
-            self.score +=10
-        if self.bg.scroll == 4000:
-            self.score +=10
-        if self.bg.scroll == 6000:
-            self.score +=10
-        if self.bg.scroll == 8000:
-            self.score +=10
-                                
-        score_text = f"Scoreboard: {self.score:02d}"
-        text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
-        text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
-        self.display.blit(text_surface, text_rect) 
-                           
-        for boss, temp_rect in temp_collision_rects:
+        for mob, temp_rect in temp_collision_rects:
                 if self.freddy.rect.colliderect(temp_rect):
-                    self.freddy.health -= 1
+                    self.freddy.health -= 5
                     if self.freddy.health <=0:
                         self.freddy.kill()
                         pygame.quit() 
-                        
-        # Collision detection using temporary rects
-        if keys[pygame.K_f]:
-            for boss, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
-                    # Deduct health from the specific mob that was hit 
-                    boss.health -= 5
-                    
-                    
-                    # Check if the mob's health is 0 or less
-                    if boss.health <= 0:
-                        # If so, kill the mob
-                        boss.kill()
-                                   
-        for boss, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
-                    self.freddy.health -= 1
-                    if self.freddy.health <=0:
-                        self.freddy.kill()
-                        pygame.quit()
-        
+         
+        score_text = f"Freddy Health: {self.freddy.health}"
+        text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
+        text_rect = text_surface.get_rect(topright=(850, 50))  # Position it at the top right
+        self.display.blit(text_surface, text_rect) 
+                   
+             
         #Update and draw player
         self.freddy.update(keys)
         if self.jump == 1:
@@ -330,21 +293,14 @@ class Level1:
                 self.display.blit(self.powerUp_img4, (350, self.freddy.rect.y))
                 if self.fireFrame == 80:    
                     self.fireFrame = 0
-
-        
-             
+  
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 58, self.freddy.rect.y - 40))
-      #  pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
+        # pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
-        
-        
         
         if self.bg.scroll == 10000:
             keys = pygame.key.get_pressed()
             self.freddy.player_movements(keys)
-        
-        keys = pygame.key.get_pressed()
-        self.sword.update(keys)
         
         if self.text_box_start_time <= game_elapsed_time <= self.text_box_end_time:
             Player.draw_text_box(self.display, self.freddy,self.lines)
@@ -356,3 +312,16 @@ class Level1:
         else:
             self.audio_displayed = False
         
+        if self.bg.scroll == 2000:
+            self.score +=10
+        if self.bg.scroll == 4000:
+            self.score +=10
+        if self.bg.scroll == 6000:
+            self.score +=10
+        if self.bg.scroll == 8000:
+            self.score +=10
+            
+        score_text = f"Scoreboard: {self.score:02d}"
+        text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
+        text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
+        self.display.blit(text_surface, text_rect) 
