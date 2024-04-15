@@ -138,7 +138,8 @@ class Level1:
             minutes = int(elapsed_time // 60)
             seconds = int(elapsed_time % 60)
             timer_text = f"{minutes:02d}:{seconds:02d}"
-        
+            if minutes == 2:
+                pygame.quit()
             # Render the text
             text_surface = self.font.render(timer_text, True, (255, 255, 255))  # White text
             text_rect = text_surface.get_rect(topright=(1420, 20))  # Position it at the top right
