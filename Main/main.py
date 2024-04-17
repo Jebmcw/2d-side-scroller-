@@ -39,6 +39,8 @@ class Game:
                             print("Game paused. Press Space to resume.")
                         else:
                             print("Game resumed.")
+        #Check if player is dead
+    
          # Check if game is paused
             if not self.paused:
             # Proceed with game logic only if not A
@@ -47,7 +49,7 @@ class Game:
                 # Call the main_menu method of Menu
                     self.menu.main_menu()  
                 else:
-                # Call the run method for other statesa
+                # Call the run method for other states
                     self.states[current_state].run()  
 
                 pygame.display.update()
