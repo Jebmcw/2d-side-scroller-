@@ -1,16 +1,24 @@
-image: python:3.9
+#  Template python-build
+
+#  This template allows you to validate your python code.
+#  The workflow allows running tests and code linting on the default branch.
+
+image: python:3.8
 
 pipelines:
-  default:
-    - step:
-        name: Install and Test
-        script:
-          - pip install pygame
-          - pip install pyinstaller
-          - python -m unittest discover tests
-    - step:
-        name: Build Executable
-        script:
-          - pyinstaller --onefile --windowed main.py
-        artifacts:
-          - dist/**
+  default: 
+    - parallel:
+      - step:
+          name: Test
+          caches:
+            - pip
+          script:
+            - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+            - pip install pytest
+            - pytest -v tests/* --junitxml=test-reports/report.xml
+      - step:
+          name: Lint code
+          script:
+            # Enforce style consistency across Python projects https://flake8.pycqa.org
+            - pip install flake8
+            - flake8 . --extend-exclude=dist,build --show-source --statistics
