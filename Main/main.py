@@ -41,7 +41,7 @@ class Game:
                             print("Game resumed.")
          # Check if game is paused
             if not self.paused:
-            # Proceed with game logic only if not paused
+            # Proceed with game logic only if not A
                 current_state = self.gameStateManager.get_state()
                 if current_state == 'menu':
                 # Call the main_menu method of Menu
