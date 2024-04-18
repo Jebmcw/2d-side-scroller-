@@ -1,6 +1,7 @@
 import pygame
 import time
 import os
+import random
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
@@ -25,7 +26,7 @@ class Level1:
         self.lines = "In a mystical realm, a hero embarks \non a quest to recover ancient artifacts,\n battling foes and unraveling mysteries\n to restore harmony to the land."
         # Frame rate and timing for spawns
         self.start_time = time.time()
-        self.spawn_intervals = [3, 5, 6, 9, 10] # seconds between spawns
+        self.spawn_intervals = [3, 5, 6, 9, 10,13] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
         
@@ -34,6 +35,13 @@ class Level1:
         self.text_box_end_time = 10  # Stop displaying the text box 6 seconds into the game
         self.text_displayed = False  # Flag
 
+        
+        
+        self.text_boss_start_time = 40
+        self.text_boss_end_time = 50
+        self.text_boss_displayed = False
+        self.shake_intensity = 5
+        
         #audio for the text
         self.audio_start_time = self.text_box_start_time
         self.audio_end_time = self.text_box_end_time
@@ -55,7 +63,7 @@ class Level1:
         self.freddy = Player.spawnPlayer(self.display, 2, 300, 390)
         print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
        
-        
+        self.sword = Sword(display,self.freddy)
         #initialize power up fireball to collect
         self.powerUp_img = pygame.image.load('assets/fireball.png').convert_alpha()
         self.scaled_width = 50  # Desired width after scaling
@@ -234,25 +242,32 @@ class Level1:
             temp_collision_rects.append((boss, temp_rect))
          
             
-        # Collision detection using temporary rects
-        if self.bg.scroll <= 7000:
-            if keys[pygame.K_f]:
-                for mob, temp_rect in temp_collision_rects:
-                    if self.freddy.rect.colliderect(temp_rect):
-                        # Deduct health from the specific mob that was hit 
-                        mob.health -= 5
+          
+        keys = pygame.key.get_pressed()
+        self.sword.update(keys)   
+        
+        
+        if keys[pygame.K_LSHIFT]:
+            for mob, temp_rect in temp_collision_rects:
+                if self.sword.rect.colliderect(temp_rect):
+                    mob.health -= 2
+                    
+                    if mob.health == 2:
+                        mob.kill()
+                        self.score+=50        
                         
-                        # Check if the mob's health is 5 then kill the mob
-                        if mob.health == 5:
-                            mob.kill()
-                            self.score+=50
-        else:                     
-            if keys[pygame.K_f]:
-                for boss, temp_rect in temp_collision_rects:
-                    if self.freddy.rect.colliderect(temp_rect):
-                        boss.health -= 5
-                        if boss.health <= 0:
-                            boss.kill()        
+        for mob, temp_rect in temp_collision_rects:
+                if self.freddy.rect.colliderect(temp_rect):
+                    self.freddy.health -= 5
+                    if self.freddy.health <=0:
+                        self.freddy.kill()
+                        pygame.quit() 
+         
+        score_text = f"Freddy Health: {self.freddy.health}"
+        text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
+        text_rect = text_surface.get_rect(topright=(850, 50))  # Position it at the top right
+        self.display.blit(text_surface, text_rect) 
+         
                             
         if self.bg.scroll == 2000:
             self.score +=10
@@ -353,3 +368,20 @@ class Level1:
         else:
             self.audio_displayed = False
         
+        if self.text_boss_start_time <= game_elapsed_time <= self.text_boss_end_time:
+            font = pygame.font.SysFont('Times New Roman', 100)
+            text_color = (148, 0, 211)
+            text_surface = font.render('BOSS FIGHT!!!!', True, text_color)
+
+            # Random offset for shaking effect
+            offset_x = random.randint(-self.shake_intensity, self.shake_intensity)
+            offset_y = random.randint(-self.shake_intensity, self.shake_intensity)
+
+            # Position for text
+            text_x = 420 + offset_x
+            text_y = 175 + offset_y
+
+            # Blit the text surface to the display with shaking
+            self.display.blit(text_surface, (text_x, text_y))
+            self.text_boss_displayed = True
+            
