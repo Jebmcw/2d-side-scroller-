@@ -65,20 +65,20 @@ class Start:
         self.menu = Menu(self.display, self.gameStateManager)
 
     def run(self):
-        self.display.fill('red')
-        text_surface = self.font.render('Press E to start', True, (255, 255, 255))  # Render white text
-        text_rect = text_surface.get_rect(center=(750, 300))  # Position the text in the center
-        self.display.blit(text_surface, text_rect)
+        #self.display.fill('red')
+        #text_surface = self.font.render('Press E to start', True, (255, 255, 255))  # Render white text
+        #text_rect = text_surface.get_rect(center=(750, 300))  # Position the text in the center
+        #self.display.blit(text_surface, text_rect)
         
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_e]:
-            self.gameStateManager.set_state('level1')
-            self.gameStateManager.start_time = time.time()  # Record start time
-        if self.gameStateManager.get_state() == 'menu':
-            self.menu.main_menu()
-        elif self.gameStateManager.get_state() == 'level1':
+        #keys = pygame.key.get_pressed()
+        #if keys[pygame.K_e]:
+        self.gameStateManager.set_state('level1')
+        self.gameStateManager.start_time = time.time()  # Record start time
+        #if self.gameStateManager.get_state() == 'menu':
+            #self.menu.main_menu()
+        #elif self.gameStateManager.get_state() == 'level1':
             # Logic for starting level 1
-            pass
+            #pass
  
                       
 class GameStateManager:

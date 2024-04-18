@@ -30,9 +30,9 @@ class Fireball(object):
         self.fires.append(pg.image.load('assets/firework1.png').convert_alpha())
         self.fires.append(pg.image.load('assets/firework2.png').convert_alpha())
         
-        self.fireball = pygame.image.load("assets/fireball.png").convert_alpha()
         
-        self.rect=self.fireball.get_rect()
+        #self.fireball = pygame.image.load("assets/fireball.png").convert_alpha()
+        #self.rect=self.fireball.get_rect()
         
         screen_height = 1500
         self.jump_max = screen_height-100
