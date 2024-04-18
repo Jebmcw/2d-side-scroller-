@@ -3,7 +3,6 @@ import sys
 import time
 from title import Menu
 from levels.level1 import Level1
-from options import Options
 from soundtrack import soundtrack
 
 
@@ -19,9 +18,8 @@ class Game:
         self.menu = Menu(self.screen, self.gameStateManager)
         self.start = Start(self.screen, self.gameStateManager)
         self.level1 = Level1(self.screen, self.gameStateManager)
-        self.options = Options(self.screen, self.gameStateManager, self.gameStateManager.get_state())
         
-        self.states = {'start':self.start, 'menu': self.menu, 'level1': self.level1, 'options': self.options}
+        self.states = {'start':self.start, 'menu': self.menu, 'level1': self.level1}
     
         # Initialize pause state
         self.paused = False  # Add this line to track pause state
@@ -32,27 +30,31 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                
                 elif event.type == pygame.KEYDOWN:
+                    # Toggle pause state when spacebar is pressed
                     if event.key == pygame.K_SPACE:
                         self.paused = not self.paused
                         if self.paused:
                             print("Game paused. Press Space to resume.")
                         else:
                             print("Game resumed.")
-                    elif event.key == pygame.K_o:  # Switch to options menu
-                        self.gameStateManager.set_state('options', self.gameStateManager.get_state())  # Pass the current state as previous state
-
+        #Check if player is dead
+    
+         # Check if game is paused
             if not self.paused:
+            # Proceed with game logic only if not A
                 current_state = self.gameStateManager.get_state()
                 if current_state == 'menu':
-                    self.menu.main_menu()
-                elif current_state == 'options':  # Run options menu
-                    self.options.run()
+                # Call the main_menu method of Menu
+                    self.menu.main_menu()  
                 else:
-                    self.states[current_state].run()
+                # Call the run method for other states
+                    self.states[current_state].run()  
 
-            pygame.display.update()
-            self.clock.tick(FPS)
+                pygame.display.update()
+                self.clock.tick(FPS)
+            
 
 class Start:
     def __init__(self, display, gameStateManager):
