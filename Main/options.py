@@ -24,7 +24,7 @@ class Options:
 
     def run(self):
         self.running = True  # Set the running flag to True
-        while self.running:  # Run loop as long as the flag is True
+        while self.running:  # Runs the loop as long as the flag is True
             self.display.fill((50, 0, 0))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -47,7 +47,7 @@ class Options:
                     self.gameStateManager.set_state(self.previous_state)
                     self.running = False  # Set running flag to False to exit the run loop
                 return
-
+    
     def handle_hover(self, position):
         for button in self.buttons:
             if button.checkForInput(position):
