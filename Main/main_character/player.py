@@ -6,13 +6,12 @@ from weapons.fireball import Fireball
 class Player(pygame.sprite.Sprite):
     def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 300, initial_y = 390):
         super().__init__()
-        #Current file directory
-        self.fire = Fireball(350,450,True)
-        print()
+        
+        #Freddy sprite images loading...
         imageChoice = 1
-        current_path = os.path.dirname('assets')
         self.sprites = []
-        #Load image file path
+        current_path = os.path.dirname('assets')
+
         if imageChoice == 1:
             self.image = pygame.image.load('assets/main_character.png').convert_alpha()
             self.sprites.append(pygame.image.load('assets/main_char_walk_1.png').convert_alpha())
@@ -25,29 +24,32 @@ class Player(pygame.sprite.Sprite):
             self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
             
         self.current_frame = 0
-        self.image = self.sprites[self.current_frame]    
-        #self.rect = self.image.get_rect()
-        #Creates the rectangle for the sprite, now scale it down
-        # Scale down the sprite's rectangle
+        self.image = self.sprites[self.current_frame]
+
+        #Initialize custom player rectangle
         scaled_rect_width = 39
         scaled_rect_height = 80
         self.rect = pygame.Rect(initial_x, initial_y, scaled_rect_width, scaled_rect_height)
         #This will be the area of collision
-        #coordinates of top left corner.
         self.width = self.image.get_width
         self.height = self.image.get_height
         self.initial_y = initial_y
         self.screen_width = screen_width
         self.screen_height = screen_height
+
+        #Jump variables
         self.jump_max = screen_height - 80
         self.parabolaX = 0
-        
+        self.speed = 5
+
+        #Health variables
         self.health = 1000
         
+        #Clock and delay
         self.ticks = pygame.time.get_ticks()
         self.animation_delay = 200
         self.animation_timer = self.ticks
-        self.speed = 5
+        
         #Fireball Power-Up
         self.flameOn = False
         self.projectiles = []
@@ -157,3 +159,8 @@ class Player(pygame.sprite.Sprite):
             # If moving, update position
             # Your movement logic here
             pass
+
+    def flameOn(self):
+        self.flameOn = True
+        #update skin
+        

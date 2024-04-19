@@ -30,12 +30,12 @@ class Fireball(object):
         self.fires.append(pg.image.load('assets/firework1.png').convert_alpha())
         self.fires.append(pg.image.load('assets/firework2.png').convert_alpha())
         
-        
+
         #self.fireball = pygame.image.load("assets/fireball.png").convert_alpha()
         #self.rect=self.fireball.get_rect()
         
-        screen_height = 1500
-        self.jump_max = screen_height-100
+        screen_height = 700
+        self.jump_max = screen_height - 80
         self.gravity = 0.5  # Gravity effect
         self.jump_force = -15  # Initial force for jumps
         self.vertical_speed = 0  # Current vertical speed
@@ -43,6 +43,15 @@ class Fireball(object):
         self.speed_x = 1  # Horizontal speed
         
         self.direction_x = 1  # 1 for right, -1 for left
+
+    def update(self, core):
+        pass
+    #     if self.state == 0:
+    #         self.update_image(core)
+    #         self.move(core)
+    #         self.check_collision_with_mobs(core)
+    #     elif self.state == -1:
+    #         self.update_image(core)
     #update parameters for use in level1.py
     def update_image(self):
         self.image_tick += 1
@@ -68,63 +77,61 @@ class Fireball(object):
         self.image_tick = 0
         self.state = -1
 
-    def update_x_pos(self, blocks):
-        self.rect.x += self.x_vel
+    # def update_x_pos(self, blocks):
+    #     self.rect.x += self.x_vel
       
-        for block in blocks:
-            if block != 0 and block.type != 'BGObject':
-                if pg.Rect.colliderect(self.rect, block.rect):
+    #     for block in blocks:
+    #         if block != 0 and block.type != 'BGObject':
+    #             if pg.Rect.colliderect(self.rect, block.rect):
 
-                    # Fireball blows up only when collides on x-axis
-                    self.start_boom()
+    #                 # Fireball blows up only when collides on x-axis
+    #                 self.start_boom()
 
-    def update_y_pos(self, blocks):
-        self.rect.y += self.y_vel
-        for block in blocks:
-            if block != 0 and block.type != 'BGObject':
-                if pg.Rect.colliderect(self.rect, block.rect):
-                    self.rect.bottom = block.rect.top
-                    self.y_vel = -3
-#update borders in this function//
+    # def update_y_pos(self, blocks):
+    #     self.rect.y += self.y_vel
+    #     for block in blocks:
+    #         if block != 0 and block.type != 'BGObject':
+    #             if pg.Rect.colliderect(self.rect, block.rect):
+    #                 self.rect.bottom = block.rect.top
+    #                 self.y_vel = -3
+    #update borders in this function//
     def check_map_borders(self, core):
-        if self.rect.x <= 0:
-            core.get_map().remove_whizbang(self)
-        elif self.rect.x >= 6768:
-            core.get_map().remove_whizbang(self)
-        elif self.rect.y > 448:
-            core.get_map().remove_whizbang(self)
+        pass
+    #     if self.rect.x <= 0:
+    #         core.get_map().remove_whizbang(self)
+    #     elif self.rect.x >= 6768:
+    #         core.get_map().remove_whizbang(self)
+    #     elif self.rect.y > 448:
+    #         core.get_map().remove_whizbang(self)
 
     def move(self, core):
-        self.y_vel += GRAVITY
+        pass
+    #     self.y_vel += GRAVITY
 
-        blocks = core.get_map().get_blocks_for_collision(self.rect.x // 32, self.rect.y // 32)
-        self.update_y_pos(blocks)
-        self.update_x_pos(blocks)
+    #     blocks = core.get_map().get_blocks_for_collision(self.rect.x // 32, self.rect.y // 32)
+    #     self.update_y_pos(blocks)
+    #     self.update_x_pos(blocks)
 
-        self.check_map_borders(core)
+    #     self.check_map_borders(core)
 
     def check_collision_with_mobs(self, core):
-        for mob in core.get_map().get_mobs():
-            if self.rect.colliderect(mob.rect):
-                if mob.collision:
-                    mob.die(core, instantly=False, crushed=False)
-                    self.start_boom()
-
-    def update(self, core):
-        if self.state == 0:
-            self.update_image(core)
-            self.move(core)
-            self.check_collision_with_mobs(core)
-        elif self.state == -1:
-            self.update_image(core)
+        pass
+    #     for mob in core.get_map().get_mobs():
+    #         if self.rect.colliderect(mob.rect):
+    #             if mob.collision:
+    #                 mob.die(core, instantly=False, crushed=False)
+    #                 self.start_boom()
+    
     #where to blit the image from. write the blit statement on this function?
     def render(self, window):
+        pass
         #self.screen = pg.display.set_mode((WINDOW_W, WINDOW_H))
 
         #include the window data into this file so I can blit from here.
 
+        #core.screen.blit(self.images[self.current_image], core.get_map().get_camera().apply(self))
 
-        core.screen.blit(self.images[self.current_image], core.get_map().get_camera().apply(self))
+        
 ###################################################################################################
     #maybe apply into level1.py
         #the function will need to be defined in the level class becasue that is where
