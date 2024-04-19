@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_max = screen_height - 80
         self.parabolaX = 0
         
-        self.health = 1000
+        self.health = 500
         
         self.ticks = pygame.time.get_ticks()
         self.animation_delay = 200
@@ -62,7 +62,7 @@ class Player(pygame.sprite.Sprite):
     @staticmethod
     def draw_health_bar_player(display, player,scroll):
         # Health bar drawing
-        health_percentage = player.health / 1000
+        health_percentage = player.health / 500
         bar_width = 50
         bar_height = 10
         fill = bar_width * health_percentage
