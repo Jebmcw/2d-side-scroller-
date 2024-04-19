@@ -4,15 +4,15 @@ import os
 from weapons.fireball import Fireball
 #testing branches on gitkraken.
 class Player(pygame.sprite.Sprite):
-    def __init__(self,imageChoice, screen_width = 700, screen_height=1500, initial_x = 300, initial_y = 390):
+    def __init__(self, imageChoice, screen_width = 700, screen_height=1500, initial_x = 300, initial_y = 390):
         super().__init__()
         
         #Freddy sprite images loading...
-        imageChoice = 1
+        skin = imageChoice
         self.sprites = []
         current_path = os.path.dirname('assets')
 
-        if imageChoice == 1:
+        if skin == 1:
             self.image = pygame.image.load('assets/main_character.png').convert_alpha()
             self.sprites.append(pygame.image.load('assets/main_char_walk_1.png').convert_alpha())
             self.sprites.append(pygame.image.load('assets/main_char_walk_2.png').convert_alpha())
@@ -20,7 +20,7 @@ class Player(pygame.sprite.Sprite):
             self.sprites.append(pygame.image.load('assets/main_char_walk_4.png').convert_alpha())
             self.sprites.append(pygame.image.load('assets/main_char_walk_5.png').convert_alpha())
             
-        elif imageChoice == 2:
+        elif skin == 2:
             self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
             
         self.current_frame = 0
@@ -160,7 +160,14 @@ class Player(pygame.sprite.Sprite):
             # Your movement logic here
             pass
 
-    def flameOn(self):
+    def heatUp(self):
         self.flameOn = True
         #update skin
+        #pause game
+        #move player up 5 (skin red)
+        #move player up 5 (skin OG)
+        #move player up 5 (skin red)
+        #player falls to OG pos
+        #game resumes
+
         

@@ -23,9 +23,9 @@ class Fireball(object):
         self.image_tick = 0
         #7 images loaded into class
         self.fires = [pg.image.load('assets/fireball.png').convert_alpha()]
-        self.fires.append(pg.transform.flip(self.fires[0], 0, 90))
-        self.fires.append(pg.transform.flip(self.fires[0], 90, 90))
-        self.fires.append(pg.transform.flip(self.fires[0], 90, 0))
+        self.fires.append(pg.transform.rotate(self.fires[0], 90))
+        self.fires.append(pg.transform.rotate(self.fires[0], 90))
+        self.fires.append(pg.transform.rotate(self.fires[0], 90))
         self.fires.append(pg.image.load('assets/firework0.png').convert_alpha())
         self.fires.append(pg.image.load('assets/firework1.png').convert_alpha())
         self.fires.append(pg.image.load('assets/firework2.png').convert_alpha())
@@ -132,6 +132,7 @@ class Fireball(object):
         #core.screen.blit(self.images[self.current_image], core.get_map().get_camera().apply(self))
 
         
+
 ###################################################################################################
     #maybe apply into level1.py
         #the function will need to be defined in the level class becasue that is where
