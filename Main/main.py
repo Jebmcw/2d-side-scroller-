@@ -32,11 +32,11 @@ class Game:
                     sys.exit()
                 
                 elif event.type == pygame.KEYDOWN:
-                    # Toggle pause state when spacebar is pressed
-                    if event.key == pygame.K_SPACE:
+                    # Toggle pause state when escape is pressed, space now for fireballsa
+                    if event.key == pygame.K_ESCAPE:
                         self.paused = not self.paused
                         if self.paused:
-                            print("Game paused. Press Space to resume.")
+                            print("Game paused. Press 'Escape' to resume.")
                         else:
                             print("Game resumed.")
         #Check if player is dead

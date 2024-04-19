@@ -11,7 +11,7 @@ class Player(pygame.sprite.Sprite):
         skin = imageChoice
         self.sprites = []
         current_path = os.path.dirname('assets')
-
+        #change to 3 and place last (red)
         if skin == 1:
             self.image = pygame.image.load('assets/main_character.png').convert_alpha()
             self.sprites.append(pygame.image.load('assets/main_char_walk_1.png').convert_alpha())
@@ -19,9 +19,10 @@ class Player(pygame.sprite.Sprite):
             self.sprites.append(pygame.image.load('assets/main_char_walk_3.png').convert_alpha())
             self.sprites.append(pygame.image.load('assets/main_char_walk_4.png').convert_alpha())
             self.sprites.append(pygame.image.load('assets/main_char_walk_5.png').convert_alpha())
-            
+        #green    
         elif skin == 2:
             self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
+        #blue
             
         self.current_frame = 0
         self.image = self.sprites[self.current_frame]
@@ -36,6 +37,7 @@ class Player(pygame.sprite.Sprite):
         self.initial_y = initial_y
         self.screen_width = screen_width
         self.screen_height = screen_height
+        self.facingRight = False
 
         #Jump variables
         self.jump_max = screen_height - 80
@@ -52,7 +54,10 @@ class Player(pygame.sprite.Sprite):
         
         #Fireball Power-Up
         self.flameOn = False
+        self.animatePU = False
         self.projectiles = []
+        self.fireBuffer = 3
+        
         
     @staticmethod
     def spawnPlayer(display, imageNum, initial_x, initial_y):
@@ -114,7 +119,6 @@ class Player(pygame.sprite.Sprite):
     
    
    
-   
     def jump(self):
         #Jump curve
         factor = self.parabolaX - 30
@@ -151,23 +155,59 @@ class Player(pygame.sprite.Sprite):
             # Update the image according to the current frame
             if keys_pressed[pygame.K_a]:
                 self.image = pygame.transform.flip(self.sprites[self.current_frame], True, False)
+                self.facingRight = False
             else:
                 self.image = self.sprites[self.current_frame]
-
-        # Check for movement
-        if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_d]:
-            # If moving, update position
-            # Your movement logic here
-            pass
+                self.facingRight = True
+        #append fireballs to projectiles list        
+        if self.flameOn:
+            self.fireBuffer -= 1
+            if keys_pressed[pygame.K_SPACE] and self.fireBuffer <= 0:
+                self.projectiles.append(Fireball(self.rect.x + 15, self.rect.y + 40, self.facingRight))
+                self.fireBuffer = 20
+            
+            #Freddy is updated, so spawn the fireball at his pos
+            #shoot fireball:    
+            if self.projectiles:
+                #update fireball object every frame
+                for whizbang in self.projectiles[:]:
+                    whizbang.update()
+                    if whizbang.rect.x <= -16 or whizbang.rect.x >= 1500 or whizbang.state == -2:
+                        self.projectiles.remove(whizbang)
+                    #check for colissions with mobs in level1 file
+                    
 
     def heatUp(self):
         self.flameOn = True
-        #update skin
-        #pause game
-        #move player up 5 (skin red)
-        #move player up 5 (skin OG)
-        #move player up 5 (skin red)
-        #player falls to OG pos
-        #game resumes
+        self.animatePU = True
+        # #animate power up with game frozen
+            # if self.level1.freddy.animatePU == True:
+            #     #Update player position and skin in a loop
+            #     self.level1.freddy.rect.y -= 5
+            #     for _ in range(100):
+            #         self.screen.blit(self.green, (self.level1.freddy.rect.x - 25, self.level1.freddy.rect.y - 15))
+            #         pygame.display.update()
+            #     self.level1.freddy.rect.y -= 5
+            #     for _ in range(100):
+            #         self.screen.blit(self.red, (self.level1.freddy.rect.x - 25, self.level1.freddy.rect.y - 15))
+            #         pygame.display.update()
+            #     self.level1.freddy.rect.y -= 5
+            #     for _ in range(100):
+            #         self.screen.blit(self.green, (self.level1.freddy.rect.x - 25, self.level1.freddy.rect.y - 15))
+            #         pygame.display.update()
 
+                # #player falls to OG pos
+                # for i in range(9):
+                #     if i <= 6:
+                #         self.level1.freddy.rect.y += 2
+                #     elif i <= 9:
+                #         self.level1.freddy.rect.y += 1
+                #     for _ in range(100):
+                #         self.screen.blit(self.green, (self.level1.freddy.rect.x - 25, self.level1.freddy.rect.y - 15))
+                #         pygame.display.update()
+               
+
+        #game resumes
+        self.animatePU = False
+        #self.paused = False
         

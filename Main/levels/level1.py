@@ -170,12 +170,9 @@ class Level1:
        
         #Events
         keys=pygame.key.get_pressed()
-        self.freddy.update(keys)
         if keys[pygame.K_w] and self.player_y == 395:
             self.jump = 1
-
-        
-        self.freddy.update(keys)
+        #Handle jump    
         if self.jump == 1:
             self.freddy.jump()
             self.jumpCount += 1
@@ -183,17 +180,7 @@ class Level1:
             self.jump = 0
             self.jumpCount = 0
             self.freddy.rect.y = self.freddy.initial_y
-
-
-        #Freddy is updated, so spawn the fireball at his pos
-            #shoot fireball:    
-        if keys[pygame.K_f]:
-            #spawn fireball into player projectile list
-            #update fireball sprite every frame
-            #apply gravity until it hits the ground and then make it bounce twice
-            #explodes on third bounce or collision
-            #remove fireball from the projectiles list
-            self.freddy.projectiles.append(Fireball(350, self.freddy.rect.y, True))
+        self.freddy.update(keys)
             
 
         #Mob spawning
@@ -236,7 +223,7 @@ class Level1:
             temp_collision_rects.append((boss, temp_rect))
 
         #Spawn power Up once, then update until acquired or off left side of screen
-        if self.score >= 100 and self.spawnFire == False and self.despawnFire == False:
+        if self.score >= 50 and self.spawnFire == False and self.despawnFire == False:
             self.powerUp_rect.x = 1300
             self.powerUp_rect.y = 420
             self.bounceVel = 3
@@ -283,9 +270,20 @@ class Level1:
                 self.freddy.heatUp()
                 self.spawnFire = False
                 self.despawnFire = True
+        #Collision detection between fireballs and mobs
+        if self.freddy.flameOn:
+            for mob, temp_rect in temp_collision_rects:
+                for whizbang in self.freddy.projectiles:
+                    if whizbang.rect.colliderect(temp_rect):
+                        mob.health -= 0.5
+                        if whizbang.state == 0:
+                            whizbang.start_boom()
+                        if mob.health <= 5:
+                            mob.kill()
+                            self.score+=50
 
         # Collision detection using temporary rects################################################
-        if self.bg.scroll <= 7000:
+        if self.bg.scroll <= 7000 and not self.freddy.flameOn:
             if keys[pygame.K_f]:
                 for mob, temp_rect in temp_collision_rects:
                     if self.freddy.rect.colliderect(temp_rect):
@@ -293,7 +291,7 @@ class Level1:
                         mob.health -= 5
                         
                         # Check if the mob's health is 5 then kill the mob
-                        if mob.health == 5:
+                        if mob.health <= 5:
                             mob.kill()
                             self.score+=50
         else:                     
@@ -351,14 +349,17 @@ class Level1:
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 25, self.freddy.rect.y - 15))
         pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
+        #Draw fireballs
         if self.spawnFire:
             self.display.blit(self.powerUp_img, (self.powerUp_rect.x, self.powerUp_rect.y))
+        if self.freddy.flameOn:
+            for whizbang in self.freddy.projectiles:
+                self.display.blit(whizbang.fires[whizbang.current_image], (whizbang.rect.x, whizbang.rect.y))
 
             
         
         #????is this for the boss fight?
         if self.bg.scroll == 10000:
-            keys = pygame.key.get_pressed()
             self.freddy.player_movements(keys)
         
         
