@@ -18,6 +18,7 @@ class Menu:
 
     def options(self):
         # Implement options screen functionality here
+        self.gameStateManager.set_state('options')
         pass
 	
     def main_menu(self):
