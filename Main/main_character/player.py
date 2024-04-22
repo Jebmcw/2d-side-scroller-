@@ -11,7 +11,8 @@ class Player(pygame.sprite.Sprite):
         skin = imageChoice
         self.sprites = []
         current_path = os.path.dirname('assets')
-        #change to 3 and place last (red)
+        self.death = []
+        #Load image file path
         if skin == 1:
             self.image = pygame.image.load('assets/main_character.png').convert_alpha()
             self.sprites.append(pygame.image.load('assets/main_char_walk_1.png').convert_alpha())
@@ -19,11 +20,11 @@ class Player(pygame.sprite.Sprite):
             self.sprites.append(pygame.image.load('assets/main_char_walk_3.png').convert_alpha())
             self.sprites.append(pygame.image.load('assets/main_char_walk_4.png').convert_alpha())
             self.sprites.append(pygame.image.load('assets/main_char_walk_5.png').convert_alpha())
-        #green    
         elif skin == 2:
             self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
-        #blue
             
+        self.death.append(pygame.image.load('assets/main_char_death.png').convert_alpha())    
+        
         self.current_frame = 0
         self.image = self.sprites[self.current_frame]
 
@@ -43,9 +44,8 @@ class Player(pygame.sprite.Sprite):
         self.jump_max = screen_height - 80
         self.parabolaX = 0
         self.speed = 5
-
         #Health variables
-        self.health = 1000
+        self.health = 2000
         
         #Clock and delay
         self.ticks = pygame.time.get_ticks()
@@ -69,7 +69,7 @@ class Player(pygame.sprite.Sprite):
     @staticmethod
     def draw_health_bar_player(display, player,scroll):
         # Health bar drawing
-        health_percentage = player.health / 1000
+        health_percentage = player.health / 2000
         bar_width = 50
         bar_height = 10
         fill = bar_width * health_percentage
@@ -211,3 +211,5 @@ class Player(pygame.sprite.Sprite):
         self.animatePU = False
         #self.paused = False
         
+        if self.health == 5:
+            self.image = self.death[0]

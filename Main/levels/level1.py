@@ -1,6 +1,8 @@
 import pygame
 import time
 import os
+import sys
+import random
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
@@ -10,6 +12,8 @@ from Voice import Voice
 from soundtrack import soundtrack
 from weapons.fireball import Fireball
 from weapons.sword import Sword
+from .win_lose_conditions import game_over, game_win
+
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -24,7 +28,7 @@ class Level1:
         
         # Frame rate and timing for spawns
         self.start_time = time.time()
-        self.spawn_intervals = [3, 5, 6, 9, 10] # seconds between spawns
+        self.spawn_intervals = [3, 5, 6, 9, 10, 8] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
         self.some_additional_offset = 100
@@ -35,6 +39,13 @@ class Level1:
         self.text_box_end_time = 10  # Stop displaying the text box 6 seconds into the game
         self.text_displayed = False  # Flag
 
+        
+        
+        self.text_boss_start_time = 55
+        self.text_boss_end_time = 60
+        self.text_boss_displayed = False
+        self.shake_intensity = 5
+        
         #audio for the text
         self.audio_start_time = self.text_box_start_time
         self.audio_end_time = self.text_box_end_time
@@ -56,6 +67,7 @@ class Level1:
         self.freddy = Player.spawnPlayer(self.display, 1, 300, 390)
         self.score = 0
        
+        self.sword = Sword(display,self.freddy)
         #initialize power up fireball to collect
         self.powerUp_img = pygame.image.load('assets/fireball.png').convert_alpha()
         self.scaled_width = 50  # Desired width after scaling
@@ -77,13 +89,13 @@ class Level1:
         if self.spawn_intervals[self.spawn_index] == 3:
             self.some_additional_offset = 500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 400, 50, dynamic_offset)
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 400, 500, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 1")
             
             
         if self.spawn_intervals[self.spawn_index] == 5:
-            self.some_additional_offset = 500
+            self.some_additional_offset = 1000
             dynamic_offset = self.bg.scroll + self.some_additional_offset
             mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.mobs.add(*mobs_to_add)
@@ -91,42 +103,42 @@ class Level1:
             
             
         if self.spawn_intervals[self.spawn_index] == 6:
-            self.some_additional_offset = 500
+            self.some_additional_offset = 1500
             soundtrack('Main/music/xDeviruchi - Exploring The Unknown.wav')
             dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 500, 500, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 8")
             
             
         if self.spawn_intervals[self.spawn_index] == 9:
-            self.some_additional_offset = 500
+            self.some_additional_offset = 2000
             dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 2, 500, 200, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 9")
            
             
         if self.spawn_intervals[self.spawn_index] == 10:
-            self.some_additional_offset = 500
+            self.some_additional_offset = 2500
             dynamic_offset = self.bg.scroll + self.some_additional_offset
-            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 1, 500, 50, dynamic_offset)
+            mobs_to_add = Mob.spawn_mobs_horizontally(self.display, 3, 500, 100, dynamic_offset)
             self.mobs.add(*mobs_to_add)
             print("Mob spawned : 10")
             
             
     def spawn_boss(self):
-        font = pygame.font.SysFont('arial', 100)  # Specify the font name and size.
-        text_color = (255, 0, 0)  # Red color
+        
 
-        if self.bg.scroll == 8000:
+        if self.spawn_intervals[self.spawn_index] == 8:
             dynamic_offset = 10000
             boss_to_add = Boss.spawn_boss_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.boss.add(boss_to_add)
             
-        if self.bg.scroll >8000 and self.bg.scroll <= 9000 and not self.bossFightTextShown:
-            text_surface = font.render('Boss Fight!!!', True, text_color)
-            self.display.blit(text_surface, (450, 150))  # Position of the text
+        
+
+    #def spawn_powerUp(self):
+        #make the png a sprite and scale and blit to screen
                 
             
     def update_timer(self):
@@ -140,16 +152,59 @@ class Level1:
             minutes = int(elapsed_time // 60)
             seconds = int(elapsed_time % 60)
             timer_text = f"{minutes:02d}:{seconds:02d}"
-        
+            if minutes >= 2:
+                self.game_over()
             # Render the text
             text_surface = self.font.render(timer_text, True, (255, 255, 255))  # White text
             text_rect = text_surface.get_rect(topright=(1420, 20))  # Position it at the top right
         
             # Blit the text surface onto the screen
             self.display.blit(text_surface, text_rect)
+                 
+    def game_over(self):
+        result = game_over(self.display)  # Ensure you pass the correct display surface
+        if result == 'restart':
+            self.reset_game()  # Method to reset the game state
+        elif result == 'quit':
+            pygame.quit()
+            sys.exit()
 
+    def game_win(self):
+        result = game_win(self.display)  # Call game win function that shows the screen and waits for input
+        if result == 'restart':
+            self.reset_game()  # Reset the game if 'restart' was chosen
+        elif result == 'main_menu':
+            # Assuming you have a way to handle switching to the main menu
+            self.gameStateManager.set_state('menu')
 
-                    
+    def reset_game(self):
+        # Reinitialize game components
+        self.__init__(self.display, self.gameStateManager)
+        # Reset all game-related attributes
+        self.gameStateManager.start_time = time.time()
+        self.score = 0
+
+        # Reset mobs and bosses
+        self.mobs.empty()
+        self.boss.empty()
+
+        # Reset player attributes
+        self.freddy = Player.spawnPlayer(self.display, 1, 300, 390)
+        self.freddy.health = 500  # Reset health
+        self.freddy.rect.x = 300  # Reset position
+        self.freddy.rect.y = 390
+        self.freddy.current_frame = 0  # Reset animation frame
+        self.freddy.parabolaX = 0  # Reset any jump or movement mechanics
+
+        # Reset game environment and state
+        self.tile_map = TileMap('Main/levels/platforms/level 1 tile map.csv', tile_size=32)
+        self.spawn_index = 0
+        self.next_spawn_time = self.spawn_intervals[0]
+        self.some_additional_offset = 100
+
+        self.run()  # Restart the game loop if necessary
+  
+
     def run(self):
         self.display.fill((0, 0, 0))
         pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
@@ -186,6 +241,7 @@ class Level1:
         #Mob spawning
         if elapsed_time >= self.next_spawn_time:
             self.spawn_mobs()
+            self.spawn_boss()  
             self.spawn_index +=1
             if self.spawn_index < len(self.spawn_intervals):
                 self.next_spawn_time += self.spawn_intervals[self.spawn_index]
@@ -212,16 +268,17 @@ class Level1:
             temp_collision_rects.append((mob, temp_rect))
 
                                        
-        self.spawn_boss()   
+        boss_temp_collision_rects = []                               
+        #self.spawn_boss()   
         self.boss.update()
         for boss in self.boss:
             boss_world_x = boss.rect.x - self.bg.scroll
             self.display.blit(boss.image, (boss_world_x, boss.rect.y))
             Boss.draw_health_bar(self.display, boss, self.bg.scroll)
             # Create a temporary rect for collision detection, adjusted for scrolling
-            temp_rect = pygame.Rect(boss_world_x, boss.rect.y, boss.rect.width, boss.rect.height)
-            temp_collision_rects.append((boss, temp_rect))
-
+            temp_rects = pygame.Rect(boss_world_x, boss.rect.y, boss.rect.width, boss.rect.height)
+            boss_temp_collision_rects.append((boss, temp_rects))
+         
         #Spawn power Up once, then update until acquired or off left side of screen
         if self.score >= 50 and self.spawnFire == False and self.despawnFire == False:
             self.powerUp_rect.x = 1300
@@ -234,13 +291,13 @@ class Level1:
             #once fire is off screen's left side, despawn.
             if -50 >= self.powerUp_rect.x:
                 self.spawnFire = False
-                self.despawnFire = True
             #image swirl  
+                self.despawnFire = True
             self.swirl = self.fireFrame//5  
             if self.swirl == 0 or self.swirl == 4:
                 self.powerUp_img = self.powerUp_img1
-                self.powerUp_rect.y -= self.bounceVel
 
+                self.powerUp_rect.y -= self.bounceVel
             elif self.swirl == 1 or self.swirl == 5:
                 self.powerUp_img = self.powerUp_img2
                 self.powerUp_rect.y -= self.bounceVel-1
@@ -263,13 +320,18 @@ class Level1:
             if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
                 self.powerUp_rect.x -= 5
             
-
-        #Collision detection between Freddy and Power Up
-        if self.spawnFire == True:
-            if self.freddy.rect.colliderect(self.powerUp_rect):
-                self.freddy.heatUp()
-                self.spawnFire = False
-                self.despawnFire = True
+        self.sword.update(keys)   
+        keys = pygame.key.get_pressed()
+        
+        
+        if keys[pygame.K_LSHIFT]:
+            for mob, temp_rect in temp_collision_rects:
+                if self.sword.rect.colliderect(temp_rect):
+                    mob.health -= 2
+                    mob.speed_x+=.09
+                    if mob.health == 2:
+                        mob.kill()
+                        self.score+=50        
         #Collision detection between fireballs and mobs
         if self.freddy.flameOn:
             for mob, temp_rect in temp_collision_rects:
@@ -282,68 +344,83 @@ class Level1:
                             mob.kill()
                             self.score+=50
 
-        # Collision detection using temporary rects################################################
-        if self.bg.scroll <= 7000 and not self.freddy.flameOn:
-            if keys[pygame.K_f]:
-                for mob, temp_rect in temp_collision_rects:
-                    if self.freddy.rect.colliderect(temp_rect):
-                        # Deduct health from the specific mob that was hit 
-                        mob.health -= 5
+                self.despawnFire = True
+                self.spawnFire = False
+                self.freddy.heatUp()
+            if self.freddy.rect.colliderect(self.powerUp_rect):
+        if self.spawnFire == True:
+        #Collision detection between Freddy and Power Up
+
                         
-                        # Check if the mob's health is 5 then kill the mob
-                        if mob.health <= 5:
-                            mob.kill()
-                            self.score+=50
-        else:                     
-            if keys[pygame.K_f]:
-                for boss, temp_rect in temp_collision_rects:
-                    if self.freddy.rect.colliderect(temp_rect):
-                        boss.health -= 5
-                        if boss.health <= 0:
-                            boss.kill()        
-                            
-        if self.bg.scroll == 2000:
-            self.score +=10
-        if self.bg.scroll == 4000:
-            self.score +=10
-        if self.bg.scroll == 6000:
-            self.score +=10
-        if self.bg.scroll == 8000:
-            self.score +=10
-                                
-        score_text = f"Scoreboard: {self.score:02d}"
-        text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
-        text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
-        self.display.blit(text_surface, text_rect) 
-                           
-        #
-        for boss, temp_rect in temp_collision_rects:
+        for mob, temp_rect in temp_collision_rects:
                 if self.freddy.rect.colliderect(temp_rect):
-                    self.freddy.health -= 1
+                    self.freddy.health -= 10
                     if self.freddy.health <=0:
                         self.freddy.kill()
-                        pygame.quit() 
+                        self.game_over() # Game over when health is depleted
+                        
+         
+        score_text = f"Freddy Health: {self.freddy.health}"
+        text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
+        text_rect = text_surface.get_rect(topright=(850, 50))  # Position it at the top right
+        self.display.blit(text_surface, text_rect) 
+
+        for boss, temp_rects in boss_temp_collision_rects:
+            if self.sword.rect.colliderect(temp_rects):
+                    boss.health -= 2
+                    boss.speed_x+=.006
+                    if boss.health == 2:
+                        boss.kill()
+                        print("You Won!!")
+                        self.game_win()
+                              
+        for boss, temp_rects in boss_temp_collision_rects:
+                if self.freddy.rect.colliderect(temp_rects):
+                    self.freddy.health -= 10
+                    if self.freddy.health <=0:
+                        self.freddy.kill()
+                        self.game_over()   
                         
         # Collision detection using temporary rects
         if keys[pygame.K_f]:
-            for boss, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
+            
+            for boss, temp_rects in boss_temp_collision_rects:
+                if self.freddy.rect.colliderect(temp_rects):
                     # Deduct health from the specific mob that was hit 
                     boss.health -= 5
-                    
-                    
                     # Check if the mob's health is 0 or less
                     if boss.health <= 0:
                         # If so, kill the mob
                         boss.kill()
-                                   
-        for boss, temp_rect in temp_collision_rects:
+                        # Call the game win function to handle the win condition 
+                        self.game_win()
+                        
+            for mob, temp_rect in temp_collision_rects:
                 if self.freddy.rect.colliderect(temp_rect):
-                    self.freddy.health -= 1
-                    if self.freddy.health <=0:
-                        self.freddy.kill()
-                        pygame.quit()
-        ######################################################################
+                    mob.health -= 2
+                    mob.speed_x+=.09
+                    if mob.health == 2:
+                        mob.kill()
+                        self.score+=50        
+                        
+                        
+                        
+        #for boss, temp_rect in temp_collision_rects:
+                #if self.freddy.rect.colliderect(temp_rect):
+                    #self.freddy.health -= 1
+                    #if self.freddy.health <=0:
+                        #self.freddy.kill()
+                        #self.game_over()
+        
+        #Update and draw player
+        self.freddy.update(keys)
+        if self.jump == 1:
+            self.freddy.jump()
+            self.jumpCount += 1
+        if self.jumpCount >= 60:
+            self.jump = 0
+            self.jumpCount = 0
+            self.freddy.rect.y = self.freddy.initial_y
 
         #Draw player and hit-box     
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 25, self.freddy.rect.y - 15))
@@ -374,3 +451,32 @@ class Level1:
         else:
             self.audio_displayed = False
         
+        if self.text_boss_start_time <= game_elapsed_time <= self.text_boss_end_time:
+            font = pygame.font.SysFont('Times New Roman', 100)
+            text_color = (148, 0, 211)
+            text_surface = font.render('BOSS FIGHT!!!!', True, text_color)
+
+            # Random offset for shaking effect
+            offset_x = random.randint(-self.shake_intensity, self.shake_intensity)
+            offset_y = random.randint(-self.shake_intensity, self.shake_intensity)
+
+            # Position for text
+            text_x = 420 + offset_x
+            text_y = 175 + offset_y
+
+            # Blit the text surface to the display with shaking
+            self.display.blit(text_surface, (text_x, text_y))
+            self.text_boss_displayed = True
+        if self.bg.scroll == 2000:
+            self.score +=10
+        if self.bg.scroll == 4000:
+            self.score +=10
+        if self.bg.scroll == 6000:
+            self.score +=10
+        if self.bg.scroll == 8000:
+            self.score +=10
+                                
+        score_text = f"Scoreboard: {self.score:02d}"
+        text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
+        text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
+        self.display.blit(text_surface, text_rect)     
