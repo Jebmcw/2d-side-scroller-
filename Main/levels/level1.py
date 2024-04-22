@@ -1,6 +1,7 @@
 import pygame
 import time
 import os
+import sys
 import random
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
@@ -11,6 +12,8 @@ from Voice import Voice
 from soundtrack import soundtrack
 from weapons.fireball import Fireball
 from weapons.sword import Sword
+from .win_lose_conditions import game_over
+
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -138,8 +141,8 @@ class Level1:
             minutes = int(elapsed_time // 60)
             seconds = int(elapsed_time % 60)
             timer_text = f"{minutes:02d}:{seconds:02d}"
-            if minutes == 2:
-                pygame.quit()
+            if minutes >= 2:
+                self.game_over
             # Render the text
             text_surface = self.font.render(timer_text, True, (255, 255, 255))  # White text
             text_rect = text_surface.get_rect(topright=(1420, 20))  # Position it at the top right
@@ -147,7 +150,20 @@ class Level1:
             # Blit the text surface onto the screen
             self.display.blit(text_surface, text_rect)
                  
-                    
+    def game_over(self):
+        result = game_over(self.display)  # Ensure you pass the correct display surface
+        if result == 'restart':
+            self.reset_game()  # Method to reset the game state
+        elif result == 'quit':
+            pygame.quit()
+            sys.exit()
+
+    def reset_game(self):
+        # Reinitialize game components
+        self.__init__(self.display, self.gameStateManager)
+        self.run()  # Restart the game loop if necessary
+  
+
     def run(self):
         self.display.fill((0, 0, 0))
         pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
@@ -229,7 +245,7 @@ class Level1:
                     self.freddy.health -= 5
                     if self.freddy.health <=0:
                         self.freddy.kill()
-                        pygame.quit() 
+                        self.game_over() # Game over when health is depleted
                         
         for boss, temp_rects in boss_temp_collision_rects:
             if self.sword.rect.colliderect(temp_rects):
