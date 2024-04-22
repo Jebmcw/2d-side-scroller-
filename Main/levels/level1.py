@@ -29,7 +29,7 @@ class Level1:
         self.lines = "In a mystical realm, a hero embarks \non a quest to recover ancient artifacts,\n battling foes and unraveling mysteries\n to restore harmony to the land."
         # Frame rate and timing for spawns
         self.start_time = time.time()
-        self.spawn_intervals = [3, 5, 6, 9, 10, 15] # seconds between spawns
+        self.spawn_intervals = [3, 5, 6, 9, 10, 8] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
         
@@ -139,7 +139,7 @@ class Level1:
     def spawn_boss(self):
         
 
-        if self.spawn_intervals[self.spawn_index] == 15:
+        if self.spawn_intervals[self.spawn_index] == 8:
             dynamic_offset = 10000
             boss_to_add = Boss.spawn_boss_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.boss.add(boss_to_add)
@@ -319,7 +319,7 @@ class Level1:
         for boss, temp_rects in boss_temp_collision_rects:
             if self.sword.rect.colliderect(temp_rects):
                     boss.health -= 2
-                    boss.speed_x+=.009
+                    boss.speed_x+=.006
                     if boss.health == 2:
                         boss.kill()
                         print("You Won!!")
@@ -334,19 +334,28 @@ class Level1:
                         
         # Collision detection using temporary rects
         if keys[pygame.K_f]:
-            for boss, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
+            
+            for boss, temp_rects in boss_temp_collision_rects:
+                if self.freddy.rect.colliderect(temp_rects):
                     # Deduct health from the specific mob that was hit 
                     boss.health -= 5
-                    
-                    
                     # Check if the mob's health is 0 or less
                     if boss.health <= 0:
                         # If so, kill the mob
                         boss.kill()
                         # Call the game win function to handle the win condition 
                         self.game_win()
-
+                        
+            for mob, temp_rect in temp_collision_rects:
+                if self.freddy.rect.colliderect(temp_rect):
+                    mob.health -= 2
+                    mob.speed_x+=.09
+                    if mob.health == 2:
+                        mob.kill()
+                        self.score+=50        
+                        
+                        
+                        
         #for boss, temp_rect in temp_collision_rects:
                 #if self.freddy.rect.colliderect(temp_rect):
                     #self.freddy.health -= 1
