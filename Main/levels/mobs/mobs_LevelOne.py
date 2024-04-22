@@ -12,9 +12,11 @@ class Mob(pygame.sprite.Sprite):
     def __init__(self, screen_width=600, screen_height=1500, initial_y=None, initial_x=None):
         super().__init__()
         self.sprites = []
+        self.death = []
         self.is_animating = True
         self.sprites.append(pygame.image.load('Main/Level1_Img/mob/mob_walk_death_1.png'))
         self.sprites.append(pygame.image.load('Main/Level1_Img/mob/mob_walk_death_2.png'))
+        self.death.append(pygame.image.load('Main/Level1_Img/mob/mob_walk_death_3.png'))
         self.current_sprite = 0
         self.image_change_delay = 10
         self.current_delay = 0
@@ -87,6 +89,9 @@ class Mob(pygame.sprite.Sprite):
                     self.current_sprite = 0
 
                 self.image = self.sprites[self.current_sprite]
+                
+        if self.health == 10:
+            self.image = self.death[0]
         # speed based on direction
         self.rect.x += self.speed_x * self.direction_x
         
