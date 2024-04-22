@@ -1,6 +1,7 @@
 import pygame
 import time
 import os
+import sys
 import random
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
@@ -11,6 +12,8 @@ from Voice import Voice
 from soundtrack import soundtrack
 from weapons.fireball import Fireball
 from weapons.sword import Sword
+from .win_lose_conditions import game_over, game_win
+
 
 class Level1:
     def __init__(self, display, gameStateManager):
@@ -159,7 +162,8 @@ class Level1:
             minutes = int(elapsed_time // 60)
             seconds = int(elapsed_time % 60)
             timer_text = f"{minutes:02d}:{seconds:02d}"
-        
+            if minutes >= 2:
+                self.game_over()
             # Render the text
             text_surface = self.font.render(timer_text, True, (255, 255, 255))  # White text
             text_rect = text_surface.get_rect(topright=(1420, 20))  # Position it at the top right
@@ -167,7 +171,50 @@ class Level1:
             # Blit the text surface onto the screen
             self.display.blit(text_surface, text_rect)
                  
-                    
+    def game_over(self):
+        result = game_over(self.display)  # Ensure you pass the correct display surface
+        if result == 'restart':
+            self.reset_game()  # Method to reset the game state
+        elif result == 'quit':
+            pygame.quit()
+            sys.exit()
+
+    def game_win(self):
+        result = game_win(self.display)  # Call game win function that shows the screen and waits for input
+        if result == 'restart':
+            self.reset_game()  # Reset the game if 'restart' was chosen
+        elif result == 'main_menu':
+            # Assuming you have a way to handle switching to the main menu
+            self.gameStateManager.set_state('menu')
+
+    def reset_game(self):
+        # Reinitialize game components
+        self.__init__(self.display, self.gameStateManager)
+        # Reset all game-related attributes
+        self.gameStateManager.start_time = time.time()
+        self.score = 0
+
+        # Reset mobs and bosses
+        self.mobs.empty()
+        self.boss.empty()
+
+        # Reset player attributes
+        self.freddy = Player.spawnPlayer(self.display, 1, 300, 390)
+        self.freddy.health = 500  # Reset health
+        self.freddy.rect.x = 300  # Reset position
+        self.freddy.rect.y = 390
+        self.freddy.current_frame = 0  # Reset animation frame
+        self.freddy.parabolaX = 0  # Reset any jump or movement mechanics
+
+        # Reset game environment and state
+        self.tile_map = TileMap('Main/levels/platforms/level 1 tile map.csv', tile_size=32)
+        self.spawn_index = 0
+        self.next_spawn_time = self.spawn_intervals[0]
+        self.some_additional_offset = 100
+
+        self.run()  # Restart the game loop if necessary
+  
+
     def run(self):
         self.display.fill((0, 0, 0))
         pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
@@ -260,13 +307,15 @@ class Level1:
                     self.freddy.health -= 10
                     if self.freddy.health <=0:
                         self.freddy.kill()
-                        pygame.quit() 
+                        self.game_over() # Game over when health is depleted
+                        
          
         score_text = f"Freddy Health: {self.freddy.health}"
         text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
         text_rect = text_surface.get_rect(topright=(850, 50))  # Position it at the top right
         self.display.blit(text_surface, text_rect) 
         
+
         for boss, temp_rects in boss_temp_collision_rects:
             if self.sword.rect.colliderect(temp_rects):
                     boss.health -= 2
@@ -274,13 +323,14 @@ class Level1:
                     if boss.health == 2:
                         boss.kill()
                         print("You Won!!")
+                        self.game_win()
                               
         for boss, temp_rects in boss_temp_collision_rects:
                 if self.freddy.rect.colliderect(temp_rects):
                     self.freddy.health -= 10
                     if self.freddy.health <=0:
                         self.freddy.kill()
-                        pygame.quit()   
+                        self.game_over()   
                         
         # Collision detection using temporary rects
         if keys[pygame.K_f]:
@@ -294,13 +344,15 @@ class Level1:
                     if boss.health <= 0:
                         # If so, kill the mob
                         boss.kill()
-                                   
-        for boss, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
-                    self.freddy.health -= 1
-                    if self.freddy.health <=0:
-                        self.freddy.kill()
-                        pygame.quit()
+                        # Call the game win function to handle the win condition 
+                        self.game_win()
+
+        #for boss, temp_rect in temp_collision_rects:
+                #if self.freddy.rect.colliderect(temp_rect):
+                    #self.freddy.health -= 1
+                    #if self.freddy.health <=0:
+                        #self.freddy.kill()
+                        #self.game_over()
         
         #Update and draw player
         self.freddy.update(keys)
