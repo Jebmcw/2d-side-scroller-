@@ -63,11 +63,19 @@ class Start:
         self.menu = Menu(self.display, self.gameStateManager)
 
     def run(self):
-        self.display.fill('red')
+        # Initialize the loadingscreen attribute
+        self.loadingscreen = None
+        self.loadingscreen = pygame.image.load(r"Main\Level1_Img\backgrounds\loading_screen.png")
+        # Get the dimensions of the display
+        screen_width, screen_height = self.display.get_size()
+        # Resize the image to fit the screen dimensions
+        self.loadingscreen = pygame.transform.scale(self.loadingscreen, (screen_width, screen_height))
+        self.display.blit(self.loadingscreen, (0, 0))
         text_surface = self.font.render('Press E to start', True, (255, 255, 255))  # Render white text
         text_rect = text_surface.get_rect(center=(750, 300))  # Position the text in the center
         self.display.blit(text_surface, text_rect)
-        
+        pygame.display.update()
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_e]:
             self.gameStateManager.set_state('level1')
