@@ -12,6 +12,7 @@ class Player(pygame.sprite.Sprite):
         imageChoice = 1
         current_path = os.path.dirname('assets')
         self.sprites = []
+        self.death = []
         #Load image file path
         if imageChoice == 1:
             self.image = pygame.image.load('assets/main_character.png').convert_alpha()
@@ -20,10 +21,11 @@ class Player(pygame.sprite.Sprite):
             self.sprites.append(pygame.image.load('assets/main_char_walk_3.png').convert_alpha())
             self.sprites.append(pygame.image.load('assets/main_char_walk_4.png').convert_alpha())
             self.sprites.append(pygame.image.load('assets/main_char_walk_5.png').convert_alpha())
-            
+        
         elif imageChoice == 2:
             self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
-            
+        
+        self.death.append(pygame.image.load('assets/main_char_death.png').convert_alpha())    
         self.current_frame = 0
         self.image = self.sprites[self.current_frame]    
         #self.rect = self.image.get_rect()
@@ -157,3 +159,5 @@ class Player(pygame.sprite.Sprite):
             # If moving, update position
             # Your movement logic here
             pass
+        if self.health == 5:
+            self.image = self.death[0]
