@@ -28,8 +28,8 @@ class Sword():
         self.SwordFrame = 0
         
     def update(self,keys):
-        sword_x_offset = -15  # Adjust so the sword appears correctly relative to Freddy
-        sword_y_offset = 10  # Adjust based on your game's needs
+        sword_x_offset = 25  # Adjust so the sword appears correctly relative to Freddy
+        sword_y_offset = 30  # Adjust based on your game's needs
         
         self.rect.x = self.freddy.rect.x + sword_x_offset
         self.rect.y = self.freddy.rect.y + sword_y_offset
@@ -42,8 +42,8 @@ class Sword():
                 self.display.blit(self.sword_img2, (self.rect.x, self.rect.y))
                 self.SwordFrame +=1 
             else:
-                sword_x_offset = -30
-                sword_y_offset = -30
+                sword_x_offset = 5
+                sword_y_offset = -10
                 self.rect.x = self.freddy.rect.x + sword_x_offset
                 self.rect.y = self.freddy.rect.y + sword_y_offset
                 self.SwordFrame +=1
