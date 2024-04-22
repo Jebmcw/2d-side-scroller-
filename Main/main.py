@@ -65,7 +65,7 @@ class Start:
     def run(self):
         # Initialize the loadingscreen attribute
         self.loadingscreen = None
-        self.loadingscreen = pygame.image.load(r"Main\Level1_Img\backgrounds\loading_screen.png")
+        self.loadingscreen = pygame.image.load(r"Main/Level1_Img/backgrounds/loading_screen.png")
         # Get the dimensions of the display
         screen_width, screen_height = self.display.get_size()
         # Resize the image to fit the screen dimensions
