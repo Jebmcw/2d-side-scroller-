@@ -33,10 +33,11 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+                    # Toggle pause state when escape is pressed, space now for fireballsa
+                    if event.key == pygame.K_ESCAPE:
                         self.paused = not self.paused
                         if self.paused:
-                            print("Game paused. Press Space to resume.")
+                            print("Game paused. Press 'Escape' to resume.")
                         else:
                             print("Game resumed.")
                     elif event.key == pygame.K_o:  # Switch to options menu
@@ -84,7 +85,7 @@ class Start:
             self.menu.main_menu()
         elif self.gameStateManager.get_state() == 'level1':
             # Logic for starting level 1
-            pass
+            #pass
  
                       
 class GameStateManager:
