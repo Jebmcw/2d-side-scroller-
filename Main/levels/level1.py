@@ -284,7 +284,7 @@ class Level1:
             boss_temp_collision_rects.append((boss, temp_rects))
          
         #Spawn power Up once, then update until acquired or off left side of screen
-        if self.score >= 150 and self.spawnFire == False and self.despawnFire == False:
+        if self.score >= 200 and self.spawnFire == False and self.despawnFire == False:
             self.powerUp_rect.x = 1300
             self.powerUp_rect.y = 420
             self.bounceVel = 3
