@@ -3,6 +3,7 @@ import time
 import os
 import sys
 import random
+from game_lose import game_lose
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
@@ -357,6 +358,7 @@ class Level1:
                     self.freddy.health -= 10
                     if self.freddy.health <=0:
                         self.freddy.kill()
+                        game_lose('Main/music/xDeviruchi - The Final of The Fantasy.wav')
                         self.game_over() # Game over when health is depleted
                         
          
