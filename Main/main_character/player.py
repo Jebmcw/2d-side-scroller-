@@ -206,6 +206,13 @@ class Player(pygame.sprite.Sprite):
     def heatUp(self):
         self.flameOn = True
         self.animatePU = True
+
+        #loop the animation
+        #count clock ticks
+        #ticks used to animate, and should be subtracted form official game clock.
+        
+
+
         # #animate power up with game frozen
             # if self.level1.freddy.animatePU == True:
             #     #Update player position and skin in a loop
