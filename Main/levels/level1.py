@@ -3,7 +3,7 @@ import time
 import os
 import sys
 import random
-from game_lose import game_lose
+from game_lose import game_lose, win_music
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
@@ -449,6 +449,7 @@ class Level1:
                         # If so, kill the mob
                         boss.kill()
                         # Call the game win function to handle the win condition 
+                        win_music('Main/music/xDeviruchi - Take some rest and eat some food!.wav')
                         self.game_win()
                         
             for mob, temp_rect in temp_collision_rects:
