@@ -84,8 +84,8 @@ class Start:
         if self.gameStateManager.get_state() == 'menu':
             self.menu.main_menu()
         elif self.gameStateManager.get_state() == 'level1':
-            # Logic for starting level 1
-            #pass
+            
+            pass
  
                       
 class GameStateManager:
