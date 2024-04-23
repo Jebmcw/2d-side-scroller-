@@ -84,6 +84,12 @@ class Level1:
         self.spawnFire = False
         self.despawnFire = False
 
+        self.apple = pygame.image.load('assets/apple.png').convert_alpha()
+        self.apple_img = pygame.transform.scale(self.apple, (80,80))
+        self.spawnApple = False
+        self.despawnApple= False
+        self.apple_rect = self.apple_img.get_rect()
+        self.appleFrame = 0
         
     def spawn_mobs(self):
         
@@ -133,7 +139,7 @@ class Level1:
         
 
         if self.spawn_intervals[self.spawn_index] == 8:
-            dynamic_offset = 10000
+            dynamic_offset = 8000
             boss_to_add = Boss.spawn_boss_horizontally(self.display, 1, 500, 50, dynamic_offset)
             self.boss.add(boss_to_add)
             
@@ -192,7 +198,7 @@ class Level1:
 
         # Reset player attributes
         self.freddy = Player.spawnPlayer(self.display, 1, 300, 390)
-        self.freddy.health = 500  # Reset health
+        self.freddy.health = 800  # Reset health
         self.freddy.rect.x = 300  # Reset position
         self.freddy.rect.y = 390
         self.freddy.current_frame = 0  # Reset animation frame
@@ -204,6 +210,10 @@ class Level1:
         self.next_spawn_time = self.spawn_intervals[0]
         self.some_additional_offset = 100
 
+        self.sword = Sword(self.display,self.freddy)
+        
+        
+        
         self.run()  # Restart the game loop if necessary
   
     def gettingFired(self):
@@ -344,6 +354,29 @@ class Level1:
             self.fireGrav = 1
             self.spawnFire = True
         
+        
+        if self.score >=300 and self.spawnApple == False and self.despawnApple == False:
+            self.apple_rect.x= 1300
+            self.apple_rect.y = 410
+            self.spawnApple = True
+            
+       
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:   
+            self.apple_rect.x += 5
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            self.apple_rect.x -= 5     
+         
+        if self.spawnApple:
+            if -50 >=self.apple_rect.x:
+                self.spawnApple = False
+                self.despawnApple = True
+                
+                
+        if self.freddy.rect.colliderect(self.apple_rect) and self.despawnApple!= True:
+                self.despawnApple = True
+                self.spawnApple = False   
+                self.freddy.health +=200 
+                
         if self.spawnFire:
             #once fire is off screen's left side, despawn.
             if -50 >= self.powerUp_rect.x:
@@ -370,13 +403,16 @@ class Level1:
             if self.fireFrame == 40:    
                 self.fireFrame = 0
                 self.powerUp_rect.y = 420
+                
                     
-            #scroll with bg        
-            if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-                self.powerUp_rect.x += 5
+            #scroll with bg  
+            if keys[pygame.K_LEFT] or keys[pygame.K_a]:   
+               self.powerUp_rect.x += 5
             if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
                 self.powerUp_rect.x -= 5
             
+            
+                
             if self.freddy.rect.colliderect(self.powerUp_rect):
                 self.despawnFire = True
                 self.spawnFire = False
@@ -389,7 +425,7 @@ class Level1:
             for mob, temp_rect in temp_collision_rects:
                 if self.sword.rect.colliderect(temp_rect):
                     mob.health -= 2
-                    mob.speed_x+=.09
+                    mob.speed_x+=.01
                     if mob.health == 2:
                         mob.kill()
                         self.score+=50        
@@ -472,6 +508,8 @@ class Level1:
             for whizbang in self.freddy.projectiles:
                 self.display.blit(whizbang.fires[whizbang.current_image], (whizbang.rect.x, whizbang.rect.y))
 
+        if self.spawnApple:
+            self.display.blit(self.apple_img, (self.apple_rect.x, self.apple_rect.y))
             
         
         #????is this for the boss fight?
@@ -519,4 +557,3 @@ class Level1:
         text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
         text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
         self.display.blit(text_surface, text_rect)     
-        
