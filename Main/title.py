@@ -9,7 +9,7 @@ class Menu:
         self.font_path = "assets/Gothic Pixels.ttf"  # Update this path as needed
         self.gameStateManager = gameStateManager
         # Load the selector image once here
-        self.selector_img = pygame.image.load("assets\Selectors.png")
+        self.selector_img = pygame.image.load("assets/Selectors.png")
         self.selector_img_2 = pygame.image.load("assets/Selector_2.png")
     def get_font(self, size):  # Helper method to load fonts
         return pygame.font.Font(self.font_path, size)
