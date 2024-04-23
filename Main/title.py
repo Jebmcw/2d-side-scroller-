@@ -6,7 +6,7 @@ class Menu:
     def __init__(self, screen,gameStateManager):
         self.screen = screen
         self.bg = pygame.image.load("assets/background.png")
-        self.font_path = "assets/font.ttf"  # Update this path as needed
+        self.font_path = "assets/Gothic Pixels.ttf"  # Update this path as needed
         self.gameStateManager = gameStateManager
         # Load the selector image once here
         self.selector_img = pygame.image.load("assets\Selectors.png")
