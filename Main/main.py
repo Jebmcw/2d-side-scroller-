@@ -14,6 +14,7 @@ class Game:
         pygame.init()
         self.screen = pygame.display.set_mode((1500,600), pygame.SRCALPHA)
         self.clock = pygame.time.Clock()
+        self.running = True
         
         self.gameStateManager = GameStateManager('menu')
         self.menu = Menu(self.screen, self.gameStateManager)
@@ -27,7 +28,7 @@ class Game:
         self.paused = False  # Add this line to track pause state
 
     def run(self):
-        while True:
+        while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -50,7 +51,12 @@ class Game:
                 elif current_state == 'options':  # Run options menu
                     self.options.run()
                 else:
-                    self.states[current_state].run()
+                    if self.level1.heatUp == True:
+                        self.level1.gettingFired()
+                    else:
+                        self.states[current_state].run()
+            
+
 
             pygame.display.update()
             self.clock.tick(FPS)

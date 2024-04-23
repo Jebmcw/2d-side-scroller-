@@ -40,7 +40,8 @@ class Level1:
         self.text_box_end_time = 10  # Stop displaying the text box 6 seconds into the game
         self.text_displayed = False  # Flag
 
-        
+        self.animateIterate = 80
+        self.heatUp = False
         
         self.text_boss_start_time = 55
         self.text_boss_end_time = 60
@@ -205,6 +206,58 @@ class Level1:
 
         self.run()  # Restart the game loop if necessary
   
+    def gettingFired(self):
+        self.display.fill((0,0,0))
+        pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))
+        #subtract the time spent animating from the game clock.
+        #elapsed time
+        font = pygame.font.SysFont('Times New Roman',30)
+        text_color = (255,255,255)
+        text_surface = font.render('Flame On!', True, text_color)
+        self.display.blit(text_surface, (0,10))
+
+        if self.animateIterate >= 70:
+            self.freddy.rect.x += 2
+            self.freddy.rect.y -= 3
+            self.freddy.image = self.freddy.greenSprites[0]
+        elif self.animateIterate >= 60:
+            self.freddy.rect.x += 2
+            self.freddy.rect.y -= 3
+            self.freddy.image = self.freddy.redSprites[0]
+        elif self.animateIterate >= 50:
+            self.freddy.rect.x += 2
+            self.freddy.rect.y -= 3
+            self.freddy.image = self.freddy.greenSprites[0]
+        elif self.animateIterate >= 40:
+            self.freddy.rect.x += 2
+            self.freddy.rect.y -= 3
+            self.freddy.image = self.freddy.redSprites[0]
+        elif self.animateIterate >= 35:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.death[1]
+        elif self.animateIterate >= 30:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.death[1]
+        elif self.animateIterate >= 20:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.redSprites[0]
+        elif self.animateIterate >= 10:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.greenSprites[0]
+        else:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.redSprites[0]
+        self.animateIterate -= 1
+        self.display.blit(self.freddy.image, (self.freddy.rect.x - 25, self.freddy.rect.y - 15))
+        if self.animateIterate == 0:
+            self.heatUp = False
+
+
 
     def run(self):
         self.display.fill((0, 0, 0))
@@ -328,7 +381,7 @@ class Level1:
                 self.despawnFire = True
                 self.spawnFire = False
                 self.freddy.heatUp()
-                #Collision detection between Freddy and Power Up    
+                self.heatUp = True    
 
         self.sword.update(keys) 
         
