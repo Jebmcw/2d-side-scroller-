@@ -236,7 +236,10 @@ class Level1:
             self.jump = 0
             self.jumpCount = 0
             self.freddy.rect.y = self.freddy.initial_y
-        self.freddy.update(keys)
+        if not self.freddy.flameOn:
+            self.freddy.update(keys)
+        else:
+            self.freddy.updateRed(keys)
             
 
         #Mob spawning
@@ -402,25 +405,7 @@ class Level1:
                     if mob.health == 2:
                         mob.kill()
                         self.score+=50        
-                        
-                        
-                        
-        #for boss, temp_rect in temp_collision_rects:
-                #if self.freddy.rect.colliderect(temp_rect):
-                    #self.freddy.health -= 1
-                    #if self.freddy.health <=0:
-                        #self.freddy.kill()
-                        #self.game_over()
         
-        #Update and draw player
-        self.freddy.update(keys)
-        if self.jump == 1:
-            self.freddy.jump()
-            self.jumpCount += 1
-        if self.jumpCount >= 60:
-            self.jump = 0
-            self.jumpCount = 0
-            self.freddy.rect.y = self.freddy.initial_y
 
         #Draw player and hit-box     
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 25, self.freddy.rect.y - 15))

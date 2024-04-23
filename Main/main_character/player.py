@@ -9,24 +9,30 @@ class Player(pygame.sprite.Sprite):
         
         #Freddy sprite images loading...
         skin = imageChoice
-        self.sprites = []
+        self.redSprites = []
+        self.greenSprites = []
         current_path = os.path.dirname('assets')
         self.death = []
         #Load image file path
-        if skin == 1:
-            self.image = pygame.image.load('assets/main_character.png').convert_alpha()
-            self.sprites.append(pygame.image.load('assets/main_char_walk_1.png').convert_alpha())
-            self.sprites.append(pygame.image.load('assets/main_char_walk_2.png').convert_alpha())
-            self.sprites.append(pygame.image.load('assets/main_char_walk_3.png').convert_alpha())
-            self.sprites.append(pygame.image.load('assets/main_char_walk_4.png').convert_alpha())
-            self.sprites.append(pygame.image.load('assets/main_char_walk_5.png').convert_alpha())
-        elif skin == 2:
-            self.image = pygame.image.load('assets/main character 2nd option.png').convert_alpha()
+        #if skin == 1:
+        #self.image = pygame.image.load('assets/main_character.png').convert_alpha()
+        self.redSprites.append(pygame.image.load('assets/main_char_walk_1.png').convert_alpha())
+        self.redSprites.append(pygame.image.load('assets/main_char_walk_2.png').convert_alpha())
+        self.redSprites.append(pygame.image.load('assets/main_char_walk_3.png').convert_alpha())
+        self.redSprites.append(pygame.image.load('assets/main_char_walk_4.png').convert_alpha())
+        self.redSprites.append(pygame.image.load('assets/main_char_walk_5.png').convert_alpha())
+        #elif skin == 2:
+        self.greenSprites.append(pygame.image.load('assets/greenFreddy01.png').convert_alpha())
+        self.greenSprites.append(pygame.image.load('assets/greenFreddy02.png').convert_alpha())
+        self.greenSprites.append(pygame.image.load('assets/greenFreddy03.png').convert_alpha())
+        self.greenSprites.append(pygame.image.load('assets/greenFreddy04.png').convert_alpha())
+        self.greenSprites.append(pygame.image.load('assets/greenFreddy05.png').convert_alpha())
             
-        self.death.append(pygame.image.load('assets/main_char_death.png').convert_alpha())    
+        self.death.append(pygame.image.load('assets/main_char_death.png').convert_alpha()) 
+        self.death.append(pygame.image.load('assets/greenFreddyDead.png').convert_alpha())   
         
         self.current_frame = 0
-        self.image = self.sprites[self.current_frame]
+        self.image = self.greenSprites[self.current_frame]
 
         #Initialize custom player rectangle
         scaled_rect_width = 39
@@ -145,7 +151,7 @@ class Player(pygame.sprite.Sprite):
             self.animation_timer = pygame.time.get_ticks()
             if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_d]:
                 # If moving, update animation
-                self.current_frame = (self.current_frame + 1) % len(self.sprites)
+                self.current_frame = (self.current_frame + 1) % len(self.greenSprites)
                 if self.current_frame == 0:
                     self.current_frame = 1  # Skip frame 0
 
@@ -154,27 +160,47 @@ class Player(pygame.sprite.Sprite):
 
             # Update the image according to the current frame
             if keys_pressed[pygame.K_a]:
-                self.image = pygame.transform.flip(self.sprites[self.current_frame], True, False)
+                self.image = pygame.transform.flip(self.greenSprites[self.current_frame], True, False)
                 self.facingRight = False
             else:
-                self.image = self.sprites[self.current_frame]
+                self.image = self.greenSprites[self.current_frame]
                 self.facingRight = True
+        
+
+    def updateRed(self, keys_pressed):
+    # Check for movement
+        if pygame.time.get_ticks() - self.animation_timer > self.animation_delay:
+            self.animation_timer = pygame.time.get_ticks()
+            if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_d]:
+                # If moving, update animation
+                self.current_frame = (self.current_frame + 1) % len(self.redSprites)
+                if self.current_frame == 0:
+                    self.current_frame = 1  # Skip frame 0
+
+            else:
+                self.current_frame = 0  # Set current frame to 0 when not moving
+
+            # Update the image according to the current frame
+            if keys_pressed[pygame.K_a]:
+                self.image = pygame.transform.flip(self.redSprites[self.current_frame], True, False)
+                self.facingRight = False
+            else:
+                self.image = self.redSprites[self.current_frame]
+                self.facingRight = True
+
         #append fireballs to projectiles list        
-        if self.flameOn:
-            self.fireBuffer -= 1
-            if keys_pressed[pygame.K_SPACE] and self.fireBuffer <= 0:
-                self.projectiles.append(Fireball(self.rect.x + 15, self.rect.y + 40, self.facingRight))
-                self.fireBuffer = 20
-            
-            #Freddy is updated, so spawn the fireball at his pos
-            #shoot fireball:    
-            if self.projectiles:
-                #update fireball object every frame
-                for whizbang in self.projectiles[:]:
-                    whizbang.update()
-                    if whizbang.rect.x <= -16 or whizbang.rect.x >= 1500 or whizbang.state == -2:
-                        self.projectiles.remove(whizbang)
-                    #check for colissions with mobs in level1 file
+        self.fireBuffer -= 1
+        if keys_pressed[pygame.K_SPACE] and self.fireBuffer <= 0:
+            self.projectiles.append(Fireball(self.rect.x + 15, self.rect.y + 40, self.facingRight))
+            self.fireBuffer = 20
+        #Freddy is updated, so spawn the fireball at his pos
+        #shoot fireball:    
+        if self.projectiles:
+            #update fireball object every frame
+            for whizbang in self.projectiles[:]:
+                whizbang.update()
+                if whizbang.rect.x <= -16 or whizbang.rect.x >= 1500 or whizbang.state == -2:
+                    self.projectiles.remove(whizbang)
                     
 
     def heatUp(self):
