@@ -3,6 +3,7 @@ import time
 import os
 import sys
 import random
+from game_lose import game_lose
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
@@ -14,26 +15,27 @@ from weapons.fireball import Fireball
 from weapons.sword import Sword
 from .win_lose_conditions import game_over, game_win
 
-
+#published to github
 class Level1:
     def __init__(self, display, gameStateManager):
+
         self.display = display
         self.gameStateManager = gameStateManager
-
-        
-        self.mobs = pygame.sprite.Group()  # Corrected from a list to a sprite group
-        self.boss = pygame.sprite.Group()
         # Initialize Background with the display
         self.bg = Background(self.display)
         
-        self.lines = "In a mystical realm, a hero embarks \non a quest to recover ancient artifacts,\n battling foes and unraveling mysteries\n to restore harmony to the land."
+        self.mobs = pygame.sprite.Group()
+        self.boss = pygame.sprite.Group()
+        
         # Frame rate and timing for spawns
         self.start_time = time.time()
         self.spawn_intervals = [3, 5, 6, 9, 10, 8] # seconds between spawns
         self.next_spawn_time = self.spawn_intervals[0]
         self.spawn_index = 0
+        self.some_additional_offset = 100
         
-         # Timing for text box display
+        # Timing for text box display
+        self.lines = "In a mystical realm, a hero embarks \non a quest to recover ancient artifacts,\n battling foes and unraveling mysteries\n to restore harmony to the land."
         self.text_box_start_time = 1  # Displaying the text box 1 second into the game
         self.text_box_end_time = 10  # Stop displaying the text box 6 seconds into the game
         self.text_displayed = False  # Flag
@@ -48,23 +50,23 @@ class Level1:
         #audio for the text
         self.audio_start_time = self.text_box_start_time
         self.audio_end_time = self.text_box_end_time
-        
         self.audio_displayed = False  
 
-        current_path = os.path.dirname(__file__)
+        # Boss text
+        self.bossFightTextShown = False
+
         # Initialize the TileMap
         csv_file_path = "Main/levels/platforms/level 1 tile map.csv"
         self.tile_map = TileMap(csv_file_path, tile_size=32)  # Adjust as needed
 
-        #initialize main character pos and jumps
+        #initialize main character, pos, and jump variables
         self.jumpCount = 0
         self.jump = 0
         self.player_x = 300
         self.player_y = 395
         self.alive = True
-        
-        self.freddy = Player.spawnPlayer(self.display, 2, 300, 390)
-        print('freddy dimensions: ', self.freddy.rect.width, ', ', self.freddy.rect.height)
+        self.freddy = Player.spawnPlayer(self.display, 1, 300, 390)
+        self.score = 0
        
         self.sword = Sword(display,self.freddy)
         #initialize power up fireball to collect
@@ -74,23 +76,13 @@ class Level1:
         
         self.powerUp_img1 = pygame.transform.scale(self.powerUp_img, (self.scaled_width, self.scaled_height))
         self.powerUp_rect = self.powerUp_img1.get_rect()
-        print('Power Up dimensions: ', self.powerUp_rect.width, ',', self.powerUp_rect.height)
-        self.powerUp_img2 = pygame.transform.flip(self.powerUp_img1,0, 90)
-        self.powerUp_img3 = pygame.transform.flip(self.powerUp_img1,90,90)
-        self.powerUp_img4 = pygame.transform.flip(self.powerUp_img1,90,0)
+        self.powerUp_img2 = pygame.transform.rotate(self.powerUp_img1,-90)
+        self.powerUp_img3 = pygame.transform.rotate(self.powerUp_img2,-90)
+        self.powerUp_img4 = pygame.transform.rotate(self.powerUp_img3,-90)
         self.fireFrame = 0
-        
-        
-        # Original dimensions of the image
-        # original_width, original_height = self.powerUp_img.get_width(), self.powerUp_img.get_height()
-        # print(original_width, ", ", original_height, '\n')
-        # Scale the image
+        self.spawnFire = False
+        self.despawnFire = False
 
-        self.some_additional_offset = 100
-
-        self.bossFightTextShown = False
-        
-        self.score = 0
         
     def spawn_mobs(self):
         
@@ -149,7 +141,6 @@ class Level1:
     #def spawn_powerUp(self):
         #make the png a sprite and scale and blit to screen
                 
-                      
             
     def update_timer(self):
         self.font = pygame.font.Font(None, 36)
@@ -220,13 +211,9 @@ class Level1:
         pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))  # Draw a red rectangle
         self.tile_map.draw(self.display)
         current_time = time.time()
-        #total time since instance of lvl1 was initialized
+        #total time since instance of lvl1 was initialized #make clock stop when paused in game
         elapsed_time = current_time - self.start_time
         game_elapsed_time = current_time - self.start_time
-
-
-        keys=pygame.key.get_pressed()
-        self.freddy.update(keys)
         
         # Draw the background first
         self.bg.draw_bg()
@@ -237,17 +224,26 @@ class Level1:
         text_surface = font.render('Freddy World', True, text_color)
         self.display.blit(text_surface, (0,10))
        
-
-        #Jump button is 'w':
+        #Events
+        keys=pygame.key.get_pressed()
         if keys[pygame.K_w] and self.player_y == 395:
-            #print('jump')
             self.jump = 1
+        #Handle jump    
+        if self.jump == 1:
+            self.freddy.jump()
+            self.jumpCount += 1
+        if self.jumpCount >= 60:
+            self.jump = 0
+            self.jumpCount = 0
+            self.freddy.rect.y = self.freddy.initial_y
+        if not self.freddy.flameOn:
+            self.freddy.update(keys)
+        else:
+            self.freddy.updateRed(keys)
+            
 
-        #Timed spawning only works with infinite scroll and infinite scroll doesn't work bc?
-            #coordinate spawning would be easier to plan and level would have a set duration till boss fight.
-            #less group list creation would be necessary --> cleaner code.    
+        #Mob spawning
         if elapsed_time >= self.next_spawn_time:
-            #self
             self.spawn_mobs()
             self.spawn_boss()  
             self.spawn_index +=1
@@ -287,11 +283,54 @@ class Level1:
             temp_rects = pygame.Rect(boss_world_x, boss.rect.y, boss.rect.width, boss.rect.height)
             boss_temp_collision_rects.append((boss, temp_rects))
          
-            
-          
-        keys = pygame.key.get_pressed()
-        self.sword.update(keys)   
+        #Spawn power Up once, then update until acquired or off left side of screen
+        if self.score >= 150 and self.spawnFire == False and self.despawnFire == False:
+            self.powerUp_rect.x = 1300
+            self.powerUp_rect.y = 420
+            self.bounceVel = 3
+            self.fireGrav = 1
+            self.spawnFire = True
         
+        if self.spawnFire:
+            #once fire is off screen's left side, despawn.
+            if -50 >= self.powerUp_rect.x:
+                self.spawnFire = False
+            #image swirl  
+                self.despawnFire = True
+            self.swirl = self.fireFrame//5  
+            if self.swirl == 0 or self.swirl == 4:
+                self.powerUp_img = self.powerUp_img1
+
+                self.powerUp_rect.y -= self.bounceVel
+            elif self.swirl == 1 or self.swirl == 5:
+                self.powerUp_img = self.powerUp_img2
+                self.powerUp_rect.y -= self.bounceVel-1
+
+            elif self.swirl == 2 or self.swirl == 6:
+                self.powerUp_img = self.powerUp_img3
+                
+            elif self.swirl == 3 or self.swirl == 7:
+                self.powerUp_img = self.powerUp_img4
+                self.powerUp_rect.y += self.fireGrav
+            self.fireFrame += 1
+            self.powerUp_rect.y += self.fireGrav
+            if self.fireFrame == 40:    
+                self.fireFrame = 0
+                self.powerUp_rect.y = 420
+                    
+            #scroll with bg        
+            if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+                self.powerUp_rect.x += 5
+            if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+                self.powerUp_rect.x -= 5
+            
+            if self.freddy.rect.colliderect(self.powerUp_rect):
+                self.despawnFire = True
+                self.spawnFire = False
+                self.freddy.heatUp()
+                #Collision detection between Freddy and Power Up    
+
+        self.sword.update(keys) 
         
         if keys[pygame.K_LSHIFT]:
             for mob, temp_rect in temp_collision_rects:
@@ -301,20 +340,33 @@ class Level1:
                     if mob.health == 2:
                         mob.kill()
                         self.score+=50        
+
+        #Collision detection between fireballs and mobs
+        if self.freddy.flameOn:
+            for mob, temp_rect in temp_collision_rects:
+                for whizbang in self.freddy.projectiles:
+                    if whizbang.rect.colliderect(temp_rect):
+                        mob.health -= 0.5
+                        if whizbang.state == 0:
+                            whizbang.start_boom()
+                        if mob.health <= 5:
+                            mob.kill()
+                            self.score+=50
+
                         
         for mob, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
-                    self.freddy.health -= 10
-                    if self.freddy.health <=0:
-                        self.freddy.kill()
-                        self.game_over() # Game over when health is depleted
-                        
+            if self.freddy.rect.colliderect(temp_rect):
+                self.freddy.health -= 10
+                if self.freddy.health <=0:
+                    self.freddy.kill()
+                    game_lose('Main/music/xDeviruchi - The Final of The Fantasy.wav')
+                    self.game_over() # Game over when health is depleted
+                    
          
         score_text = f"Freddy Health: {self.freddy.health}"
         text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
         text_rect = text_surface.get_rect(topright=(850, 50))  # Position it at the top right
         self.display.blit(text_surface, text_rect) 
-        
 
         for boss, temp_rects in boss_temp_collision_rects:
             if self.sword.rect.colliderect(temp_rects):
@@ -353,60 +405,23 @@ class Level1:
                     if mob.health == 2:
                         mob.kill()
                         self.score+=50        
-                        
-                        
-                        
-        #for boss, temp_rect in temp_collision_rects:
-                #if self.freddy.rect.colliderect(temp_rect):
-                    #self.freddy.health -= 1
-                    #if self.freddy.health <=0:
-                        #self.freddy.kill()
-                        #self.game_over()
         
-        #Update and draw player
-        self.freddy.update(keys)
-        if self.jump == 1:
-            self.freddy.jump()
-            self.jumpCount += 1
-        if self.jumpCount >= 60:
-            self.jump = 0
-            self.jumpCount = 0
-            self.freddy.rect.y = self.freddy.initial_y
 
-        #Freddy is updated, so spawn the fireball at his pos
-            #shoot fireball    
-        if keys[pygame.K_f]:
-            #spawn fireball into player projectile list
-            #update fireball sprite every frame
-            #apply gravity until it hits the ground and then make it bounce twice
-            #explodes on third bounce or collision
-            #remove fireball from the projectiles list
-            self.freddy.projectiles.append(Fireball(350, self.freddy.rect.y, True))
-            if self.fireFrame <= 20:
-                self.display.blit(self.powerUp_img1, (350, self.freddy.rect.y))
-                self.fireFrame += 1
-            elif self.fireFrame <= 40:
-                self.display.blit(self.powerUp_img2, (350, self.freddy.rect.y))
-                self.fireFrame += 1
-            elif self.fireFrame <= 60:
-                self.display.blit(self.powerUp_img3, (350, self.freddy.rect.y))
-                self.fireFrame += 1
-            else:
-                self.fireFrame += 1
-                self.display.blit(self.powerUp_img4, (350, self.freddy.rect.y))
-                if self.fireFrame == 80:    
-                    self.fireFrame = 0
-
-        
-             
+        #Draw player and hit-box     
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 25, self.freddy.rect.y - 15))
         pygame.draw.rect(self.display, (0, 255, 0), self.freddy.rect, 2)
         Player.draw_health_bar_player(self.display, self.freddy,100)
+        #Draw fireballs
+        if self.spawnFire:
+            self.display.blit(self.powerUp_img, (self.powerUp_rect.x, self.powerUp_rect.y))
+        if self.freddy.flameOn:
+            for whizbang in self.freddy.projectiles:
+                self.display.blit(whizbang.fires[whizbang.current_image], (whizbang.rect.x, whizbang.rect.y))
+
+            
         
-        
-        
+        #????is this for the boss fight?
         if self.bg.scroll == 10000:
-            keys = pygame.key.get_pressed()
             self.freddy.player_movements(keys)
         
         
@@ -450,3 +465,4 @@ class Level1:
         text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
         text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
         self.display.blit(text_surface, text_rect)     
+        
