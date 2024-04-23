@@ -3,7 +3,7 @@ import sys
 
 def game_over(screen):
     clock = pygame.time.Clock()
-    font = pygame.font.SysFont('Arial', 36)
+    font = pygame.font.Font('assets/Gothic Pixels.ttf', 50)  # Updated to use custom font
     background = pygame.image.load('Main/Level1_Img/backgrounds/game_over_level1.png')  # Load the background image
     
     # Get the dimensions of the screen for centering text
@@ -30,8 +30,8 @@ def game_over(screen):
 
        # Instead of filling the screen with a solid color, blit the loaded background
         screen.blit(background, bg_rect.topleft)
-        text_restart = font.render('Press R to Restart', True, (255, 255, 255))
-        text_quit = font.render('Press Q to Quit', True, (255, 255, 255))
+        text_restart = font.render('Press R to Restart', True, (139, 0, 0))
+        text_quit = font.render('Press Q to Quit', True, (139, 0, 0))
         
         # Calculate the text's position to center it horizontally and adjust the vertical position
         restart_rect = text_restart.get_rect(center=(screen.get_width() / 2, vertical_offset))
@@ -45,7 +45,7 @@ def game_over(screen):
 
 def game_win(screen):
     clock = pygame.time.Clock()
-    font = pygame.font.SysFont('Arial', 50)  # Slightly larger font for the win message
+    font = pygame.font.Font('assets/Gothic Pixels.ttf', 50)  # Updated to use custom font  # Slightly larger font for the win message
     background = pygame.image.load('Main/Level1_Img/backgrounds/win_level1.png')
 
     # Get the dimensions of the screen for centering text and scaling the image

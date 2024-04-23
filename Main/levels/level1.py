@@ -3,7 +3,7 @@ import time
 import os
 import sys
 import random
-from game_lose import game_lose
+from game_lose import game_lose, win_music
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
@@ -40,7 +40,8 @@ class Level1:
         self.text_box_end_time = 10  # Stop displaying the text box 6 seconds into the game
         self.text_displayed = False  # Flag
 
-        
+        self.animateIterate = 80
+        self.heatUp = False
         
         self.text_boss_start_time = 55
         self.text_boss_end_time = 60
@@ -205,6 +206,58 @@ class Level1:
 
         self.run()  # Restart the game loop if necessary
   
+    def gettingFired(self):
+        self.display.fill((0,0,0))
+        pygame.draw.rect(self.display, (255, 0, 0), (50, 50, 100, 100))
+        #subtract the time spent animating from the game clock.
+        #elapsed time
+        font = pygame.font.SysFont('Times New Roman',30)
+        text_color = (255,255,255)
+        text_surface = font.render('Flame On!', True, text_color)
+        self.display.blit(text_surface, (0,10))
+
+        if self.animateIterate >= 70:
+            self.freddy.rect.x += 2
+            self.freddy.rect.y -= 3
+            self.freddy.image = self.freddy.greenSprites[0]
+        elif self.animateIterate >= 60:
+            self.freddy.rect.x += 2
+            self.freddy.rect.y -= 3
+            self.freddy.image = self.freddy.redSprites[0]
+        elif self.animateIterate >= 50:
+            self.freddy.rect.x += 2
+            self.freddy.rect.y -= 3
+            self.freddy.image = self.freddy.greenSprites[0]
+        elif self.animateIterate >= 40:
+            self.freddy.rect.x += 2
+            self.freddy.rect.y -= 3
+            self.freddy.image = self.freddy.redSprites[0]
+        elif self.animateIterate >= 35:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.death[1]
+        elif self.animateIterate >= 30:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.death[1]
+        elif self.animateIterate >= 20:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.redSprites[0]
+        elif self.animateIterate >= 10:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.greenSprites[0]
+        else:
+            self.freddy.rect.x -= 2
+            self.freddy.rect.y += 3
+            self.freddy.image = self.freddy.redSprites[0]
+        self.animateIterate -= 1
+        self.display.blit(self.freddy.image, (self.freddy.rect.x - 25, self.freddy.rect.y - 15))
+        if self.animateIterate == 0:
+            self.heatUp = False
+
+
 
     def run(self):
         self.display.fill((0, 0, 0))
@@ -236,7 +289,10 @@ class Level1:
             self.jump = 0
             self.jumpCount = 0
             self.freddy.rect.y = self.freddy.initial_y
-        self.freddy.update(keys)
+        if not self.freddy.flameOn:
+            self.freddy.update(keys)
+        else:
+            self.freddy.updateRed(keys)
             
 
         #Mob spawning
@@ -281,7 +337,7 @@ class Level1:
             boss_temp_collision_rects.append((boss, temp_rects))
          
         #Spawn power Up once, then update until acquired or off left side of screen
-        if self.score >= 150 and self.spawnFire == False and self.despawnFire == False:
+        if self.score >= 200 and self.spawnFire == False and self.despawnFire == False:
             self.powerUp_rect.x = 1300
             self.powerUp_rect.y = 420
             self.bounceVel = 3
@@ -325,7 +381,7 @@ class Level1:
                 self.despawnFire = True
                 self.spawnFire = False
                 self.freddy.heatUp()
-                #Collision detection between Freddy and Power Up    
+                self.heatUp = True    
 
         self.sword.update(keys) 
         
@@ -393,6 +449,7 @@ class Level1:
                         # If so, kill the mob
                         boss.kill()
                         # Call the game win function to handle the win condition 
+                        win_music('Main/music/xDeviruchi - Take some rest and eat some food!.wav')
                         self.game_win()
                         
             for mob, temp_rect in temp_collision_rects:
@@ -402,25 +459,7 @@ class Level1:
                     if mob.health == 2:
                         mob.kill()
                         self.score+=50        
-                        
-                        
-                        
-        #for boss, temp_rect in temp_collision_rects:
-                #if self.freddy.rect.colliderect(temp_rect):
-                    #self.freddy.health -= 1
-                    #if self.freddy.health <=0:
-                        #self.freddy.kill()
-                        #self.game_over()
         
-        #Update and draw player
-        self.freddy.update(keys)
-        if self.jump == 1:
-            self.freddy.jump()
-            self.jumpCount += 1
-        if self.jumpCount >= 60:
-            self.jump = 0
-            self.jumpCount = 0
-            self.freddy.rect.y = self.freddy.initial_y
 
         #Draw player and hit-box     
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 25, self.freddy.rect.y - 15))
