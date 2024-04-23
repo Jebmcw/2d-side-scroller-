@@ -39,7 +39,7 @@ class Menu:
             self.screen.blit(self.bg, (0, 0))
             menu_mouse_pos = pygame.mouse.get_pos()
 
-            menu_text = self.get_font(100).render("MAIN MENU", True, "#b68f40")
+            menu_text = self.get_font(100).render("Freddy's World", True, "#b68f40")
             menu_rect = menu_text.get_rect(center=(750, 100))
             self.screen.blit(menu_text, menu_rect)
 
