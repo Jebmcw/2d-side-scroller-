@@ -15,7 +15,7 @@ from weapons.fireball import Fireball
 from weapons.sword import Sword
 from .win_lose_conditions import game_over, game_win
 
-
+#published to github
 class Level1:
     def __init__(self, display, gameStateManager):
 
@@ -351,14 +351,14 @@ class Level1:
                             self.score+=50
 
                         
-            for mob, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
-                    self.freddy.health -= 10
-                    if self.freddy.health <=0:
-                        self.freddy.kill()
-                        game_lose('Main/music/xDeviruchi - The Final of The Fantasy.wav')
-                        self.game_over() # Game over when health is depleted
-                        
+        for mob, temp_rect in temp_collision_rects:
+            if self.freddy.rect.colliderect(temp_rect):
+                self.freddy.health -= 10
+                if self.freddy.health <=0:
+                    self.freddy.kill()
+                    game_lose('Main/music/xDeviruchi - The Final of The Fantasy.wav')
+                    self.game_over() # Game over when health is depleted
+                    
          
         score_text = f"Freddy Health: {self.freddy.health}"
         text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
@@ -480,3 +480,4 @@ class Level1:
         text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
         text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
         self.display.blit(text_surface, text_rect)     
+        
