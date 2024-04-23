@@ -3,6 +3,7 @@ import time
 import os
 import sys
 import random
+from game_lose import game_lose
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
@@ -14,7 +15,7 @@ from weapons.fireball import Fireball
 from weapons.sword import Sword
 from .win_lose_conditions import game_over, game_win
 
-
+#published to github
 class Level1:
     def __init__(self, display, gameStateManager):
 
@@ -280,7 +281,7 @@ class Level1:
             boss_temp_collision_rects.append((boss, temp_rects))
          
         #Spawn power Up once, then update until acquired or off left side of screen
-        if self.score >= 50 and self.spawnFire == False and self.despawnFire == False:
+        if self.score >= 150 and self.spawnFire == False and self.despawnFire == False:
             self.powerUp_rect.x = 1300
             self.powerUp_rect.y = 420
             self.bounceVel = 3
@@ -320,9 +321,13 @@ class Level1:
             if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
                 self.powerUp_rect.x -= 5
             
-        self.sword.update(keys)   
-        keys = pygame.key.get_pressed()
-        
+            if self.freddy.rect.colliderect(self.powerUp_rect):
+                self.despawnFire = True
+                self.spawnFire = False
+                self.freddy.heatUp()
+                #Collision detection between Freddy and Power Up    
+
+        self.sword.update(keys) 
         
         if keys[pygame.K_LSHIFT]:
             for mob, temp_rect in temp_collision_rects:
@@ -332,6 +337,7 @@ class Level1:
                     if mob.health == 2:
                         mob.kill()
                         self.score+=50        
+
         #Collision detection between fireballs and mobs
         if self.freddy.flameOn:
             for mob, temp_rect in temp_collision_rects:
@@ -344,21 +350,15 @@ class Level1:
                             mob.kill()
                             self.score+=50
 
-                self.despawnFire = True
-                self.spawnFire = False
-                self.freddy.heatUp()
-            if self.freddy.rect.colliderect(self.powerUp_rect):
-        if self.spawnFire == True:
-        #Collision detection between Freddy and Power Up
-
                         
         for mob, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
-                    self.freddy.health -= 10
-                    if self.freddy.health <=0:
-                        self.freddy.kill()
-                        self.game_over() # Game over when health is depleted
-                        
+            if self.freddy.rect.colliderect(temp_rect):
+                self.freddy.health -= 10
+                if self.freddy.health <=0:
+                    self.freddy.kill()
+                    game_lose('Main/music/xDeviruchi - The Final of The Fantasy.wav')
+                    self.game_over() # Game over when health is depleted
+                    
          
         score_text = f"Freddy Health: {self.freddy.health}"
         text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
@@ -480,3 +480,4 @@ class Level1:
         text_surface = self.font.render(score_text, True, (255, 255, 255))  # White text
         text_rect = text_surface.get_rect(topright=(800, 20))  # Position it at the top right
         self.display.blit(text_surface, text_rect)     
+        
