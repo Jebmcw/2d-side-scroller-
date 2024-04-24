@@ -40,6 +40,7 @@ class Boss(pygame.sprite.Sprite):
         self.image = self.sprites[self.current_sprite]
         self.rect = self.image.get_rect()
         
+        
         # Set initial positions
         if initial_x is None:
             initial_x = screen_width // 10  # Start at the middle of the screen

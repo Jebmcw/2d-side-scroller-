@@ -3,7 +3,8 @@ import time
 import os
 import sys
 import random
-from game_lose import game_lose, win_music
+from game_lose import game_lose 
+from game_lose import win_music
 from levels.platforms.platforms import TileMap
 from levels.mobs.mobs_LevelOne import Mob
 from main_character.player import Player
@@ -441,15 +442,17 @@ class Level1:
                         if mob.health <= 5:
                             mob.kill()
                             self.score+=50
-            for boss, temp_rects in boss_temp_collision_rects:
-                for whizbang in self.freddy.projectiles:
-                    if whizbang.rect.colliderect(temp_rect):
-                        boss.health -= 10
-                        boss.speed_x-=.006
-                        if boss.health <= 2:
-                            boss.kill()
-                            print("You Won!!")
-                            self.game_win()
+            if self.bg.scroll >= 7000:                
+                for boss, temp_rects in boss_temp_collision_rects:
+                    for whizbang in self.freddy.projectiles:
+                        if whizbang.rect.colliderect(temp_rect):
+                            boss.health -= 10
+                            boss.speed_x-=.006
+                            if boss.health <= 2:
+                                boss.kill()
+                                print("You Won!!")
+                                win_music('Main/music/xDeviruchi - Take some rest and eat some food!.wav')
+                                self.game_win()
             
 
                         
@@ -474,6 +477,7 @@ class Level1:
                     if boss.health <= 2:
                         boss.kill()
                         print("You Won!!")
+                        win_music('Main/music/xDeviruchi - Take some rest and eat some food!.wav')
                         self.game_win()
                               
         for boss, temp_rects in boss_temp_collision_rects:
@@ -481,6 +485,7 @@ class Level1:
                     self.freddy.health -= 10
                     if self.freddy.health <=0:
                         self.freddy.kill()
+                        game_lose('Main/music/xDeviruchi - The Final of The Fantasy.wav')
                         self.game_over()   
                         
 
