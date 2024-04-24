@@ -222,9 +222,9 @@ class Level1:
         #subtract the time spent animating from the game clock.
         #elapsed time
         font = pygame.font.SysFont('Times New Roman',30)
-        text_color = (255,255,255)
+        text_color = 'orange'
         text_surface = font.render('Flame On!', True, text_color)
-        self.display.blit(text_surface, (0,10))
+        self.display.blit(text_surface, (10,10))
 
         if self.animateIterate >= 70:
             self.freddy.rect.x += 2
@@ -426,7 +426,7 @@ class Level1:
                 if self.sword.rect.colliderect(temp_rect):
                     mob.health -= 2
                     mob.speed_x+=.01
-                    if mob.health == 2:
+                    if mob.health <= 2:
                         mob.kill()
                         self.score+=50        
 
@@ -441,6 +441,16 @@ class Level1:
                         if mob.health <= 5:
                             mob.kill()
                             self.score+=50
+            for boss, temp_rects in boss_temp_collision_rects:
+                for whizbang in self.freddy.projectiles:
+                    if whizbang.rect.colliderect(temp_rect):
+                        boss.health -= 10
+                        boss.speed_x-=.006
+                        if boss.health <= 2:
+                            boss.kill()
+                            print("You Won!!")
+                            self.game_win()
+            
 
                         
         for mob, temp_rect in temp_collision_rects:
@@ -460,8 +470,8 @@ class Level1:
         for boss, temp_rects in boss_temp_collision_rects:
             if self.sword.rect.colliderect(temp_rects):
                     boss.health -= 2
-                    boss.speed_x+=.006
-                    if boss.health == 2:
+                    boss.speed_x+=.002
+                    if boss.health <= 2:
                         boss.kill()
                         print("You Won!!")
                         self.game_win()
@@ -473,29 +483,6 @@ class Level1:
                         self.freddy.kill()
                         self.game_over()   
                         
-        # Collision detection using temporary rects
-        if keys[pygame.K_f]:
-            
-            for boss, temp_rects in boss_temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rects):
-                    # Deduct health from the specific mob that was hit 
-                    boss.health -= 5
-                    # Check if the mob's health is 0 or less
-                    if boss.health <= 0:
-                        # If so, kill the mob
-                        boss.kill()
-                        # Call the game win function to handle the win condition 
-                        win_music('Main/music/xDeviruchi - Take some rest and eat some food!.wav')
-                        self.game_win()
-                        
-            for mob, temp_rect in temp_collision_rects:
-                if self.freddy.rect.colliderect(temp_rect):
-                    mob.health -= 2
-                    mob.speed_x+=.09
-                    if mob.health == 2:
-                        mob.kill()
-                        self.score+=50        
-        
 
         #Draw player and hit-box     
         self.display.blit(self.freddy.image, (self.freddy.rect.x - 25, self.freddy.rect.y - 15))
