@@ -443,7 +443,7 @@ class Level1:
                             mob.kill()
                             self.score+=50
             if self.bg.scroll >= 7000:                
-                for boss, temp_rects in boss_temp_collision_rects:
+                for boss, temp_rect in boss_temp_collision_rects:
                     for whizbang in self.freddy.projectiles:
                         if whizbang.rect.colliderect(temp_rect):
                             boss.health -= 10
