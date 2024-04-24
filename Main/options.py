@@ -1,7 +1,7 @@
 import pygame
 import sys
 from button import Button
-from soundtrack import set_volume
+from soundtrack import set_volume, current_volume
 
 class Options:
     def __init__(self, display, gameStateManager, previous_state):
@@ -18,7 +18,7 @@ class Options:
         self.volume_slider = pygame.Rect(self.display.get_width() // 2 - 200, 300, 400, 20)  # Volume slider position and size
         self.volume_text = self.font.render("Volume", True, (255, 255, 255))  # Render volume text
         self.volume_text_rect = self.volume_text.get_rect(center=(self.display.get_width() // 2, 250))  # Position volume text above exit button
-        self.volume_level = 0.5  # Initial volume level (0 to 1)
+        self.volume_level = current_volume #Initial volume level (0 to 1)
         self.running = False  # Add a flag to control the run loop
     
 
