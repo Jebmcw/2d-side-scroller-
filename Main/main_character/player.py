@@ -51,7 +51,7 @@ class Player(pygame.sprite.Sprite):
         self.parabolaX = 0
         self.speed = 5
         #Health variables
-        self.health = 2000
+        self.health = 800
         
         #Clock and delay
         self.ticks = pygame.time.get_ticks()
@@ -75,7 +75,7 @@ class Player(pygame.sprite.Sprite):
     @staticmethod
     def draw_health_bar_player(display, player,scroll):
         # Health bar drawing
-        health_percentage = player.health / 2000
+        health_percentage = player.health / 800
         bar_width = 50
         bar_height = 10
         fill = bar_width * health_percentage
