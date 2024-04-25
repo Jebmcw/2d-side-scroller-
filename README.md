@@ -498,7 +498,7 @@ Blake Woods:
 [Pull Request]()
 - Task 2: Fix the mob spawning bug
 
-[SCRUM66]()
+[SCRUM]()
 
 [bitbucket]()
 
@@ -506,174 +506,171 @@ Blake Woods:
 
 - Task 3: Clean of the repo so it looks nice
 
-[SCRUM88]
+[SCRUM]()
 
-[Pull Request]
+[Pull Request]()
 
 [bitbucket]
 
 - Task 4: Add the boss into the game
 
-[SCRUM67]
-[bitbucket]
+[SCRUM]()
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
 - Task 5: Add movement to the boss
 
-[SCRUM68]
-[bitbucket]
+[SCRUM]()
+[bitbucket]()
 
-[Pull request]
+[Pull request]()
 
 - Task 6: Add a health bar to the boss
 
-[SCRUM69]
+[SCRUM69]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
 
 Abel Guzman:
 
-- Task 1: Create the moving animations for the character
+- Task 1: 
 
-[SCRUM73]
+[SCRUM]()
+[bitbucket]()
+[Pull Request]()
 
-[bitbucket]
-[Pull Request]
+- Task 2:
 
-- Task 2:  implement the animations of the main character
+[SCRUM]()
 
-[SCRUM77]
-
-[bitbucket]
-[Pull Request]
-
-
-- Task 3: add alternating music to different parts of the game
-
-[SCRUM81]
-
-[bitbucket]
-[Pull Request]
+[bitbucket]()
+[Pull Request]()
 
 
-- Task 4: create the moving animations for the mob
+- Task 3:
 
-[SCRUM76]
+[SCRUM]()
 
-[bitbucket]
+[bitbucket]()
+[Pull Request]()
 
-[Pull Request
 
-- Task 5: implement the animation for the mobs
+- Task 4:
 
-[SCRUM78]
-[bitbucket]
+[SCRUM]()
 
-[Pull Request]
+[bitbucket]()
+
+[Pull Request()
+
+- Task 5:
+
+[SCRUM]()
+[bitbucket]()
+
+[Pull Request]()
 
 Freddy Martinez:
 
-- Task 1: Create the platform for level one ,so the character sprite can stand on something
+- Task 1: 
 
-[SCRUM31]
+[SCRUM]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
-- Task 2: Choices the narrator voice for the text boxes.
+- Task 2:
 
-[SCRUM57]
-[bitbucket]
-[Pull Request]
+[SCRUM]()
+[bitbucket]()
+[Pull Request]()
 
-- Task 3: Create a design for the first weapon.
+- Task 3:
 
-[SCRUM47]
+[SCRUM]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
-- Task 4: Implement a pause game feature.
+- Task 4:
 
-[SCRUM92]
+[SCRUM]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
 
 Mustafa Chambers
 
-- Task 1: add a stopwatch into the game so the user knows how long it took for them to beat the game.
+- Task 1:
 
-[SCRUM82]
+[SCRUM]()
 
-[bitbucket]
-[Pull Request]
+[bitbucket]()
+[Pull Request]()
 
-- Task 2: Add a time limit to the text box so it wont be up forever.
+- Task 2: 
 
-[SCRUM87]
+[SCRUM]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
-- Task 3: Add the text box into the game window so the player's backstory can be on the screen.
+- Task 3:
 
-[SCRUM83]
-[bitbucket]
+[SCRUM]()
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
-- Task 4: Add the backstory onto the textbox
+- Task 4: 
 
-[SCRUM86]
-[bitbucket]
+[SCRUM]()
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
-- Task 5: Enable Forward/backward movement
+- Task 5: 
 
-[SCRUM93]
+[SCRUM]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
 
 Seth Leifheit
 
-- Task 1: add collision between player and platforms
--	Collision between the player and the ground is stable when jumping and landing.
+- Task 1:
 
-[SCRUM62]
+[SCRUM]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
-- Task 2: add collision between player and mobs
--	Collision is being detected between player and mob sprites, although I may have to change this to rectangle collision for resizing purposes.
+- Task 2: 
 
-[SCRUM63]
-[bitbucket]
+[SCRUM]()
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
-- Task 3: create instance of the weapon class in the level one file, and add to player inventory upon collision with player sprite.
+- Task 3: 
 
-[SCRUM80]
+[SCRUM]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
-- Task 4: Create simple movement for the first weapon.
+[Pull Request]()
+- Task 4:
 
-[SCRUM50]
+[SCRUM]()
