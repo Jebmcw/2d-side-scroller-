@@ -483,3 +483,195 @@ Seth Leifheit
 
 ## Jira Report
 ![Example screenshot](./img/jira2.png)
+
+
+Blake Woods:
+
+- Task 1: Add a scoreboard for the player to track how many mobs he has killed
+
+[Scrum108]
+
+[bitbucket]
+
+[Pull Request]
+- Task 2: Fix the mob spawning bug
+
+[SCRUM66]
+
+[bitbucket]
+
+[Pull Request]
+
+- Task 3: Clean of the repo so it looks nice
+
+[SCRUM88]
+
+[Pull Request]
+
+[bitbucket]
+
+- Task 4: Add the boss into the game
+
+[SCRUM67]
+[bitbucket]
+
+[Pull Request]
+
+- Task 5: Add movement to the boss
+
+[SCRUM68]
+[bitbucket]
+
+[Pull request]
+
+- Task 6: Add a health bar to the boss
+
+[SCRUM69]
+
+[bitbucket]
+
+[Pull Request]
+
+
+Abel Guzman:
+
+- Task 1: Create the moving animations for the character
+
+[SCRUM73]
+
+[bitbucket]
+[Pull Request]
+
+- Task 2:  implement the animations of the main character
+
+[SCRUM77]
+
+[bitbucket]
+[Pull Request]
+
+
+- Task 3: add alternating music to different parts of the game
+
+[SCRUM81]
+
+[bitbucket]
+[Pull Request]
+
+
+- Task 4: create the moving animations for the mob
+
+[SCRUM76]
+
+[bitbucket]
+
+[Pull Request
+
+- Task 5: implement the animation for the mobs
+
+[SCRUM78]
+[bitbucket]
+
+[Pull Request]
+
+Freddy Martinez:
+
+- Task 1: Create the platform for level one ,so the character sprite can stand on something
+
+[SCRUM31]
+
+[bitbucket]
+
+[Pull Request]
+
+- Task 2: Choices the narrator voice for the text boxes.
+
+[SCRUM57]
+[bitbucket]
+[Pull Request]
+
+- Task 3: Create a design for the first weapon.
+
+[SCRUM47]
+
+[bitbucket]
+
+[Pull Request]
+
+- Task 4: Implement a pause game feature.
+
+[SCRUM92]
+
+[bitbucket]
+
+[Pull Request]
+
+
+Mustafa Chambers
+
+- Task 1: add a stopwatch into the game so the user knows how long it took for them to beat the game.
+
+[SCRUM82]
+
+[bitbucket]
+[Pull Request]
+
+- Task 2: Add a time limit to the text box so it wont be up forever.
+
+[SCRUM87]
+
+[bitbucket]
+
+[Pull Request]
+
+- Task 3: Add the text box into the game window so the player's backstory can be on the screen.
+
+[SCRUM83]
+[bitbucket]
+
+[Pull Request]
+
+- Task 4: Add the backstory onto the textbox
+
+[SCRUM86]
+[bitbucket]
+
+[Pull Request]
+
+- Task 5: Enable Forward/backward movement
+
+[SCRUM93]
+
+[bitbucket]
+
+[Pull Request]
+
+
+Seth Leifheit
+
+- Task 1: add collision between player and platforms
+-	Collision between the player and the ground is stable when jumping and landing.
+
+[SCRUM62]
+
+[bitbucket]
+
+[Pull Request]
+
+- Task 2: add collision between player and mobs
+-	Collision is being detected between player and mob sprites, although I may have to change this to rectangle collision for resizing purposes.
+
+[SCRUM63]
+[bitbucket]
+
+[Pull Request]
+
+- Task 3: create instance of the weapon class in the level one file, and add to player inventory upon collision with player sprite.
+
+[SCRUM80]
+
+[bitbucket]
+
+[Pull Request]
+- Task 4: Create simple movement for the first weapon.
+
+[SCRUM50]
