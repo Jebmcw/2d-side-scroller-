@@ -491,44 +491,57 @@ Blake Woods:
 
 - Task 1: Add a scoreboard for the player to track how many mobs he has killed
 
-[Scrum108]()
+[Scrum108](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-108?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/dbffc800e8947a94f6b42b0c778f286be1fe153d)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/27)
+
+
+- Task 2: create sword weapon class
+
+[SCRUM112](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-112?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/16c5d370a06bf3ef33d621a465127cfc158cd166)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/28)
+
+- Task 3: Create sword movement
+
+[SCRUM114](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-114?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
+
+[Pull Request]()
+
+[bitbucket]()
+
+- Task 4: Create Sword collisions
+
+[SCRUM115](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-115?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
 [bitbucket]()
 
 [Pull Request]()
-- Task 2: Fix the mob spawning bug
 
-[SCRUM]()
+- Task 5: create instance of sword in level one early
 
-[bitbucket]()
+[SCRUM113](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-113?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
-[Pull Request]()
-
-- Task 3: Clean of the repo so it looks nice
-
-[SCRUM]()
-
-[Pull Request]()
-
-[bitbucket]
-
-- Task 4: Add the boss into the game
-
-[SCRUM]()
-[bitbucket]()
-
-[Pull Request]()
-
-- Task 5: Add movement to the boss
-
-[SCRUM]()
 [bitbucket]()
 
 [Pull request]()
 
-- Task 6: Add a health bar to the boss
+- Task 6: Fix how the boss spawns at the end of the game
 
-[SCRUM69]()
+
+[SCRUM102](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-102?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
+
+[bitbucket]()
+
+[Pull Request]()
+
+- Task 7: Add more mobs and make sure there spawning is not out of order.
+
+[SCRUM135](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-135?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
 [bitbucket]()
 
