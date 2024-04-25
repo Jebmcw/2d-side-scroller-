@@ -672,13 +672,13 @@ Seth Leifheit
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/34)
 
-- Task 3: 
+- Task 3: Create walk cycle for alternate player color
 
-[SCRUM]()
+[SCRUM103](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-103?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/f27c206321bea2e8b03497ed4b29cba988c09361)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/34)
 - Task 4:
 
 [SCRUM]()
