@@ -551,11 +551,11 @@ Blake Woods:
 
 Abel Guzman:
 
-- Task 1: 
+- Task 1: Add animation to the boss
 
-[SCRUM]()
-[bitbucket]()
-[Pull Request]()
+[SCRUM97](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-97?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A3b800e25-6467-424e-bc13-bd6f3a1cf2c4%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/17b2667dd88f8259a84c668d6dea8dc333200e73)
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/41)
 
 - Task 2:
 
