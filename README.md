@@ -655,13 +655,13 @@ Mustafa Chambers
 
 Seth Leifheit
 
-- Task 1:
+- Task 1: Implement the winner music
 
-[SCRUM]()
+[SCRUM132](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-132?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/0a41f01468514192cb87ff54c65eaa7652c03572)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/52)
 
 - Task 2: 
 
