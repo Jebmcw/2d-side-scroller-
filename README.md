@@ -653,11 +653,13 @@ Mustafa Chambers
 [SCRUM 134](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-133?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A64e663bb-9b6d-4106-b751-13e8a0c3f278%20ORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
 [bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/4f5fcf18effdd70dfce3f2c9dc8a874cd4c2ebe6)
+
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/45)
 
 - Task 2: Fix any out-of-place game text
 
 [SCRUM 101](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-101?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A64e663bb-9b6d-4106-b751-13e8a0c3f278%20ORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
+
 [bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/7ade3005dbbd45469e36a80b47d18ef8f9cb5049)
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/54)
@@ -665,6 +667,7 @@ Mustafa Chambers
 - Task 3: Add pixel art item to pick up to regenerate health before boss fight. only one. (turkey leg, etc.)
 
 [SCRUM 130](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-118?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A64e663bb-9b6d-4106-b751-13e8a0c3f278%20ORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
+
 [bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/dfbd0d569755516a74a61d22b2322f8b9d962672)
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/53)
@@ -672,6 +675,7 @@ Mustafa Chambers
 - Task 4: Publish code on github
 
 [SCRUM 129](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-117?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A64e663bb-9b6d-4106-b751-13e8a0c3f278%20ORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
+
 [Github](https://github.com/mchamb92/2DSideScroller)
 
 [bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/31dff979e4c4746c3c1cf51e5c5cb5312c03b55a)
@@ -713,6 +717,13 @@ Seth Leifheit
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/50)
 
+- Task 5: Create simple movement for the first weapon.
+
+[SCRUM50](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-50?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%20ORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/8eccf48423f4d45e7753a0984a11221bba2529d1)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/44)
 
 
 ##What we be doing for sprint 4:
