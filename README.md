@@ -546,9 +546,6 @@ Blake Woods:
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/36)
 
-
-
-
 Abel Guzman:
 
 - Task 1: Add animation to the boss
@@ -557,68 +554,96 @@ Abel Guzman:
 [bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/17b2667dd88f8259a84c668d6dea8dc333200e73)
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/41)
 
-- Task 2:
+- Task 2: Allow to user to change the volume of the sound
 
-[SCRUM]()
+[SCRUM99](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-99?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A3b800e25-6467-424e-bc13-bd6f3a1cf2c4%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
-[Pull Request]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/a3a43cba98d7a9b69b06497fa07cba606c97e775)
 
-
-- Task 3:
-
-[SCRUM]()
-
-[bitbucket]()
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/43)
 
 
-- Task 4:
+- Task 3: implement the animation to the boss
 
-[SCRUM]()
+[SCRUM119](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-119?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A3b800e25-6467-424e-bc13-bd6f3a1cf2c4%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/8bdc37229181b1a07c64839370326d75d3e7188f)
 
-[Pull Request()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/42)
 
-- Task 5:
 
-[SCRUM]()
-[bitbucket]()
+- Task 4: Add a options page
 
-[Pull Request]()
+[SCRUM120](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-120?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A3b800e25-6467-424e-bc13-bd6f3a1cf2c4%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/6a44b7395b7d962e250563fbd6e91bca8da2af22)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/35)
+
+- Task 5: implement death animation for the character
+
+[SCRUM121](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-121?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A3b800e25-6467-424e-bc13-bd6f3a1cf2c4%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/7d9a8b1fc09c549dfcd11dbbb0ec0c0f2db31ec4)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/38)
+
+- Task 6: implement death animation for the mobs
+
+[SCRUM122](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-122?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A3b800e25-6467-424e-bc13-bd6f3a1cf2c4%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/faa2d4947cc79dca91f74bf6cb900275c8cd6c5f)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/37)
 
 Freddy Martinez:
 
-- Task 1: 
+- Task 1: Change the UI Design for the loading screens.
 
-[SCRUM]()
+[SCRUM136](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-136?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A2a56fe71-8c76-4be3-895c-1200fd83b2e8%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/b459e67af4c3554adb027f7f14e9abeb6a3162b6)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/51)
 
-- Task 2:
+- Task 2: set score const variable to unlock the fireball powerup
 
-[SCRUM]()
-[bitbucket]()
-[Pull Request]()
+[SCRUM111](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-111?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A2a56fe71-8c76-4be3-895c-1200fd83b2e8%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/cb406b0a42656c148e59d993c5af8d242e7f3e85)
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/49)
 
-- Task 3:
+- Task 3: create a game win screen
 
-[SCRUM]()
+[SCRUM110](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-110?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A2a56fe71-8c76-4be3-895c-1200fd83b2e8%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/8f250e251cfd840671133110f014d0276b80c625)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/40)
 
-- Task 4:
+- Task 4: Create a game over screen
 
-[SCRUM]()
+[SCRUM109](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-109?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A2a56fe71-8c76-4be3-895c-1200fd83b2e8%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/4178c7d56ee8b751edf5c289d26c38e2db2e1e3a)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/39)
+
+- Task 5: Add a time limit in the game so the game doesn't just keep running.
+
+[SCRUM105](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-105?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A2a56fe71-8c76-4be3-895c-1200fd83b2e8%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/96926b3078886d214944a4db45a058c178656c00)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/33)
+
+- Task 6: Update the main menu
+
+[SCRUM95](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-95?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A2a56fe71-8c76-4be3-895c-1200fd83b2e8%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/fb624b74d1690b8c05a18f45d9c13f194efbcd6b)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/48)
+
+
+
 
 
 Mustafa Chambers
