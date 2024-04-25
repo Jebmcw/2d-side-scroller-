@@ -703,7 +703,12 @@ Seth Leifheit
 
 [bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/f27c206321bea2e8b03497ed4b29cba988c09361)
 
-[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/34)
-- Task 4:
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/47)
 
-[SCRUM]()
+- Task 4: Make the fireball powerup have a animation when the player presses F
+
+[SCRUM94](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-94?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/af5e8b40fdb24ff080c303a98d64dd39bbfdcae5)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/50)
