@@ -488,7 +488,6 @@ Seth Leifheit
 ##Sprint 3
 
 Blake Woods:
-
 - Task 1: Add a scoreboard for the player to track how many mobs he has killed
 
 [Scrum108](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-108?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
@@ -510,42 +509,44 @@ Blake Woods:
 
 [SCRUM114](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-114?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/30)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/ced1becec6caaf430d38e7d098fb846a06066ced)
 
 - Task 4: Create Sword collisions
 
 [SCRUM115](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-115?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/d43bb0fa0d7fd1f5ca2ab6ae97202a47e9716e76)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/31)
 
 - Task 5: create instance of sword in level one early
 
 [SCRUM113](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-113?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/62b7809f257ed6ad17e16b1069139e2b3678f99b)
 
-[Pull request]()
+[Pull request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/29)
 
 - Task 6: Fix how the boss spawns at the end of the game
 
 
 [SCRUM102](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-102?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-102?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20currentUser%28%29%0AORDER%20BY%20status%20DESC%2C%20duedate%20DESC%2C%20lastviewed%20DESC%2C%20created%20DESC)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/32)
 
 - Task 7: Add more mobs and make sure there spawning is not out of order.
 
 [SCRUM135](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-135?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
-[bitbucket]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/8ec0ebaf595ea2c89e7c1d2a242e1a5c94668483)
 
-[Pull Request]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/36)
+
+
 
 
 Abel Guzman:
