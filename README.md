@@ -664,20 +664,26 @@ Seth Leifheit
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/52)
 
-- Task 2: 
+- Task 2: Polish up the hitbox of the player
 
-[SCRUM]()
-[bitbucket]()
+[SCRUM131](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-131?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[Pull Request]()
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/de40a4515e2e20cdfaf6a878979a61cb2bd37bf7)
 
-- Task 3: 
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/34)
 
-[SCRUM]()
+- Task 3: Create walk cycle for alternate player color
 
-[bitbucket]()
+[SCRUM103](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-103?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
-[Pull Request]()
-- Task 4:
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/f27c206321bea2e8b03497ed4b29cba988c09361)
 
-[SCRUM]()
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/47)
+
+- Task 4: Make the fireball powerup have a animation when the player presses F
+
+[SCRUM94](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-94?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/af5e8b40fdb24ff080c303a98d64dd39bbfdcae5)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/50)
