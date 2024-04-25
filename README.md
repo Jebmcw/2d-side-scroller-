@@ -609,38 +609,31 @@ Freddy Martinez:
 
 Mustafa Chambers
 
-- Task 1:
+- Task 1: Implement Loser Music
 
-[SCRUM]()
+[SCRUM 134](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-133?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A64e663bb-9b6d-4106-b751-13e8a0c3f278%20ORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 
 [bitbucket]()
 [Pull Request]()
 
-- Task 2: 
+- Task 2: Fix any out-of-place game text
 
-[SCRUM]()
-
+[SCRUM 101](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-101?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A64e663bb-9b6d-4106-b751-13e8a0c3f278%20ORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 [bitbucket]()
 
 [Pull Request]()
 
-- Task 3:
+- Task 3: Add pixel art item to pick up to regenerate health before boss fight. only one. (turkey leg, etc.)
 
-[SCRUM]()
+[SCRUM 130](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-118?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A64e663bb-9b6d-4106-b751-13e8a0c3f278%20ORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
 [bitbucket]()
 
 [Pull Request]()
 
-- Task 4: 
+- Task 4: Publish code on github
 
-[SCRUM]()
-[bitbucket]()
-
-[Pull Request]()
-
-- Task 5: 
-
-[SCRUM]()
+[SCRUM 129](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-117?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A64e663bb-9b6d-4106-b751-13e8a0c3f278%20ORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
+[Github](https://github.com/mchamb92/2DSideScroller)
 
 [bitbucket]()
 
