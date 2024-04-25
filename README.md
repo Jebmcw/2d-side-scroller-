@@ -485,22 +485,24 @@ Seth Leifheit
 ![Example screenshot](./img/jira2.png)
 
 
+##Sprint 3
+
 Blake Woods:
 
 - Task 1: Add a scoreboard for the player to track how many mobs he has killed
 
-[Scrum108]
+[Scrum108]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 - Task 2: Fix the mob spawning bug
 
-[SCRUM66]
+[SCRUM66]()
 
-[bitbucket]
+[bitbucket]()
 
-[Pull Request]
+[Pull Request]()
 
 - Task 3: Clean of the repo so it looks nice
 
