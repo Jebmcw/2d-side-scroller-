@@ -712,3 +712,53 @@ Seth Leifheit
 [bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/af5e8b40fdb24ff080c303a98d64dd39bbfdcae5)
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/50)
+
+
+
+##What we be doing for sprint 4:
+
+- Blake: Make the files and folder for level 2
+
+- Blake: Make the gamestate manager for level 2
+
+- Blake: Put the level 2 mobs into level 2
+
+- Blake: Add movment to the mobs into level 2
+
+- Abel:
+
+- Abel:
+
+- Abel:
+
+- Abel:
+
+- Abel:
+
+- Freddy:
+
+- Freddy:
+
+- Freddy:
+
+- Freddy:
+
+- Seth:
+
+- Seth:
+
+- Seth:
+
+- Seth:
+
+- Mustafa:
+
+- Mustafa:
+
+- Mustafa:
+
+- Mustafa:
+
+
+
+
