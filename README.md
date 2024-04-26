@@ -771,6 +771,5 @@ Seth Leifheit
 - Mustafa:
 
 
-[![CS3398 Review](https://img.youtube.com/vi/jVDJxpNFHIQ/0.jpg)](https://www.youtube.com/watch?v=jVDJxpNFHIQ "CS3398 Review")
 
 
