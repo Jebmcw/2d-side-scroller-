@@ -487,7 +487,10 @@ Seth Leifheit
 
 ##Sprint 3
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Blake Woods:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 - Task 1: Add a scoreboard for the player to track how many mobs he has killed
 
 [Scrum108](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-108?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20in%20%28currentUser%28%29%2C%20712020%3A9305f4bc-2d85-49f3-b3f4-6f230679a9b0%29%0AORDER%20BY%20lastviewed%20DESC%2C%20created%20DESC)
@@ -546,7 +549,9 @@ Blake Woods:
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/36)
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Abel Guzman:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - Task 1: Add animation to the boss
 
@@ -594,7 +599,9 @@ Abel Guzman:
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/37)
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Freddy Martinez:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - Task 1: Change the UI Design for the loading screens.
 
@@ -645,8 +652,10 @@ Freddy Martinez:
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Mustafa Chambers
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - Task 1: Implement Loser Music
 
@@ -682,18 +691,10 @@ Mustafa Chambers
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/46)
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Seth Leifheit
-
-- Task 1: Implement the winner music
-
-[SCRUM132](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-132?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
-
-[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/0a41f01468514192cb87ff54c65eaa7652c03572)
-
-[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/52)
-
-- Task 2: Polish up the hitbox of the player
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+- Task 1: Polish up the hitbox of the player
 
 [SCRUM131](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-131?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
@@ -701,23 +702,9 @@ Seth Leifheit
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/34)
 
-- Task 3: Create walk cycle for alternate player color
-
-[SCRUM103](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-103?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
-
-[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/f27c206321bea2e8b03497ed4b29cba988c09361)
-
-[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/47)
-
-- Task 4: Make the fireball powerup have a animation when the player presses F
-
-[SCRUM94](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-94?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
-
-[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/af5e8b40fdb24ff080c303a98d64dd39bbfdcae5)
-
-[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/50)
-
-- Task 5: Create simple movement for the first weapon.
+- Task 2: Create simple movement for the first weapon. 
+- Note: This was the most complex task I had to complete, so I wanted to do it second (earlier in the sprint).
+        I created a class diagram to cure my confusion as to which class files would handle which aspects of the fireballs' "projectiles" list. It only seemed right for the player to have direct capability to create and manupulate the fireball data so that the Player class instance "freddy" could seemingly gain the powers of fire-bending. The level1 file is where the bulk of the scripting occurs like writing the central story elements and establishing the characters and world-building.
 
 [SCRUM50](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-50?jql=project%20%3D%20%22SCRUM%22%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%20ORDER%20BY%20status%20DESC%2C%20created%20DESC)
 
@@ -725,6 +712,36 @@ Seth Leifheit
 
 [Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/44)
 
+- Task 3: Create walk cycle for alternate player color: start the game green, then "Flame On!".
+
+[SCRUM103](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-103?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/f27c206321bea2e8b03497ed4b29cba988c09361)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/47)
+
+- Task 4: Make the fireball powerup have a animation when the player presses F.
+- Note: This task was challenging because I had to figure out how to pause the rest of the game loop 
+        while the player powered up.
+
+[SCRUM94](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-94?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/af5e8b40fdb24ff080c303a98d64dd39bbfdcae5)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/50)
+
+- Task 5: Implement the winner music!
+- Note: I implemented this in two places, checking for fireball collision with the boss and checking for sword collision with the boss. I think this could have been refined to one set of statements checking the bosses health after damage collision checking for the sword and fireballs separately. (cleaner code)
+
+[SCRUM132](https://cs3398s24mimas.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-132?jql=project%20%3D%20"SCRUM"%20and%20assignee%20%3D%20712020%3A69619b08-2a01-4870-b46e-0b69eb9c610e%0AORDER%20BY%20status%20DESC%2C%20created%20DESC)
+
+[bitbucket](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/commits/0a41f01468514192cb87ff54c65eaa7652c03572)
+
+[Pull Request](https://bitbucket.org/cs3398s24mimas/%7B0e32a28c-8195-43b6-a28f-473a74bb774f%7D/pull-requests/52)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ##What we be doing for sprint 4:
 
@@ -746,7 +763,7 @@ Seth Leifheit
 
 - Abel:
 
-- Freddy:
+- Freddy: Add more story line text/speech
 
 - Freddy:
 
@@ -754,13 +771,14 @@ Seth Leifheit
 
 - Freddy:
 
-- Seth:
+- Seth: Give the character a second chance to gain fireball power up in level 2, if they did not acquire
+        it in level 1. If they did acquire it in level 1, give them health apple instead.
 
-- Seth:
+- Seth: Create level 2 tile map with floating platforms.
 
-- Seth:
+- Seth: Add tile map to the level and add landing collision between player and platforms.
 
-- Seth:
+- Seth: Add controls list to the settings page. Try to implement customizable control layout.
 
 - Mustafa:
 
