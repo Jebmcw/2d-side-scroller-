@@ -753,23 +753,23 @@ Seth Leifheit
 
 - Blake: Add movment to the mobs into level 2
 
-- Abel:
+- Abel: Add a anmation the the level 2 mobs
 
-- Abel:
+- Abel: Draw and add the level 2 mobs
 
-- Abel:
+- Abel: Draw the level 2 boss
 
-- Abel:
+- Abel: Add a control list to the options so the user can pick there controls
 
-- Abel:
+- Abel: Add a option to change the music
 
 - Freddy: Add more story line text/speech
 
-- Freddy:
+- Freddy: Add a time limit in level 2
 
-- Freddy:
+- Freddy: Add a sword to level 2
 
-- Freddy:
+- Freddy: Add a movment to the sword
 
 - Seth: Give the character a second chance to gain fireball power up in level 2, if they did not acquire
         it in level 1. If they did acquire it in level 1, give them health apple instead.
@@ -780,13 +780,15 @@ Seth Leifheit
 
 - Seth: Add controls list to the settings page. Try to implement customizable control layout.
 
-- Mustafa:
+- Mustafa: I'm going to work on adding the new boss to level  2
 
-- Mustafa:
+- Mustafa: I'm going to add music into level 2
 
-- Mustafa:
+- Mustafa: Im goint to add movment to the level 2 boss
 
-- Mustafa:
+- Mustafa: Going to aloud the player to turn 180 so if the mob passes him he can still hit them.
+
+
 
 
 
